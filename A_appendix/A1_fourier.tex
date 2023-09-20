@@ -1,0 +1,289 @@
+\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\chapterauthors}{Markus Lippitz}
+
+\chapter{Fourier transformation}
+
+\section{Overview}
+
+It is useful and helpful to have an intuitive approach to the Fourier transform. The bottom line is that in experimental physics one rarely needs to actually calculate a Fourier transform. Very often it is sufficient to know a few frequently occurring Fourier pairs and to combine them with simple rules. This is what I want to present here. A very nice and much more detailed presentation can be found in \cite{Butz2015}. I will follow his notation here.
+
+Before we get to Fourier pairs, however, we need to lay down some foundations.
+
+\section{Fourier series: a periodic function and its Fourier coefficients}
+
+We first consider everything here in one dimension in time or frequency space with the variables $t$ and $\omega = 2 \pi \nu$. Let the function $f(t)$ be periodic in time with period $T$, i.e. 
+\begin{equation}
+ f(t) = f (t + T) \quad .
+\end{equation}
+Then this can be written as a Fourier series
+\begin{equation}
+ f(t) = \sum_{k=-\infty}^{\infty} \, C_k \, e^{i \, \omega_k \, t}
+ \quad \text{with} \quad \omega_k = \frac{2 \pi \, k}{T}
+\end{equation}
+and the Fourier coefficients
+\begin{equation}
+ C_k = \frac{1}{T} \, \int_{-T/2}^{T/2} \, f(t) \, \, e^{-i \, \omega_k \, t} \, dt \quad .
+\end{equation}
+Note the negative sign in the exponential function in contrast to the equation before. For reel-valued functions $f(t)$, 'opposite' $C_k$ are conjugate-complex, so $C_k = C_{-k}^\star$. For $k<0$ the frequencies $\omega_k$ are negative, but this is not a problem.\sidenote{One could alternatively require $k\ge 0$ and apply a $\sin$ and $\cos$ series.} Thus, the zeroth coefficient $C_0$ is just the time average of the function $f(t)$.
+
+
+
+\section{An arbitrary function and its Fourier transform}
+
+Now we remove the restriction to periodic functions $f(t)$ by letting the period $T$ go to infinity. This turns the sum into an integral and the discrete $\omega_k$ become continuous. Thus
+\begin{align}
+ F(\omega) = & \int_{-\infty}^{+\infty} \, f(t) \, e^{- i \omega\, t} \, dt \\
+ f(t) = & \frac{1}{2 \pi } \int_{-\infty}^{+\infty} \, F(\omega) \, e^{+ i \omega\, t} \, d\omega \quad .
+\end{align}
+Here, the first equation is the forward transformation (minus sign in the exponent), and the second is the reverse transformation (plus sign in the exponent). The symmetry is broken by the $2 \pi$. But this is necessary if one wants to keep $F(\omega = 0)$ as mean\sidenote{$F( 0) = \int f(t) \, dt$ without $1/T$ in front of it is meant here by Butz as mean!}. Alternatively, we could formulate all this with $\nu$ instead of $\omega$, but then we would have a $2 \pi$ in many more places, though not before the integral.
+
+
+
+
+
+\section{Sidenote: Delta Function}
+
+The delta function can be written as
+\begin{equation}
+  \delta(x) = \lim_{a \rightarrow 0} f_a(x) \quad
+   \text{with} \quad
+    f_a(x) = \left\{ \begin{matrix}
+    a & \text{if } |x| < \frac{1}{2a} \\
+    0 & \text{other}
+    \end{matrix}
+    \right.
+\end{equation}
+or as
+\begin{equation}
+\delta(x) = \frac{1}{2 \pi}  \int_{-\infty}^{+\infty} \, e^{+ i\, x \, y} \, dy \quad .
+\end{equation}
+An important property is that the delta function selects a value, i.e. 
+\begin{equation}
+ \int_{-\infty}^{+\infty} \, \delta(x) \, f(x) \, dx = f(0) \quad .
+\end{equation}
+
+
+\section{Important Fourier pairs}
+
+It is very often sufficient to know the following pairs of functions and their Fourier transforms. I write them here, following Butz, as pairs in $t$ and $\omega$ (not $\nu = \omega / (2 \pi)$). In the same way, one could have written pairs in $x$ and $k$. The important question is whether a $2 \pi$ appears in the exponential function of the plane wave or not. So
+\begin{equation}
+e^{i \omega t} \quad \text{and} \quad e^{i k x} \quad \text{, but} \quad 
+e^{i 2 \pi \nu t} \quad .
+\end{equation}
+
+Further, I follow here the convention made above about the asymmetric distribution of the $2 \pi$ between forward and reverse transformations. If you distribute them differently, then of course the prefactors change. A good overview of many more Fourier pairs in various '$2 \pi$' conventions can be found in the English Wikipedia under 'Fourier transform'. In their nomenclature, the Butz convention used here is 'non-unitary, angular frequency'.
+
+\paragraph{constant and delta function} $f(t) = a$ becomes $F(\omega) = a \, 2 \pi \, \delta(\omega)$ and $f(t) = a \, \delta(t)$ becomes $F(\omega) = a $. This is again the asymmetric $2 \pi$.
+
+
+\paragraph{rectangle and sinc} The rectangle function of width $b$ becomes a sinc\sidenote{sometimes $\text{sinc}(x) = \sin (\pi x) / (\pi x)$ is defined, especially when $\nu$ and not $\omega$ is used as conjugate variable.}, the sinus cardinalis. So from
+\begin{equation}
+ f(t) = \text{rect} _b (t) = \left\{ 
+ \begin{array}{ll}
+ 1 & \text{for} \quad |t| < b/2 \\
+ 0 & \text{other} \\
+ \end{array}
+ \right.
+\end{equation}
+we get
+\begin{equation}
+F(\omega) = b \, \frac{\sin \omega b / 2}{\omega b /2} = b \, \text{sinc}( \omega b /2) \quad .
+\end{equation}
+
+
+
+\paragraph{Gaussian} The Gaussian function is preserved under Fourier transform. Its width changes into the reciprocal value. So from a Gauss function of area one
+\begin{equation}
+ f(t) = \frac{1}{\sigma \sqrt{2 \pi}} \, e^{- \frac{1}{2} \left( \frac{t}{\sigma} \right)^2}
+\end{equation}
+we get
+\begin{equation}
+ F(\omega) = e^{- \frac{1}{2} \left( \sigma \, \omega \right) ^2 } \quad .
+\end{equation}
+
+
+
+\paragraph{(two-sided) exponential decay and Lorentz curve} From a curve decaying exponentially at both positive and negative times
+\begin{equation}
+ f(t) = e^{- |t| / \tau}
+\end{equation}
+we obtain the Lorentz curve
+\begin{equation}
+ F(\omega) = \frac{2 \tau}{1 + \omega^2 \, \tau^2} \quad .
+\end{equation}
+
+
+\paragraph{one-sided exponential decay} As a side note, here  the one-sided exponential decay
+\begin{equation}
+ f(t) = \left\{ \begin{array}{ll}
+e^{- \lambda t } & \text{for} \quad t > 0 \\
+ 0 & \text{other} \\
+ \end{array}
+ \right. \quad .
+\end{equation}
+It will become
+\begin{equation}
+ F(\omega) = \frac{1}{\lambda + i \, \omega}
+\end{equation}
+and it is therefore complex-valued. Its magnitude squared is again a Lorentz function
+\begin{equation}
+| F(\omega)|^2 = \frac{1}{\lambda^2 + \omega^2}
+\end{equation}
+and the phase is $\phi = - \omega / \lambda$.
+
+
+\paragraph{One-dimensional point lattice} An equidistant chain of points or delta functions remains an equidistant chain under Fourier transform. The distances take  the reciprocal value. So from
+\begin{equation}
+ f(t) = \sum_n \, \delta (t - \delta t \, n)
+\end{equation}
+we get
+\begin{equation}
+ F(\omega) = \frac{2 \pi}{\delta t} \, \sum_n \, \delta \left(\omega - n\frac{2 \pi}{\Delta t} \right). \quad .
+\end{equation}
+
+
+\paragraph{Three-dimensional cubic lattice} A three-dimensional primitive cubic lattice of side length $a$ makes the transitions to a primitive cubic lattice of side length $2 \pi/a$. A face-centered cubic lattice with lattice constant $a$ of conventional unit cell is converted  to a space-centered cubic lattice with lattice constant $4 \pi / a$ and vice versa. 
+
+
+\section{Theorems and properties of the Fourier transform}
+
+In addition to the Fourier pairs, we need a few properties of the Fourier transform. In the following, let $f(t)$ and $F(\omega)$ be Fourier conjugates and likewise $g$ and $G$.
+
+\paragraph{linearity} The Fourier transform is linear
+\begin{equation}
+a \, f(t) + b \, g(t) \quad \leftrightarrow \quad 
+a \, F(\omega) + b \, G(\omega)  \quad .
+\end{equation}
+
+\paragraph{shift} A shift in time implies a modulation in frequency and vice versa.
+\begin{align}
+ f(t - a) & \quad \leftrightarrow \quad 
+F(\omega) \, e^{-i \omega a} \\
+ f(t) \, \, e^{-i \omega_0 t} & \quad \leftrightarrow \quad 
+F(\omega + \omega_0)   \quad .
+\end{align}
+
+\paragraph{scaling}  
+\begin{equation}
+ f( a \, t) \quad \leftrightarrow \quad 
+\frac{1}{|a|} \, F \left( \frac{\omega}{a} \right)   \quad .
+\end{equation}
+
+
+\paragraph{convolution and multiplication} Convolution is converted into a product, and vice versa
+\begin{equation}
+ f(t) \otimes g(t) = \int f(\zeta) g(t- \zeta) d\zeta 
+ \quad \leftrightarrow \quad 
+ F(\omega) \, G(\omega)
+\end{equation}
+and
+\begin{equation}
+ f(t) \, g(t) 
+ \quad \leftrightarrow \quad 
+\frac{1}{2 \pi} \, F(\omega) \otimes G(\omega) \quad .
+\end{equation}
+
+\paragraph{Parseval's Theorem} The total power is the same in both time and frequency domain
+\begin{equation}
+ \int |f(t) |^2 \, dt = \frac{1}{2 \pi} \, \int | F (\omega ) | ^2 \, d\omega
+\end{equation}
+
+\paragraph{time derivatives}
+\begin{equation}
+ \frac{d \, f(t)}{dt} 
+ \quad \leftrightarrow \quad 
+i \omega \, F(\omega)  \quad .
+\end{equation}
+
+
+\section{Example: Diffraction at a double slit}
+
+As an example, we consider the Fourier transform of a double slit, which describes its diffraction pattern. The slits have a width $b$ and a center distance $d$. Thus the slit is described by a convolution of the rectangular function with two delta functions at the distance $d$
+\begin{equation}
+f(x) = \text{rect} _b (x) \, \otimes \, \left( \delta (x - d/2) + \delta (x + d/2) \right) \quad .
+\end{equation}
+The Fourier transform of the rectangular function is the $\text{sinc}$, that of the delta functions a constant. However, the shift in position causes a modulation in $k$-space. Thus, the sum of the two delta functions becomes 
+\begin{equation}
+\mathcal{FT}\left\{ \delta (x - d/2) + \delta (x + d/2) \right\} =
+e^{-i k d/2} + e^{+i k d/2} = 2 \cos ( k d/2) \quad .
+\end{equation}
+The convolution with the rectangular function passes into a multiplication with the $\text{sinc}$. Together we get
+\begin{equation}
+\mathcal{FT}\left\{ f(x) \right\} = b \frac{\sin (k b/2) }{kb/2} \, 2 \cos ( k d/2) = \frac{4}{k} \, \sin (k b/2) \, \cos ( k d/2)  \quad .
+\end{equation}
+The intensity in direction $k$ is then the squared magnitude  of this.
+
+
+
+
+\begin{questions}
+  \item \emph{Temporal shift}
+    Sketch the amplitude and phase of the FT of a temporal square  pulse pulse centred on time zero!    What changes if the pulse is shifted to positive times?
+
+    \item \emph{Pulse sequence} You wonder what the Fourier transform (magnitude squared) of an infinite sequence of square pulses looks like and start searching for it on the internet. Your fellow student replies that you can "see" it immediately.
+    Sketch the Fourier transform!
+    Explain why you could derive it directly or why you should "see" it!
+
+    \item \emph{Light pulse}
+    Think of a "light pulse" as a mathematical construction of an infinitely long cosine oscillation corresponding to the frequency of light. The "pulse" is obtained by multiplying the wave by a time-limited Gaussian pulse envelope (e.g. half-width of 10 light oscillations).
+    Sketch the construction of the Fourier transform in the spectral domain.
+\end{questions}
+
+
+
+
+\section{Two-dimensional Fourier transformation}
+
+We can extend the definition of the Fourier transform to two and more dimensions. The conjugated variables are $(x,y)$ and $(k_x, k_y)$ instead of $t$ and $\omega$. The wave vector $k_i = 2\pi / \lambda_i$ contains the factor $2\pi$ as in the angular frequency $\omega$. We define
+\begin{align}
+  F(k_x, k_y) = & \iint_{-\infty}^{+\infty} \, f(x,y) \, e^{- i (k_x \, x + k_y \, y )} \, dx \, dy \\
+  f(x,y) = & \frac{1}{(2 \pi )^2} \iint_{-\infty}^{+\infty} \, F(k_x, k_y) \,\, e^{+ i (k_x \, x + k_y \, y )}  \, dk_x \,dk_y \quad .
+ \end{align}
+
+When we can separate the function $f(x,y)$ into a product of one-dimensional functions, then  the Fourier transform is simply the product of the individual Fourier transforms
+\begin{equation}
+  f(x,y) = g(x) \cdot h(y) \quad \leftrightarrow \quad 
+  F(k_x, k_y) = G(k_x) \cdot H(k_y) \quad .
+\end{equation}
+
+A rectangle of size $a \times b$ is transformed into a product of sinc functions
+\begin{align}
+  (x,y) = & \text{rect} _a (x) \cdot \text{rect} _b (y) \\
+  \leftrightarrow \quad  F(k_x, k_y) = & a b \, \text{sinc}( k_x a /2) \, \text{sinc}( k_y b /2) \quad .
+\end{align}
+
+
+A special case of this is the rotational symmetric two-dimensional Gaussian function
+\begin{equation}
+  f(x,y) = 
+  \frac{1}{2 \pi \sigma^2} \, e^{-  \frac{x^2 + y^2}{2 \sigma^2} }
+  \quad \leftrightarrow \quad 
+  F(k_x, k_y) = e^{- \frac{\sigma^2 }{2} \left(k_x^2 + k_y^2 \right)  } \quad .
+\end{equation}
+
+One important function can not be separated into a product of one-dimensional functions: a disc of radius $a$
+    \begin{equation}
+    f(x,y)  = \left\{ 
+    \begin{array}{ll}
+    1 & \text{for} \quad x^2+y^2 < a \\
+    0 & \text{other} \\
+    \end{array}
+    \right.
+   \end{equation}
+is transformed into 
+\begin{equation}
+  F(k_x, k_y) = a \, \frac{J_1(\pi \, a \, \rho )}{\rho}
+  \quad \text{width} \quad \rho = \sqrt{k_x^2 + k_y^2}
+\end{equation}
+and the (cylindrical) Bessel function of the first kind $J_1(x)$
+\begin{equation}
+  J_1(x) = \frac{1}{\pi} \int_0^\pi \cos (\tau - x \sin \tau) \,d\tau \quad ,
+\end{equation}
+which is the cylindrical analogue of a sinc function.
+
+
+
+
+
+%--------------------
+\printbibliography[segment=\therefsegment,heading=subbibliography]
