@@ -1,4 +1,4 @@
-\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\lastmod}{September 22, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Ray optics}
@@ -6,13 +6,13 @@
 
 \section{Goal}
 
-By the end of this chapter, you should be able to draw and calculate a ray's path through an optical system.
+By the end of this chapter, you should be able to draw, calculate and align a ray's path through an optical system.
 
 
 
 \section{Overview}
 
-I assume that you have seen a little bit of geometrical optics in your studies, but we will briefly review it. We will introduce the postulates of ray optics and discuss rays at a mirror and a lens as an example. I will also introduce the matrix method of ray optics, which is a very convenient way of calculating the path of a ray through a system of optical elements. More details on these topics can be found in chapter 1 of \cite{SalehTeich1991} or XXX Hering/Martin Kap. 2, Saleh/Teich Kap. 1, Hecht Kap. 5 und 6
+I assume that you have seen a little bit of geometrical optics in your studies, but we will briefly review it. We will introduce the postulates of ray optics and discuss rays at a mirror and a lens as an example. I will also introduce the matrix method of ray optics, which is a very convenient way of calculating the path of a ray through a system of optical elements. More details on these topics can be found in chapter 1 of \cite{SalehTeich1991}, chapter 2 of \cite{Hering_Martin_Optik},  chapters 5 and 6 of \cite{Hecht_Optics}, chapter 2 of \cite{Konijnenberg_Optics}.
 
 
 \section{Postulates of ray optics}
@@ -210,26 +210,54 @@ The approximation of a thin lens can be removed by introducing principal planes\
 \end{marginfigure}
 
 \begin{questions}
-\item A telephoto lens consists of many lenses, but can still be described by a single focal length. This focal length can be longer than the distance between the front lens and the film. The effective single lens is therefore outside the telephoto lens. This can be described by introducing principal planes in the matrix method of geometric optics.
+\item A telephoto lens consists of many lenses, but can still be described by a single focal length. This focal length can be longer than the distance between the front lens and the film. The effective single lens is therefore outside the telephoto lens. This can be described by introducing principal planes in the matrix method of ray optics.
  
-   Consider an optical element that can be described by a transfer matrix $\boldsymbol{M}$ with $\det(\boldsymbol{M}) = 1$. The two principal planes are located at distances $d_1$ before and $d_2$ after this element. These distances may also be negative. Assume that the refractive index of these domains is one. Show that these three domains together act like a thin lens. How large must $d_1$ and $d_2$ be?  
+   Consider an optical element that can be described by a transfer matrix $\boldsymbol{M}$ with $\det(\boldsymbol{M}) = 1$. The two principal planes are located at distances $d_1$ before and $d_2$ after this element. These distances may also be negative. Assume that the refractive index of these domains is one. Show that these three domains together act like a thin lens and calculate $d_1$ and $d_2$.
 
 \item  Show that any arrangement of thin lenses and distances between these lenses satisfies the above requirement $\det(\boldsymbol{M}) = 1$. \newline Hint: $\det(\boldsymbol{A} \boldsymbol{B} )  = \det(\boldsymbol{A})  \det(\boldsymbol{B}) $
 \end{questions}
 
-\section{Lens errors}
 
-\section {Hands on: Justage von Bauteilen 1}
-\ziel{Ich kann einen Strahlengang durch optische Bauelemente wie Spiegel, Linsen und Strahlteiler \wort{justieren}.}
+\subsection{Aberrations}
+For\sidenote{This section is  adapted from \cite{Konijnenberg_Optics}} designing advanced optical systems Gaussian geometrical optics is not sufficient. 
+Instead non-paraxial rays, and among them also non-meridional\sidenote{meridional rays run in a plane than contains the optical axis} rays, must be traced  using software based on Snell's Law with the sine of the angles of incidence and refraction. Often many thousands of rays are  traced to evaluate the quality of an image. 
+It is then found that in general the non-paraxial rays do not intersect at the ideal Gaussian image point. Instead of a single spot, a spot diagram is found which is more or less confined. The deviation from an ideal point image  is quantified in terms of  \emph{aberrations}. One distinguishes between monochromatic and chromatic aberrations. The latter are caused by the fact that the refractive index depends on wavelength. The first are a consequence of the small angle approximation in paraxial optics. If instead one retains the first two terms of the Taylor series of the sine,  the errors in the image can be quantified by  five monochromatic aberrations, the so-called \emph{primary} or \emph{Seidel aberrations} (see, for example, wikipedia\sidenote{\url{https://en.wikipedia.org/wiki/Optical_aberration}}). The best known  is \emph{spherical aberration}, which is caused by the fact that for a convergent spherical lens, the rays that makes a large angle with the optical axis are focused closer to the lens than the paraxial rays (see Fig.~\ref{fig:1_Spherical_aberration}
+). \emph{Distortion} causes deformation of images due to the fact that the magnification depends on the distance of the object point to the optical axis.
 
-\begin{itemize}
 
-\item {Freiheitsgrade eines geometrischen Strahls}
-\item {Idee der Justagespitze}
-\item{Zwei Spiegel iterieren}
-\item {Linsen und Strahlteiler justieren }
 
-\end{itemize}
+\begin{marginfigure}
+  %  \includegraphics[width=\textwidth]{\currfiledir sketches/principal_plane.png}
+   \caption{XXX spherical aberration}
+\label{fig:1_Spherical_aberration}
+\end{marginfigure}
+
+
+
+For high-quality imaging the aberrations have to be reduced by adding more lenses and optimizing  the curvatures of the surfaces, the thicknesses of the lenses and  the distances between them. For high quality systems,  a lens with an aspherical surface is sometimes used.  Systems with very small aberrations are extremely expensive, in particular if the field of view is large, as is the case in  lithographic imaging systems used in the manufacturing of integrated circuits.
+
+
+
+
+\section {Hands on: Aligning optical elements I}
+
+In the practical part of this chapter, you should practice to align optical elements as mirrors, lenses and beam splitters.
+
+\paragraph*{Laser beam} We will discuss in the next chapter the idea of a laser beam more iin detail. For now, it is sufficient to think of a bundle of rays that run more or less parallel to each other. So the beam is described by the diameter of the ray bundle and the angle of divergence within the bundle. Without lenses, we can for now assume that the rays remain parallel so that a laser beam can be approximated by a ray of geometrical optics.
+
+\paragraph*{Degrees of freedom} It is useful to have in mind the degrees of freedom that a ray of light has. Above we have used $y$ $\theta$ to describe a ray in a single plane. In three dimensions, we need two spatial coordinates $x$ and $y$, and two angles with the optical axis, say $\theta_x$ and $\theta_y$. If we want to align and thus define a beam, we need to fix these four degrees of freedom.
+
+\paragraph*{Alignment tip} A three-dimensional volume above an optical table is quite huge. In almost all cases it is not needed. It is sufficient to restrict the beam to one plane parallel to the table surface. The height of the beam above the table is defined by tje alignment tip. The center of the tip should coincide with the center of the beam.
+
+\paragraph*{Defining the first leg} The laser beam leaves the laser typically in an not too well defined direction and position. We then need two mirrors to define the four degrees of freedom of the beam as each mirror is described by two angles. We place the tip first after the second mirror and use the first mirror to bring the beam on the tip. Then we place the tip far from the second mirror and use the second mirror for alignment. Iterating this procedure will converge.\sidenote{The other way round does not converge!}
+
+\paragraph*{Defining all further legs} The advantage of a fixed beam hight comes with all further legs of the beam path. At a third mirror, the beam has already the correct height. We place the mirror such that its surface sits at the intersection oif the first two legs. Then we use the two angles of the mirror to define the new direction of tge beam.
+
+\paragraph*{Lenses} A lens should be centered on the beam. We first align the beam without lens, then place the tip after the intended position of the lens. We put the lens into the beam and translate perpendicular to the beam until it again goes over the tip. The angle of the lens relative to the beam can be check by back reflections. When translating the lens in beam direction, one needs to pay attention that the lens does not leave its centered position.
+
+\paragraph*{Beam splitter} At a beam splitter, three rotational degrees of freedom come into play. The translational degrees are identical with those of a mirror.
+
+
 
 
 
