@@ -1,44 +1,262 @@
 \renewcommand{\lastmod}{September 18, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
-\chapter{Gaussian Beams }
+\chapter{Gaussian Beams}
+
+
+\section{Goals}
+
+By the end of this chapter you should be able to explain the electric field in a Gaussian focus.
+You can construct a Gaussian beam 'by hand' for typical lens systems and calculate it using the ABCD law.
+
 
 \section{Overview}
 
-%-----------------------------------------------------------------------------
-\section{Gauss-Strahlen}
+Hering/Martin Kap. 4.6, Saleh/Teich Kap. 2,  3 und 10, Hecht Kap. 13
 
-\ziel{Ich kann den Verlauf des elektrischen Feldes in einem Gauß-Fokus \wort{erklären}.}
-
-\begin{itemize}
-
-\item Die Wellengleichung und ihre Lösungen;   ebene, sphärische und paraboloidale Wellen.
-\item {Umwandlung einer ebenen in eine sphärische Welle durch eine Linse}
-\item {Gauß-Strahlen als paraxiale Lösung der Wellengleichung}
-\item {Gauß-Strahlen als Eigenmoden eines Resonators}
-\item {Parameter und Eigenschaften von Gauß-Strahlen}
-\item Technik: knife edge test
-\item {Bonus: Hermit-Gauß’sche Strahlen und Laguerre-Gauß’sche Strahlen}
-\item {Bonus: Beziehung zwischen Wellenoptik und Strahlenoptik}
-
-\end{itemize}
-
-
-\lit{Hering/Martin Kap. 4.6, Saleh/Teich Kap. 2,  3 und 10, Hecht Kap. 13}
 
 
 %-----------------------------------------------------------------------------
-\section{Abbildung von Gauss-Strahlen}
+\section{Postulates of Wave Optics}
 
-\ziel{Ich kann für typische Linsensysteme den Verlauf eines Gauß-Strahls ‚von Hand‘ \wort{konstruieren} und mittels des ABCD Gesetzes \wort{berechnen}.}
+We expand our model to describe light. In this and the following chapter we use wave optics. We assume that light is a scalar wave. The wave function $u(\br, t)$ is complex-valued and fulfills the wave equation
+\begin{equation}
+    \nabla^2 u - \frac{1}{c^2} \, \frac{\partial^2 u}{\partial t^2} = 0
+\end{equation}
+with $c = c_0 /n$ the velocity of light in the medium of refractive index $n$. 
+We do not yet assign a physical meaning to the wave function $u(\br, t)$. But since you have seen Maxwell's equations elsewhere, you might think of it as one component of the electric field, for example. At interfaces between media, the index of refraction $n$ changes and thus also $1/c$, but we still do not discuss the physics of such interfaces and partial reflection is beyond our scope.
+The only connection we make to observable physical quantities is by defining the  \emph{intensity} $I$ of the wave as
+\begin{equation}
+    I(\br) = \braket{ |u(\br, t) |^2 }
+\end{equation}
+where the pointed brackets indicate a time average over a period long compared to the wave period.
 
-\begin{itemize}
-\item {Freiheitsgrade eines Gauss-Strahls}
+A consequence of the linear wave equation is the superposition principle. If $u$ and $v$ are solutions to the wave equation, then also $\alpha u + \beta v$ is a solution. This also means that light beams cross themselves without interaction.
 
-\item {ABCD Gesetz}
-\end{itemize}
 
-\lit{Hering/Martin Kap. 4.6, Saleh/Teich Kap. 3}
+\section{Monochromatic waves}
+
+The solutons of the wave eqaution can be written as harmonic functions
+\begin{equation}
+    u(\br, t)  = \tilde{u}(\br) \, e^{- i \omega t}
+\end{equation}
+withj an angular ferqiency $\omega = 2 \pi \nu$. The spatial part $\tilde{u}(\br)$ fulfils the Helmholtz equation
+\begin{equation}
+    \nabla^2 \tilde{u} + k^2 \tilde{u} = 0 \quad \text{with} \quad k = \frac{\omega}{c}
+\end{equation}
+$k$ is called the \emph{wavenumber} and becomes the \emph{wavevector} when going to three dimensions. The intensity is then given by $\tilde{u}(\br)$
+\begin{equation}
+    I(\br) = \braket{ |u(\br, t) |^2 } = |\tilde{u}(\br) |^2 \quad , 
+\end{equation}
+i.e., the intensity of a monochromatic wave is constant in time. 
+
+Lets discuss a few typical examples
+
+\paragraph*{Plane wave} The amplitude $\tilde{u}$ is given by
+\begin{equation}
+ \tilde{u}(\br) = A \, e^{i \bk \cdot \br}
+\end{equation}
+with $\bk$ the wavevector and $|\bk| = k $. The \emph{wavefronts}, i.e., surfaces of constant phase $\phi = q \, 2 \pi =  \arg \tilde{u}(\br)$, are parallel and equidistant planes. The distance is the wavelength $\lambda = c / \nu = 2 \pi / k$.
+
+When the index of refraction $n$ changes at an interface, the frequency $\omega$ remains the same, but the wavelength $\lambda$, the velocity of light $c$ and the wavenumber $k$ change
+\begin{equation}
+\lambda = \frac{\lambda_0}{n} \qquad
+c = \frac{c_0}{n} \qquad
+k = \frac{k_0}{n}
+\end{equation}
+ 
+
+\paragraph*{Spherical wave} Here the amplitude $\tilde{u}$ is given by
+\begin{equation}
+ \tilde{u}(\br) = \frac{A}{r} \, e^{i k r} \quad \text{with} \quad r = |\br|
+ \label{eq:2_spherical_wave}
+\end{equation}
+Note that the right side of the equation does only use scalar variables. The wavefunction depends thus only on the distance to the origin and has spherical symmetry. The wavefronts are concentric spheres of distance $\lambda$.
+
+\paragraph*{Paraboloidal wave} Close to the optical axis, we can approximate the spherical wave by a paraboloidal wave. We call $\theta$
+\begin{equation}
+    \theta^2 =  \frac{x^2 + y^2}{z^2} \ll 1
+\end{equation}
+and write $r$ as a Taylor expansion on $\theta$
+\begin{align}
+    r = & \sqrt{x^2 + y^2 + z^2}= z \sqrt{1 + \theta^2}
+    = z \left( 1 + \frac{\theta^2}{2} - \frac{\theta^4}{8} + \cdots \right) \\
+    \approx & z \left( 1 + \frac{\theta^2}{2} \right) = z + \frac{x^2 + y^2}{2z} 
+\end{align}
+This iis called the \emph{Fresnel approximation}. We put it into eq.  \ref{eq:2_spherical_wave} and approximate in the amplitude term even $r \approx z$. We get
+\begin{equation}
+    \tilde{u}(\br) = \frac{A}{z} \, e^{i k z} \, e^{i k \, \frac{x^2 + y^2}{2z}  }
+\end{equation}
+For points close to the optical axis but far from the origin, a spherical wave approaches a planar wave. In between, the paraboloidal wave is a useful approximation.
+
+
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/paraboloidal.png}
+   \caption{XXX sketch Fig 2.2.4 S/T}
+\end{marginfigure}
+
+
+\section{A transparent plate}
+
+As most simple optical element, we consider a transparent plate of thickness $d$ and index of refraction $n$ in air. We transmit a plane wave. The wavefunction is continuos at the interface. We are interested in the complex-valued transmission function $t(x,y)$
+\begin{equation}
+    t(x,y) = \frac{\tilde{u}(x,y,d)}{\tilde{u}(x,y,0)}
+\end{equation}
+For perpendicular incidence, the phase advances by $n k_0 d$ from left to right. The transmission function is thus
+\begin{equation}
+    t(x,y)  = e^{i n k_0 d}
+\end{equation}
+
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/plate.png}
+   \caption{A plate}
+\end{marginfigure}
+
+
+When the plane wave approaches the plate under angle $\theta$, then Snell's law gives the internal angle $\theta_i$ as $\sin \theta = n \sin \theta_i$. The wavevector makes this angle $\theta_i$ with the optical axis, so that the $z$-component of the term $\bk \cdot \br$ at the right side gives $n k \cos \theta_i$ and the total transmission function is
+\begin{equation}
+    t(x,y)  = e^{i n k_0 d \cos \theta_i}
+\end{equation}
+This is always against my intuition. The geometrical path in the plate gets longer by tilting it, but the phase difference becomes smaller. The point is that we only take the component along $z$ into account, as shifting a plane wave perpendicular to its direction of travel does not change anything.
+
+We of course make again the approximation that the angle $\theta$ is small enough so that we can ignore the $\cos \theta_i$ part.
+
+\begin{marginfigure}
+    \includegraphics[width=0.5\textwidth]{\currfiledir sketches/plate_var_d.png}
+   \caption{A plate of variable thickness}
+\end{marginfigure}
+
+
+If the plate has a variable thickness $d(x,y)$, we enclose it in a box of thickness $d_0$. Then part of the phase progression goes with $n$, part with air ($n=1$). In total this is
+\begin{equation}
+    t(x,y) \approx e^{i n k_0 d(x,y)} \,  e^{i k_0 (d_0 - d(x,y))}
+    = h_0   e^{i (n-1) k_0 d(x,y)}
+\end{equation}
+with $h_0 = e^{i  k_0 d_0}$ a constant phase factor. This makes the approximation that all angles are small enough and neighboring parts of the plate do not 'mix' at the output.
+
+
+\section{Conversion of a plane wave to a spherical wave by a lens}
+
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/lens.png}
+   \caption{A lens as plate of variable thickness}
+\end{marginfigure}
+
+The most interesting thin plate of variable thickness is a lens. For simplicity, we use a plane convex lens, i.e, set one radius of curvature to infinity. The thickness $d(x,y)$ of this plate is then
+\begin{equation}
+    d(x,y) = d_0 - \left( R - \sqrt{R^2 - (x^2 + y^2)} \right)
+\end{equation}
+We again use the Fresnel approximation $x^2 + y^2 \ll R^2$ and approximate the square-root term
+\begin{equation}
+    \sqrt{R^2 - (x^2 + y^2)}  = R \sqrt{1- \frac{x^2 + y^2}{R^2}} 
+    \approx R \left( 1 -  \frac{x^2 + y^2}{2 R^2} \right)
+\end{equation}
+so that 
+\begin{equation}
+    d(x,y) \approx d_0 -  \frac{x^2 + y^2}{2 R^2}
+\end{equation}
+The transmission function is then
+\begin{equation}
+    t(x,y)= h_0 \,  e^{-i k_0 \frac{x^2 + y^2}{2f}}
+    \quad 
+    \text{with} \quad
+    f = \frac{R}{n-1}
+\end{equation}
+and $h_0 = e^{i n k_0 d_0}$ another constant phase factor that we ignore.
+
+A spherical lens thus transforms a plane wave into a paraboloidal wave centered around $z=f$.
+
+
+\section{Gaussian beams as a paraxial solution of the wave equation}
+
+When we have discussed typical solutions to the wave equation above, we started from the full wave equation, found spherical waves as solution, and then made the paraxial approximation to arrive at the paraboloidal waves. We could also have gone a different route. We can apply the paraxial approximation to the wave equation directly. This leads to the paraxial Helmholtz equation
+\begin{equation}
+    \nabla_T^2 A + i 2k \frac{\partial A}{\partial z} = 0
+    \quad 
+    \text{and}
+    \quad
+    \tilde{u}(\br) = A(\br) \, e^{i k z}
+\end{equation}
+with $ \nabla_T$ acting only on the transverse coordinates only. The envelop $ A(\br)$ modulates the carrier $\exp(i k z)$. $A$ needs to be \emph{slowly varying}, i.e., on a wavelength length scale it should not change much.
+
+The paraboloidal waves 
+\begin{equation}
+    \tilde{u}(\br) = \frac{A}{z} \, e^{i k z} \, e^{i k \, \frac{x^2 + y^2}{2z}  }
+\end{equation}
+i.e.,
+\begin{equation}
+    A(\br) = \frac{A_1}{z}  \, e^{i k \, \frac{x^2 + y^2}{2z}  }
+\end{equation}
+fulfil this paraxial Helmholtz equation. The interesting point is that we can come to other solutions of the paraxial Helmholtz equation by replacing $z$ by $q(z) = z - i z_0$, i.e.
+\begin{equation}
+    A(\br) = \frac{A_1}{q(z)}  \, e^{i k \, \frac{x^2 + y^2}{2q(z)}  }
+\end{equation}
+These are \emph{Gaussian beams}. We call $q$ the q-parameter and $z_0$ the \emph{Rayleigh range}. We separate the complex function $1/q(z)$ into its real and imaginary part
+\begin{equation}
+    \frac{1}{q(z)} = \frac{1}{z -i z_0} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)}
+\end{equation}
+We will see that $R$ and $W$ give the wavefront radius of curvature and the beam width, respectively. Putting everything together, the wavefunction reads
+\begin{equation}
+    \tilde{u}(\br) = A_0 \, \frac{W_0}{W(z)} \, 
+    \exp \left( - \frac{\rho^2}{W^2(z)}  \right) \, 
+    \exp \left( +i kz +ik  \frac{\rho^2}{2 R(z)}  - i \zeta(z) \right) 
+\end{equation}
+with
+\begin{align}
+    W(z) = & W_0 \sqrt{1 + \left( \frac{z}{z_0} \right)^2    } \\
+    R(z) = & z \left[ 1 + \left( \frac{z_0}{z} \right)^2 \right] \\
+    \zeta(z) = & \arctan \frac{z}{z_0} \\
+    W_0 = & \sqrt{\frac{\lambda z_0}{\pi}}
+\end{align}
+Note that there are only two independent parameters next to the wavelength $\lambda$, namely the amplitude $A_0$ and the Rayleigh range $z_0$.
+
+\section{Gaussian beams as eigenmodes of a resonator}
+The importance of Gaussian beams comes from the laser as a ubiquitous light source. A laser produces Gaussian beams because these wave functions are the eigenmodes of a resonator formed by two spherical mirrors.
+
+In a laser, we are interested in eigenmodes, i.e. optical wave functions that do not change as they bounce back and forth in the resonator. The mirrors in a laser cavity are typically so highly reflective that there are many round trips before the field leaves the cavity.
+
+
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/cavity.png}
+   \caption{Eigenmodes of a laser cavity}
+\end{marginfigure}
+
+
+For an eigenmode to occur, the wavefront of the mode at the position of the mirror must match the shape of the mirror, otherwise it will reflect back into itself. The design of the cavity gives the radius of curvature $R_1$ and $R_2$ and the distance $d$ between the mirrors. We now show that under certain conditions a Gaussian beam is an eigenmode of such a cavity.
+
+We search for the positions $z_1$ and $z_2$ of the mirrors and the Rayleigh range $z_0$ if the mean. We have the equation system
+\begin{align}
+    z_2 = & z_1 + d \\
+    R_1 = & z_1 \left[ 1 + \left( \frac{z_0}{z_1} \right)^2 \right] \\
+    R_2 = & z_2 \left[ 1 + \left( \frac{z_0}{z_2} \right)^2 \right] \\
+\end{align}
+
+The solution is
+\begin{align}
+    z_1 = & \frac{-d (R_2 + d)}{R_1 + R_2 + 2d} \\
+    z_2 = &z_1 + d  \\
+    z_0^2 = & \frac{-d (R_1 +d)(R_2 + d)(R_1 + R_2 +d)}{(R_1 + R_2 + 2d)^2}
+\end{align}
+For a Gaussian beam $z_0$ must be real (or $z_0^2 > 0$). Otherwise $q = z - i z_0$ would be real and we would get a paraboloidal wave. This results in the \emph{stability condition} of a spherical cavity
+\begin{equation}
+    0 \le \left( 1 + \frac{d}{R_1} \right) \left( 1 + \frac{d}{R_2} \right) \le 1
+\end{equation}
+
+XXX sketch
+
+\section{Parameters and Properties of Gaussian Beams}
+
+\section{Degrees of freedom of a Gaussian beam}
+
+\section{ABCD Law}
+
+
+
+\section{Bonus: Hermit and Laguerre Gaussian beams}
+
+
+\section{Technique: Knife Edge Test}
+
 
 
 
