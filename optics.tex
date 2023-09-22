@@ -1,4 +1,3 @@
-
 \documentclass[notoc,nofonts,a4paper,twoside,nobib]{tufte-book}
 %\documentclass[nofonts,a4paper,twoside]{book}
 
@@ -240,24 +239,20 @@ isbn=false]{biblatex}
   }}  
   
 
-  \newcommand{\bk}{\boldmath k}
-  \newcommand{\br}{\boldmath r}
+  \newcommand{\bk}{\boldsymbol{k}}
+  \newcommand{\br}{\boldsymbol{r}}
+  \newcommand{\lit}[1]{#1}
+  \newcommand{\ziel}[1]{#1}
+  \newcommand{\wort}[1]{\emph{#1}}
 
 \usepackage[titletoc]{appendix}
 %\renewcommand{\appendixname}{Anhang}
 %\renewcommand{\appendixtocname}{Anhang}
 %\renewcommand{\appendixpagename}{Anhang}
 
-%\includeonly{1_FT/1_fourier}
-%\includeonly{2_optics/2_fourier_optics}
-%\includeonly{3_SLM/3_SLM}
-%\includeonly{4_xray/4_xray}
-  
-%\includeonly{5_classic/5_classic}
-%\includeonly{6_quantum/6_quantum}
+%\includeonly{preface}
+\includeonly{1_rays/1_rays}
 
-%\includeonly{8_plasmonic_rods/8_cda}
- 
  
 \begin{document}
  
@@ -290,15 +285,26 @@ isbn=false]{biblatex}
 
 %\include{preface}
 
+\include{preface}
+
+\part{Rays and beams}
+
 
 \include{1_rays/1_rays}
 \include{2_Gauss/2_gauss}
 
+\part{Fourier optics}
 \include{3_Fourier_optics/3_fourier_optics}
+
+\part{Light in matter}
 \include{4_dielectrics/4_dielectrics}
 \include{5_birefringence/5_birefringence}
+
+\part{Coherence and interference}
 \include{6_coherence/6_coherence}
 \include{7_interference/7_interference}
+
+\part{Quantum optics}
 \include{8_quantum_optics/8_quantum_optics}
 
 %-------
