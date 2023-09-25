@@ -210,6 +210,58 @@ with
 \end{align}
 Note that there are only two independent parameters next to the wavelength $\lambda$, namely the amplitude $A_0$ and the Rayleigh range $z_0$.
 
+
+
+\section{Parameters and Properties of Gaussian Beams}
+
+Let us discuss some properties of a Gaussian beam. The \emph{intensity} $I$ is
+\begin{equation}
+    I(\rho, z) = | \tilde{u}(\rho, z) |^2 = I_0 \left( \frac{W_0}{W(z)}  \right)^2 \, e^{- \frac{2 \rho^2}{W(z)^2} }
+\end{equation}
+i.e, the transversal profile of the intensity is a Gaussian. Along the $z$ axis
+\begin{equation}
+    I(0, z) =  I_0 \left( \frac{W_0}{W(z)} \right)^2= \frac{I_0}{1 + \left( \frac{z}{z_0} \right)^2}  \approx I_0  \left( \frac{z_0}{z} \right)^2
+\end{equation}
+where we assumed $z \ll z_0$ in the last approximation. This means that the intensity drops as $1/z^2$, as a spherical wave.
+
+At the \emph{beam waist} ($z=0$), the width $W(z=0) = W_0$ describes the radial distance $\rho$ at which the intensity  has dropped to $1/e^2$ of the peak value. When moving one Rayleigh range $z_0$ out of the focus, this radius increases by $\sqrt{2}$, as $W(z_0) = \sqrt{2} W_0$. At this distance, the intensity on the axis has dropped by a factor $1/2$. When integrating over any surface perpendicular to the optical axis, the integrated intensity or power remains the same.
+
+\begin{marginfigure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_divergence.png}
+   \caption{Divergence of a Gaussian beam}
+\end{marginfigure}
+
+
+We can define a \emph{divergence}, or opening angle $\Theta$ of the Gaussian beam. Far away from the beam waist, i.e. $z \ll z_0$ we have
+\begin{equation}
+    W(z) \approx W_0 \frac{z}{z_0} = \Theta \, z \quad \text{with} \quad \Theta = \frac{W_0}{z_0} = \frac{\lambda}{\pi W_0}
+ \end{equation}
+ Note that next to the wavelength $\lambda$ only the Rayleigh range $z_0$ \emph{or} the beam waist $W_0$ is a free parameter, not both. The divergence of the beam is fully contained in the beam waist. One can interpret this as diffraction of the Gaussian beam at its own waist. For comparison, diffraction at a circular aperture of radius $R$ would  lead to an angle $\Theta_\text{app} = 0.61 \lambda  / R$.
+
+ \begin{figure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_phase.png}
+   \caption{Phase fronts and radius of curvature $R$ around the beam waist.}
+\end{figure}
+
+The phase of the Gaussian beam is given by the imaginary factors of the exponential function, i.e.
+\begin{equation}
+    \phi(\rho, z) = k z + k  \frac{\rho^2}{2 R(z)}  -  \zeta(z) 
+\end{equation}
+and the curvature of the phase fronts by 
+\begin{equation}
+    R(z) = z \left[ 1 + \left( \frac{z_0}{z} \right)^2 \right] 
+\end{equation}
+At the focus ($z=0$) and for $z \rightarrow \infty$ we find a diverging radius of curvature, i.e., a plane wave. For large distances this is the same as for a circular wave. Around the focus, the Gaussian beam differs as the radius of curvature changes such that we also get a plane wave exactly at $z=0$. Another peculairity of Gaussian beams is the \emph{Gouy phase} $\zeta(z)$
+\begin{equation}
+    \zeta(z) =  \arctan \frac{z}{z_0} 
+\end{equation}
+When passing through the focus, the wave undergoes a $pi$ phase shift. An intuitive picture could be the following\footcite{Boyd1980IntuitiveEO}: In geometrical optics, the ray would go through the focus. In a Gaussian beam, the path along the $1/e$ contour stays on the same side of the optical axis and in thus around the focus a bit shorter. This is compensated by the Gouy phase shift.
+
+XXX Sketch of wave fronts and R(z)
+
+M Parameter ??
+
+
 \section{Gaussian beams as eigenmodes of a resonator}
 The importance of Gaussian beams comes from the laser as a ubiquitous light source. A laser produces Gaussian beams because these wave functions are the eigenmodes of a resonator formed by two spherical mirrors.
 
@@ -244,15 +296,59 @@ For a Gaussian beam $z_0$ must be real (or $z_0^2 > 0$). Otherwise $q = z - i z_
 
 XXX sketch
 
-\section{Parameters and Properties of Gaussian Beams}
+\section{Thin lens}
 
-\section{Degrees of freedom of a Gaussian beam}
+What happens when a Gaussian beam passes through a thin lens? As mentioned above, apart from the wavelength $\lambda$, the only free parameter is the Rayleigh range $z_0$ or the beam waist radius $W_0$. We also need to know the position $z$ of the focus along the optical axis. Since a lens does not change the wavelength, we need to find out how $z_0$ and $z$ before the lens are transformed into $z_0'$ and $z'$ after the lens. We set the coordinate system so that the beam waist before the lens is at the origin. Then the lens is at $z$ and the beam waist after the lens is a distance $z'$ later. See sketch XXX.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_lens.png}
+   \caption{A lens acting on a Gaussian beam}
+\end{figure}
+
+
+
+Just before the lens, the phase of the Gaussian beam is
+\begin{equation}
+   \phi_\text{left} =  k z + k  \frac{\rho^2}{2 R}  -  \zeta(z) 
+\end{equation}
+The phase effect of a lens is (see eq XXX)
+\begin{equation}
+  \Delta\phi_\text{lens} =   - k \frac{\rho^2}{2f}
+\end{equation}
+so that after the lens we have in total
+\begin{equation}
+  \phi_\text{right} =  \phi_\text{left}   + \Delta\phi_\text{lens}  =   k z   -  \zeta(z)  + k  \left( \frac{\rho^2}{2 R} - \frac{\rho^2}{2f} \right)
+\end{equation}  
+i.e. $W' = W'$ and
+\begin{equation}
+    \frac{1}{R'} = \frac{1}{R} - \frac{1}{f}
+\end{equation}
+and by using definition %    \frac{1}{q(z)} = \frac{1}{z -i z_0} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)}
+\begin{equation}
+    \frac{1}{q'} = \frac{1}{q} - \frac{1}{f}
+\end{equation}
+
+When the left beam waist is far from the lens, then we can see this arrangement as imaging of the left beam waist to a position $z'$ on the right side  of the lens, which will magnify the beam waist radius. The magnification factor in ray optics is 
+\begin{equation}
+    M_r = \left| \frac{f}{z -f}  \right| \quad \text{and} \quad W'_0 \approx M_r W_0
+\end{equation}
+The requirement 'far enough' means $z-f \gg z_0$, or
+\begin{equation}
+    r = \frac{z_0}{z - f} \ll 1
+\end{equation}
+We can calculate the beam parameters without  this approximation using a general magnification factor $M$ and obtain
+\begin{align}
+    M = & \frac{M_r}{\sqrt{1 + r^2}} \\
+    W'_0 = & M W_0 \\
+    (z' - f) = &M^2 (z-f) \\
+    z'_0 = & M^2 z_0 \\
+    \Theta'_0 = & \frac{\Theta_0}{M}
+\end{align}
 
 \section{ABCD Law}
 
 
-
-\section{Bonus: Hermit and Laguerre Gaussian beams}
+\section{Bonus: Hermit- and Laguerre-Gaussian beams}
 
 
 \section{Technique: Knife Edge Test}
