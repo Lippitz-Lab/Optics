@@ -1,61 +1,20 @@
-\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\lastmod}{September 26, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Fourier Optics}
 
-\ziel{Ich kann das Filtern von Raumfrequenzen experimentell \wort{demonstrieren} und \wort{erklären}.}
+\goal{By the end of this chapter you should be able to explain and experimentally demonstrate the filtering of spatial frequencies.}
 
 
-
-%-----------------------------------------------------------------------------
-\section{Beugung im reziproken Raum}
-\ziel{Ich kann Beugung im Fourier-Formalismus \wort{erklären}.}
-
-\begin{itemize}
-
-\item {Raumfrequenzen einer Blende}
-
-\item {Fresnel- und Fraunhofer-Näherung}
-
-\end{itemize}
-
-\lit{Saleh/Teich  Kap. 4, Hecht Kap.11}
-
-
-
-%-----------------------------------------------------------------------------
-\section{Beugungsbegrenzung}
-\ziel{Ich kann das Auflösungsvermögen eines Mikroskops und den Raumfilter im Formalismus der Fourier-Optik \wort{erklären}.}
-
-\begin{itemize}
-
-\item {Fourier-Transformation mittels Linse}
-
-\item {Gauß-Strahl an sich selbst gebeugt}
-\end{itemize}
-
-\lit{Saleh/Teich  Kap. 4, Hecht Kap. 11}
-
-
-
-%-----------------------------------------------------------------------------
-\section{Bonus: Optische Datenverarbeitung}
-\ziel{Ich kann optischen Mustererkennung im Formalismus der Fourier-Optik \wort{erklären}.}
-
-\begin{itemize}
-
-\item {Korrelation mittels Fourier-Transformation}
-
-\end{itemize}
-
-\lit{Goodman Kap. 8}
 
 
 \section{Overview}
 Fourier transformation simplifies the description of light, especially when it passes through obstacles, as in diffraction. The action of a lens also involves a Fourier transform. This is the field of \emph{Fourier optics}. I will follow chapter 4 of \cite{SalehTeich1991} here. Another good source is \cite{Goodman2005}. Note that books (as Saleh \& Teich) from the engineering  side of optics use $j = - i = - \sqrt{-1}$ instead of $i$. Sometimes this $j$ is even written as $i$, so engineering is the complex conjugate of physics.
 
 
-We will briefly lay the foundations of Fourier optics and then discuss diffraction and optical Fourier transform through a lens. For our purposes it is sufficient to consider scalar waves, i.e. we ignore the vectorial nature of the electric (or magnetic) field of light and use only a complex scalar value at each point in space to describe light.
+We will briefly lay the foundations of Fourier optics and then discuss diffraction and optical Fourier transform through a lens. For our purposes it is sufficient to consider scalar waves, i.e. we ignore the vectorial nature of the electric (or magnetic) field of light and use only a complex scalar value at each point in space to describe light. We will need fundamental properties of the Fourier transformation, as de scribed in Appendix \ref{chap:appendix_Fourier}
+. For numerical applications Appendix \ref{chap:appendix_FFT}
+might be useful.
 
 \section{Spatial frequencies}
 
@@ -244,6 +203,7 @@ This factor becomes spatially constant when the condition $d=f$ is met. A lens t
 
 
 
+
 \section{Spatial filter}
 
 
@@ -268,16 +228,17 @@ The inverse filter, i.e. a opaque disc, acts as high-pass filter, increasing the
 
 
 
+\section{Resolution of a microscope}
+
+\section {Optical data processing: Correlation by Fourier transform }
+
+\cite{Goodman2005}, chap. 8
+
+
 %-----------------------------------------------------------------------------
-\section{Hands on: Justage von Bauteilen 2}
-\ziel{Ich kann einen Raumfilter (engl. pin hole) für Gauß-Strahlen \wort{justieren}.}
+\section{Hands on: Align  a pin hole}
 
-\begin{itemize}
-
-\item {Justage-Strategie}
-\item {Optimaler Durchmesser}
-\end{itemize}
-
+Alignment strategy. Optimum diameter
 
 
 %--------------------

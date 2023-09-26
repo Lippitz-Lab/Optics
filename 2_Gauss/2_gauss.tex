@@ -1,25 +1,24 @@
-\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\lastmod}{September 26, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Gaussian Beams}
 
 
-\section{Goals}
-
-By the end of this chapter you should be able to explain the electric field in a Gaussian focus.
-You can construct a Gaussian beam 'by hand' for typical lens systems and calculate it using the ABCD law.
+\goal{By the end of this chapter you should be able to explain the electric field in a Gaussian focus.
+You can construct a Gaussian beam 'by hand' for typical lens systems and calculate it using the ABCD law.}
 
 
 \section{Overview}
 
-Hering/Martin Kap. 4.6, Saleh/Teich Kap. 2,  3 und 10, Hecht Kap. 13
+We extend our model to describe light. In this and the following chapters we will use wave optics and assume that light is a scalar wave. We will introduce typical wave functions as plane and spherical waves. Of particular importance are Gaussian beams: as eigenmodes of a laser resonator, they are ubiquitous in optical experiments. We will discuss how these waves and beams are transmitted through optical elements and how we can determine their properties.
+More details on these topics can be found in chapter 2 and 3 of \cite{SalehTeich1991}, chapter 4.6 of \cite{Hering_Martin_Optik},  chapter 13 of \cite{Hecht_Optics}.
 
 
 
 %-----------------------------------------------------------------------------
 \section{Postulates of Wave Optics}
 
-We expand our model to describe light. In this and the following chapter we use wave optics. We assume that light is a scalar wave. The wave function $u(\br, t)$ is complex-valued and fulfills the wave equation
+The wave function $u(\br, t)$ is complex-valued and fulfills the wave equation
 \begin{equation}
     \nabla^2 u - \frac{1}{c^2} \, \frac{\partial^2 u}{\partial t^2} = 0
 \end{equation}
@@ -36,11 +35,11 @@ A consequence of the linear wave equation is the superposition principle. If $u$
 
 \section{Monochromatic waves}
 
-The solutons of the wave eqaution can be written as harmonic functions
+The solutions of the wave equation can be written as harmonic functions
 \begin{equation}
     u(\br, t)  = \tilde{u}(\br) \, e^{- i \omega t}
 \end{equation}
-withj an angular ferqiency $\omega = 2 \pi \nu$. The spatial part $\tilde{u}(\br)$ fulfils the Helmholtz equation
+with an angular frequency $\omega = 2 \pi \nu$. The spatial part $\tilde{u}(\br)$ fulfils the Helmholtz equation
 \begin{equation}
     \nabla^2 \tilde{u} + k^2 \tilde{u} = 0 \quad \text{with} \quad k = \frac{\omega}{c}
 \end{equation}
@@ -257,9 +256,8 @@ At the focus ($z=0$) and for $z \rightarrow \infty$ we find a diverging radius o
 \end{equation}
 When passing through the focus, the wave undergoes a $pi$ phase shift. An intuitive picture could be the following\footcite{Boyd1980IntuitiveEO}: In geometrical optics, the ray would go through the focus. In a Gaussian beam, the path along the $1/e$ contour stays on the same side of the optical axis and in thus around the focus a bit shorter. This is compensated by the Gouy phase shift.
 
-XXX Sketch of wave fronts and R(z)
 
-M Parameter ??
+XXX M Parameter ??
 
 
 \section{Gaussian beams as eigenmodes of a resonator}
@@ -280,7 +278,7 @@ We search for the positions $z_1$ and $z_2$ of the mirrors and the Rayleigh rang
 \begin{align}
     z_2 = & z_1 + d \\
     R_1 = & z_1 \left[ 1 + \left( \frac{z_0}{z_1} \right)^2 \right] \\
-    R_2 = & z_2 \left[ 1 + \left( \frac{z_0}{z_2} \right)^2 \right] \\
+    R_2 = & z_2 \left[ 1 + \left( \frac{z_0}{z_2} \right)^2 \right] 
 \end{align}
 
 The solution is
@@ -294,22 +292,17 @@ For a Gaussian beam $z_0$ must be real (or $z_0^2 > 0$). Otherwise $q = z - i z_
     0 \le \left( 1 + \frac{d}{R_1} \right) \left( 1 + \frac{d}{R_2} \right) \le 1
 \end{equation}
 
-XXX sketch
+XXX sketch of stability condition
 
 \section{Thin lens}
 
-What happens when a Gaussian beam passes through a thin lens? As mentioned above, apart from the wavelength $\lambda$, the only free parameter is the Rayleigh range $z_0$ or the beam waist radius $W_0$. We also need to know the position $z$ of the focus along the optical axis. Since a lens does not change the wavelength, we need to find out how $z_0$ and $z$ before the lens are transformed into $z_0'$ and $z'$ after the lens. We set the coordinate system so that the beam waist before the lens is at the origin. Then the lens is at $z$ and the beam waist after the lens is a distance $z'$ later. See sketch XXX.
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_lens.png}
-   \caption{A lens acting on a Gaussian beam}
-\end{figure}
-
-
-
-Just before the lens, the phase of the Gaussian beam is
+What happens when a Gaussian beam passes through a thin lens? We assume a thin lens, so $z$ does not change. The radial amplitude distribution $ \tilde{u}(\rho, z)$ also does not change, which means that the width parameter $W$ remains the same, i.e,
 \begin{equation}
-   \phi_\text{left} =  k z + k  \frac{\rho^2}{2 R}  -  \zeta(z) 
+    W^{(L)} = W^{(R)}
+\end{equation}
+The phase needs a bit more attention. Just before the lens, the phase of the Gaussian beam is
+\begin{equation}
+   \phi^{(L)} =  k z + k  \frac{\rho^2}{2 R}  -  \zeta(z) 
 \end{equation}
 The phase effect of a lens is (see eq XXX)
 \begin{equation}
@@ -317,45 +310,96 @@ The phase effect of a lens is (see eq XXX)
 \end{equation}
 so that after the lens we have in total
 \begin{equation}
-  \phi_\text{right} =  \phi_\text{left}   + \Delta\phi_\text{lens}  =   k z   -  \zeta(z)  + k  \left( \frac{\rho^2}{2 R} - \frac{\rho^2}{2f} \right)
+  \phi^{(R)} =  \phi^{(L)}   + \Delta\phi_\text{lens}  =   k z   -  \zeta(z)  + k  \left( \frac{\rho^2}{2 R} - \frac{\rho^2}{2f} \right)
 \end{equation}  
-i.e. $W' = W'$ and
+i.e. 
 \begin{equation}
-    \frac{1}{R'} = \frac{1}{R} - \frac{1}{f}
-\end{equation}
-and by using definition %    \frac{1}{q(z)} = \frac{1}{z -i z_0} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)}
-\begin{equation}
-    \frac{1}{q'} = \frac{1}{q} - \frac{1}{f}
+    \frac{1}{R^{(R)}} = \frac{1}{R^{(L)}} - \frac{1}{f}
 \end{equation}
 
-When the left beam waist is far from the lens, then we can see this arrangement as imaging of the left beam waist to a position $z'$ on the right side  of the lens, which will magnify the beam waist radius. The magnification factor in ray optics is 
+What does this mean for the other properties of a Gaussian beam? How are Rayleigh range $z_0$ and beam waits $W_0$ modified by a lens? Knowing $\lambda$, $W(z)$ and .$R$, i.e, the beam properties at the lens, we can use eqs XXX to calculate $z_0$, $W_0$ and $z$, i.e. the focal parameter and the distance $z$ of focus and lens. We get
+\begin{align}
+    W_0 = & \frac{W(z)}{\sqrt{1 + \left(\frac{\pi W(z)}{ \lambda R(z)} \right)^2}} \\
+    z = & \frac{R(z)}{1 + \left(\frac{\pi W(z)}{ \lambda R(z)} \right)^2}
+\end{align}
+We thus can connect the left and right beam parameters.
+
+
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_lens.png}
+   \caption{A lens acting on a Gaussian beam}
+\end{figure}
+
+
+When the left beam waist is far from the lens, then we can see this arrangement as imaging of the left beam waist to a position $z^{(R)}$ on the right side  of the lens, which will magnify the beam waist radius. The magnification factor in ray optics is 
 \begin{equation}
-    M_r = \left| \frac{f}{z -f}  \right| \quad \text{and} \quad W'_0 \approx M_r W_0
+    M_r = \left| \frac{f}{z^{(L)} -f}  \right| \quad \text{and} \quad W_0^{(R)} \approx M_r W_0^{(L)} 
 \end{equation}
-The requirement 'far enough' means $z-f \gg z_0$, or
+The requirement 'far enough' means $z^{(L)} - f \gg z_0^{(L)} $, or
 \begin{equation}
-    r = \frac{z_0}{z - f} \ll 1
+    r = \frac{z_0^{(L)} }{z^{(L)}  - f} \ll 1
 \end{equation}
 We can calculate the beam parameters without  this approximation using a general magnification factor $M$ and obtain
 \begin{align}
     M = & \frac{M_r}{\sqrt{1 + r^2}} \\
-    W'_0 = & M W_0 \\
-    (z' - f) = &M^2 (z-f) \\
-    z'_0 = & M^2 z_0 \\
-    \Theta'_0 = & \frac{\Theta_0}{M}
+    W_0^{(R)}  = & M W_0^{(L)}  \\
+    (z^{(R)} - f) = &M^2 (z^{(L)} -f) \\
+    z_0^{(R)} = & M^2 z_0^{(L)}  \\
+    \Theta_0^{(R)} = & \frac{\Theta_0^{(L)} }{M}
 \end{align}
 
-\section{ABCD Law}
+\section{ABCD Law and q parameter}
+
+Things become simpler when we realize that the $q$ parameter is governing the Gaussian beam. We introduced above the Gaussian beams by 
+\begin{equation}
+    q(z) = z - i z_0 \quad \text{and} \quad
+    \frac{1}{q(z)} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)}
+\end{equation} 
+As soon as we know $q$ at a single position along the beam, we can calculate all the rest. When $q_1$  and $q_2$ describe the $q$ parameters left and right of an optical element, both are connected by the \emph{ABCD law}
+\begin{equation}
+    q_2 = \frac{A q_1 + B}{C q_1 + D}
+\end{equation}
+where 
+\begin{equation}
+\boldsymbol{M} = 
+\begin{pmatrix}
+    A & B \\ C & D \\
+\end{pmatrix}
+\end{equation}
+is the $2\times2$ matrix of the matrix method in ray optics, as introduced in the last chapter.\sidenote{see \cite{Brooker_Optics}, chapter 7.9, for a justification.}
+
+\emph{Propagation} by a distance $d$ thus leads to 
+\begin{equation}
+    q_2 = q_1 + d
+\end{equation}
+The action of a \emph{lens} is described by
+\begin{equation}
+    q_2 = \frac{f q_1}{f - q_1}
+\end{equation}
 
 
-\section{Bonus: Hermit- and Laguerre-Gaussian beams}
+%\section{Bonus: Hermit- and Laguerre-Gaussian beams}
 
 
 \section{Technique: Knife Edge Test}
 
 
+A common tool for determining the properties of a Gaussian beam is a knife edge or razor blade. We mount it so that it can be moved perpendicular to the optical axis, cutting out a variable part of the beam. If we measure the power in the beam after the knife edge as a function of its position, we get a partial integral over the cross-section of the beam.
+\begin{equation}
+    P(x_0) = \int_{x=x_0}^\infty \int_{y=-\infty}^\infty I(x,y) \, dx \, dy
+\end{equation}
+Taking the numerical derivative yields the beams intensity profile.
+\begin{equation}
+    I(x) \propto \frac{\partial P(x_0)}{\partial x_0}
+\end{equation}
 
 
+We can also observe the shadow of the knife edge to determine the position of the beam waist. We place a screen far from the waist and the knife edge at the estimated waist position. If the knife is between the waist and the screen, the shadow will start from the same side as the knife enters the beam. If the knife is further away than the waist, the directions are reversed. If the knife is exactly at the waist, the image on the screen will turn dark with no apparent direction. This is the \emph{Foucault knife edge test} to determine the position and quality of a focus, originally of a spherical mirror.
+
+\begin{questions}
+    \item Explain why the image turns dark with no apparent direction.
+\end{questions}
 
 %--------------------
 \printbibliography[segment=\therefsegment,heading=subbibliography]
