@@ -55,13 +55,14 @@ Paraxial rays are those that form only a small angle with the optical axis. This
 Before we come to a (spherical) lens, lets have a look at half a lens, i.e., a single spherical surface of radius $R$. For convenience, we encode in the sign of the $R$ the direction of curvature: a positive radius describes a convex surface, as seen when looking in the direction of the optical axis.
 
 \begin{marginfigure}
-    \includegraphics[width=\textwidth]{\currfiledir sketches/spherical_surface.png}
+   % \includegraphics[width=\textwidth]{\currfiledir sketches/spherical_surface.png}
+    \inputtikz{\currfiledir spherical_surface}
    \caption{Refraction of  a ray at a spherical surface}
 \end{marginfigure}
 
 We start with a ray of angle $\theta_1$ towards the optical axis in a medium of refractive index $n_1$. It hits the spherical surface at a height $y$ above the optical axis. Here we apply Snell's law and calculate the new direction of the ray. Using the paraxial approximation, we get
 \begin{equation}
-    \theta_2 \approx \frac{n_1}{n_2} \theta_1  \frac{n_2 - n_1}{n_2} \, \frac{y}{R}
+    \theta_2 \approx \frac{n_1}{n_2} \theta_1 =  \frac{n_2 - n_1}{n_2} \, \frac{y}{R}
     \label{eq:1_single_spherical_surface}
 \end{equation}
 Negative angles $\theta_i$ describe ray pointing towards below the optical axis.
@@ -83,7 +84,9 @@ The position $z_2$ along the optical axis of the image point does not depend on 
 We combine two spherical surfaces of radius $R_1$ and $R_2$. In the sketch \ref{fig:1_thin_lens} $R_2$ is negative, as this is a concave surface when seen along the optical axis. The two surfaces enclose a medium of refractive index $n$, while the outside is air, i.e., $n_1 = 1$.
 
 \begin{marginfigure}
-    \includegraphics[width=\textwidth]{\currfiledir sketches/thin_lens.png}
+    %\includegraphics[width=\textwidth]{\currfiledir sketches/thin_lens.png}
+    \inputtikz{\currfiledir lens}
+
    \caption{Refraction of  a ray at a thin lens}
    \label{fig:1_thin_lens}
 \end{marginfigure}

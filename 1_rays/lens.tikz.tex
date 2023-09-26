@@ -1,0 +1,64 @@
+% \documentclass{standalone}
+
+% \input{../tikz_header}
+
+% \begin{document}
+
+
+\begin{tikzpicture}
+
+
+    \useasboundingbox (-2.5,-1.5) rectangle (3,2.3);
+    %\draw (-2.5,-1.5) rectangle (3,2.3);
+ 
+    \pgfmathsetmacro{\ra}{2}
+    \pgfmathsetmacro{\rb}{2.5}
+    \pgfmathsetmacro{\dr}{-4.5}
+
+    \draw[->] (-2.5,0) -- (2.7,0) node[below]{$z$};    
+   % \draw[->] ( \dr/2 + \rb , - 1.5) -- ++ (0, 4) node[left]{$y$};    
+
+    \draw[name path=S1,dashed] (\ra,0) ++(225:\ra) arc (225:135:\ra);
+     \draw[name path=S2,dashed] (\rb + \dr,0) ++(35:\rb) arc (35:-35:\rb);
+     %\tikzfillbetween[of=S1 and S2,split,every even segment/.style={fill opacity=0}]{gray!10};
+
+     \path [name intersections={of=S1 and S2,by=Y}];
+
+     \draw[->, name path=pY] (Y) ++(0,-2.5) -- ++(0,3.5) node[left]{$y$};  
+
+     \begin{scope}
+            \clip (\ra,0) circle (\ra);
+            \draw[thick] (\rb + \dr,0) circle (\rb);
+     \end{scope}
+
+     \begin{scope}
+        \clip (\rb + \dr,0) circle (\rb);
+        \draw[thick] (\ra,0) circle (\ra);
+    \end{scope}
+
+
+    \draw[->] (\ra,0) -- node[above] {\footnotesize $R_1$}  ++(140:\ra) ;
+    \draw[fill] (\ra,0) circle (0.04);
+
+    \draw[->] (\rb + \dr,0) -- node[left] {\footnotesize $-R_2$}  ++(32:\rb) ;
+    \draw[fill] (\rb + \dr,0) circle (0.04);
+
+%
+    \pgfmathsetmacro{\h}{0.7}
+
+     \draw[dashed, name path=line] (-0.7,\h) coordinate (B) -- (1,\h) coordinate (C);
+
+     \path [name intersections={of=pY and line,by=X}];
+    % %\draw (X) circle (1mm);
+
+     \draw[blue, thick] (X) --++ (205:2) coordinate (A);
+     \draw[blue, thick, ->] (X) --++ (-15:2) coordinate (D);
+
+  
+     \node at ( $(Y) + (0.1,-1.2)$)  {\footnotesize $n$};
+
+\end{tikzpicture}
+
+
+
+%\end{document}
