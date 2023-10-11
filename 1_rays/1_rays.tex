@@ -1,4 +1,4 @@
-\renewcommand{\lastmod}{September 22, 2023}
+\renewcommand{\lastmod}{October 11, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Ray optics}
@@ -36,9 +36,9 @@ and is Fermat's Principle. The $\delta$ means 'variation', i.e. you try to modif
 \paragraph*{Mirror} At a mirror, the angle of incidence equals the angle of reflection, as this gives the shortest path. We can see this when we fold the reflected beam to the side behind the mirror. Then the point of reflection is the point where the ray would cross the mirror surface.
 
 
-\paragraph*{Snell's law} At a bounday between two media ($i=1,2§$), the shortest path is such  that 
+\paragraph*{Snell's law} At a boundary between two media ($i=1,2§$), the shortest path is such  that 
 \begin{equation}
-    n_i \sin \Theta_i = \text{const}
+    n_i \sin \Theta_i = \text{const} \quad ,
 \end{equation}
 where $n$ is the index of refraction and $\Theta$ the angle to tge surface normal. With our current model of ray optics, we can not say anything about the amplitude ratio of reflection and transmission at such an interface.
 
@@ -62,7 +62,7 @@ Before we come to a (spherical) lens, lets have a look at half a lens, i.e., a s
 
 We start with a ray of angle $\theta_1$ towards the optical axis in a medium of refractive index $n_1$. It hits the spherical surface at a height $y$ above the optical axis. Here we apply Snell's law and calculate the new direction of the ray. Using the paraxial approximation, we get
 \begin{equation}
-    \theta_2 \approx \frac{n_1}{n_2} \theta_1 =  \frac{n_2 - n_1}{n_2} \, \frac{y}{R}
+    \theta_2 \approx \frac{n_1}{n_2} \theta_1 =  \frac{n_2 - n_1}{n_2} \, \frac{y}{R} \quad .
     \label{eq:1_single_spherical_surface}
 \end{equation}
 Negative angles $\theta_i$ describe ray pointing towards below the optical axis.
@@ -71,8 +71,8 @@ Negative angles $\theta_i$ describe ray pointing towards below the optical axis.
 We can do the same for many rays originating under different angles $\theta_1$ from  a point $P_1 =(y_1, z_1)$ in medium 1. We find that they all cross in a point $P_2 = (y_2, z_2)$ in medium 2. Point $P_1$ is thus imaged on point $P_2$. For convenience, the sign convention is thus that $z$ is measured from the intersection of the optical axis and the surface, i.e., both $z_i$ are positive.
 We get
 \begin{equation}
-    \frac{n_1}{z_1} + \frac{n_2}{z_2} \approx \frac{n_2 - n_1}{R} \qquad 
-    y_2 = - \frac{n_1}{n_2} \, \frac{z_2}{z_1} \, y_1
+    \frac{n_1}{z_1} + \frac{n_2}{z_2} \approx \frac{n_2 - n_1}{R} \quad \text{and} \quad
+    y_2 = - \frac{n_1}{n_2} \, \frac{z_2}{z_1} \, y_1 \quad .
 \end{equation}
 The position $z_2$ along the optical axis of the image point does not depend on $y_1$, i.e., every point in the plane $z=z_1$ will have its image in the plane $z = z_2$. These two planes are \emph{conjugate planes}.
 
@@ -95,12 +95,12 @@ We combine two spherical surfaces of radius $R_1$ and $R_2$. In the sketch \ref{
 We make the approximation that this is a \emph{thin lens}, i.e., that the width $\Delta$ of the lens on the optical axis is so small that we can neglect the change in height $y$ of the ray across the lens. We apply twice eq. \ref{eq:1_single_spherical_surface} and get
 \begin{equation}
     \theta_2 = \theta_1 - \frac{y}{f} \quad \text{with} \quad
-   \frac{1}{f} = (n-1) \left( \frac{1}{R_1} - \frac{1}{R_2} \right) \quad . 
+   \frac{1}{f} = (n-1) \left( \frac{1}{R_1} - \frac{1}{R_2} \right) 
 \end{equation}
 with the \emph{focal length} $f$. The coordinates of the image points are
 \begin{equation}
     \frac{1}{z_1} + \frac{1}{z_2} = \frac{1}{f} \quad \text{and} \quad 
-    y_2 = - \frac{z_2}{z_1} \, y_2
+    y_2 = - \frac{z_2}{z_1} \, y_2 \quad .
 \end{equation}
 Again, this holds only in the paraxial approximation. When the rays make a too large angle with the optical axis, they will not be focused ideally. A spherical lens shows aberrations.
 
@@ -190,7 +190,7 @@ let it propagate by a distance $d=f$ and then pass through a lens. In total we h
     = 
     \begin{pmatrix}
         y  + f \theta \\ - \frac{y}{f}
-    \end{pmatrix}
+    \end{pmatrix} \quad .
 \end{equation}
 We see that the outgoing angle $\theta_\text{out} = - y/f$ does not depend on the direction $\theta$ in which the ray leaves the point source. All these rays are thus parallel, as expected.
 
@@ -220,7 +220,7 @@ The approximation of a thin lens can be removed by introducing principal planes\
 \end{questions}
 
 
-\subsection{Aberrations}
+\section{Aberrations}
 For\sidenote{This section is  adapted from \cite{Konijnenberg_Optics}} designing advanced optical systems Gaussian geometrical optics is not sufficient. 
 Instead non-paraxial rays, and among them also non-meridional\sidenote{meridional rays run in a plane than contains the optical axis} rays, must be traced  using software based on Snell's Law with the sine of the angles of incidence and refraction. Often many thousands of rays are  traced to evaluate the quality of an image. 
 It is then found that in general the non-paraxial rays do not intersect at the ideal Gaussian image point. Instead of a single spot, a spot diagram is found which is more or less confined. The deviation from an ideal point image  is quantified in terms of  \emph{aberrations}. One distinguishes between monochromatic and chromatic aberrations. The latter are caused by the fact that the refractive index depends on wavelength. The first are a consequence of the small angle approximation in paraxial optics. If instead one retains the first two terms of the Taylor series of the sine,  the errors in the image can be quantified by  five monochromatic aberrations, the so-called \emph{primary} or \emph{Seidel aberrations} (see, for example, wikipedia\sidenote{\url{https://en.wikipedia.org/wiki/Optical_aberration}}). The best known  is \emph{spherical aberration}, which is caused by the fact that for a convergent spherical lens, the rays that makes a large angle with the optical axis are focused closer to the lens than the paraxial rays (see Fig.~\ref{fig:1_Spherical_aberration}
@@ -247,7 +247,7 @@ In the practical part of this chapter, you should practice to align optical elem
 
 \paragraph*{Laser beam} We will discuss in the next chapter the idea of a laser beam more iin detail. For now, it is sufficient to think of a bundle of rays that run more or less parallel to each other. So the beam is described by the diameter of the ray bundle and the angle of divergence within the bundle. Without lenses, we can for now assume that the rays remain parallel so that a laser beam can be approximated by a ray of geometrical optics.
 
-\paragraph*{Degrees of freedom} It is useful to have in mind the degrees of freedom that a ray of light has. Above we have used $y$ $\theta$ to describe a ray in a single plane. In three dimensions, we need two spatial coordinates $x$ and $y$, and two angles with the optical axis, say $\theta_x$ and $\theta_y$. If we want to align and thus define a beam, we need to fix these four degrees of freedom.
+\paragraph*{Degrees of freedom} It is useful to have in mind the degrees of freedom that a ray of light has. Above we have used $y$ and $\theta$ to describe a ray in a single plane. In three dimensions, we need two spatial coordinates $x$ and $y$, and two angles with the optical axis, say $\theta_x$ and $\theta_y$. If we want to align and thus define a beam, we need to fix these four degrees of freedom.
 
 \paragraph*{Alignment tip} A three-dimensional volume above an optical table is quite huge. In almost all cases it is not needed. It is sufficient to restrict the beam to one plane parallel to the table surface. The height of the beam above the table is defined by tje alignment tip. The center of the tip should coincide with the center of the beam.
 

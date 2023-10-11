@@ -1,4 +1,4 @@
-\renewcommand{\lastmod}{September 26, 2023}
+\renewcommand{\lastmod}{October 11, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Gaussian Beams}
@@ -41,7 +41,7 @@ The solutions of the wave equation can be written as harmonic functions
 \end{equation}
 with an angular frequency $\omega = 2 \pi \nu$. The spatial part $\tilde{u}(\br)$ fulfils the Helmholtz equation
 \begin{equation}
-    \nabla^2 \tilde{u} + k^2 \tilde{u} = 0 \quad \text{with} \quad k = \frac{\omega}{c}
+    \nabla^2 \tilde{u} + k^2 \tilde{u} = 0 \quad \text{with} \quad k = \frac{\omega}{c} \quad .
 \end{equation}
 $k$ is called the \emph{wavenumber} and becomes the \emph{wavevector} when going to three dimensions. The intensity is then given by $\tilde{u}(\br)$
 \begin{equation}
@@ -61,13 +61,13 @@ When the index of refraction $n$ changes at an interface, the frequency $\omega$
 \begin{equation}
 \lambda = \frac{\lambda_0}{n} \qquad
 c = \frac{c_0}{n} \qquad
-k = \frac{k_0}{n}
+k = \frac{k_0}{n} \quad .
 \end{equation}
  
 
 \paragraph*{Spherical wave} Here the amplitude $\tilde{u}$ is given by
 \begin{equation}
- \tilde{u}(\br) = \frac{A}{r} \, e^{i k r} \quad \text{with} \quad r = |\br|
+ \tilde{u}(\br) = \frac{A}{r} \, e^{i k r} \quad \text{with} \quad r = |\br| \quad .
  \label{eq:2_spherical_wave}
 \end{equation}
 Note that the right side of the equation does only use scalar variables. The wavefunction depends thus only on the distance to the origin and has spherical symmetry. The wavefronts are concentric spheres of distance $\lambda$.
@@ -80,11 +80,11 @@ and write $r$ as a Taylor expansion on $\theta$
 \begin{align}
     r = & \sqrt{x^2 + y^2 + z^2}= z \sqrt{1 + \theta^2}
     = z \left( 1 + \frac{\theta^2}{2} - \frac{\theta^4}{8} + \cdots \right) \\
-    \approx & z \left( 1 + \frac{\theta^2}{2} \right) = z + \frac{x^2 + y^2}{2z} 
+    \approx & z \left( 1 + \frac{\theta^2}{2} \right) = z + \frac{x^2 + y^2}{2z}  \quad .
 \end{align}
-This iis called the \emph{Fresnel approximation}. We put it into eq.  \ref{eq:2_spherical_wave} and approximate in the amplitude term even $r \approx z$. We get
+This is called the \emph{Fresnel approximation}. We put it into eq.  \ref{eq:2_spherical_wave} and approximate in the amplitude term even $r \approx z$. We get
 \begin{equation}
-    \tilde{u}(\br) = \frac{A}{z} \, e^{i k z} \, e^{i k \, \frac{x^2 + y^2}{2z}  }
+    \tilde{u}(\br) = \frac{A}{z} \, e^{i k z} \, e^{i k \, \frac{x^2 + y^2}{2z}  } \quad .
 \end{equation}
 For points close to the optical axis but far from the origin, a spherical wave approaches a planar wave. In between, the paraboloidal wave is a useful approximation.
 
@@ -99,11 +99,11 @@ For points close to the optical axis but far from the origin, a spherical wave a
 
 As most simple optical element, we consider a transparent plate of thickness $d$ and index of refraction $n$ in air. We transmit a plane wave. The wavefunction is continuos at the interface. We are interested in the complex-valued transmission function $t(x,y)$
 \begin{equation}
-    t(x,y) = \frac{\tilde{u}(x,y,d)}{\tilde{u}(x,y,0)}
+    t(x,y) = \frac{\tilde{u}(x,y,d)}{\tilde{u}(x,y,0)} \quad .
 \end{equation}
 For perpendicular incidence, the phase advances by $n k_0 d$ from left to right. The transmission function is thus
 \begin{equation}
-    t(x,y)  = e^{i n k_0 d}
+    t(x,y)  = e^{i n k_0 d} \quad .
 \end{equation}
 
 \begin{marginfigure}
@@ -114,7 +114,7 @@ For perpendicular incidence, the phase advances by $n k_0 d$ from left to right.
 
 When the plane wave approaches the plate under angle $\theta$, then Snell's law gives the internal angle $\theta_i$ as $\sin \theta = n \sin \theta_i$. The wavevector makes this angle $\theta_i$ with the optical axis, so that the $z$-component of the term $\bk \cdot \br$ at the right side gives $n k \cos \theta_i$ and the total transmission function is
 \begin{equation}
-    t(x,y)  = e^{i n k_0 d \cos \theta_i}
+    t(x,y)  = e^{i n k_0 d \cos \theta_i} \quad .
 \end{equation}
 This is always against my intuition. The geometrical path in the plate gets longer by tilting it, but the phase difference becomes smaller. The point is that we only take the component along $z$ into account, as shifting a plane wave perpendicular to its direction of travel does not change anything.
 
@@ -143,7 +143,7 @@ with $h_0 = e^{i  k_0 d_0}$ a constant phase factor. This makes the approximatio
 
 The most interesting thin plate of variable thickness is a lens. For simplicity, we use a plane convex lens, i.e, set one radius of curvature to infinity. The thickness $d(x,y)$ of this plate is then
 \begin{equation}
-    d(x,y) = d_0 - \left( R - \sqrt{R^2 - (x^2 + y^2)} \right)
+    d(x,y) = d_0 - \left( R - \sqrt{R^2 - (x^2 + y^2)} \right) \quad .
 \end{equation}
 We again use the Fresnel approximation $x^2 + y^2 \ll R^2$ and approximate the square-root term
 \begin{equation}
@@ -152,7 +152,7 @@ We again use the Fresnel approximation $x^2 + y^2 \ll R^2$ and approximate the s
 \end{equation}
 so that 
 \begin{equation}
-    d(x,y) \approx d_0 -  \frac{x^2 + y^2}{2 R^2}
+    d(x,y) \approx d_0 -  \frac{x^2 + y^2}{2 R^2} \quad .
 \end{equation}
 The transmission function is then
 \begin{equation}
@@ -160,6 +160,7 @@ The transmission function is then
     \quad 
     \text{with} \quad
     f = \frac{R}{n-1}
+    \label{eq:2_phase_of_lens}
 \end{equation}
 and $h_0 = e^{i n k_0 d_0}$ another constant phase factor that we ignore.
 
@@ -188,11 +189,11 @@ i.e.,
 \end{equation}
 fulfil this paraxial Helmholtz equation. The interesting point is that we can come to other solutions of the paraxial Helmholtz equation by replacing $z$ by $q(z) = z - i z_0$, i.e.
 \begin{equation}
-    A(\br) = \frac{A_1}{q(z)}  \, e^{i k \, \frac{x^2 + y^2}{2q(z)}  }
+    A(\br) = \frac{A_1}{q(z)}  \, e^{i k \, \frac{x^2 + y^2}{2q(z)}  } \quad .
 \end{equation}
 These are \emph{Gaussian beams}. We call $q$ the q-parameter and $z_0$ the \emph{Rayleigh range}. We separate the complex function $1/q(z)$ into its real and imaginary part
 \begin{equation}
-    \frac{1}{q(z)} = \frac{1}{z -i z_0} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)}
+    \frac{1}{q(z)} = \frac{1}{z -i z_0} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)} \quad .
 \end{equation}
 We will see that $R$ and $W$ give the wavefront radius of curvature and the beam width, respectively. Putting everything together, the wavefunction reads
 \begin{equation}
@@ -202,10 +203,10 @@ We will see that $R$ and $W$ give the wavefront radius of curvature and the beam
 \end{equation}
 with
 \begin{align}
-    W(z) = & W_0 \sqrt{1 + \left( \frac{z}{z_0} \right)^2    } \\
+    W(z) = & W_0 \sqrt{1 + \left( \frac{z}{z_0} \right)^2    } \label{eq:2_wz} \\
     R(z) = & z \left[ 1 + \left( \frac{z_0}{z} \right)^2 \right] \\
     \zeta(z) = & \arctan \frac{z}{z_0} \\
-    W_0 = & \sqrt{\frac{\lambda z_0}{\pi}}
+    W_0 = & \sqrt{\frac{\lambda z_0}{\pi}} \quad . \label{eq:2_w0}
 \end{align}
 Note that there are only two independent parameters next to the wavelength $\lambda$, namely the amplitude $A_0$ and the Rayleigh range $z_0$.
 
@@ -233,7 +234,7 @@ At the \emph{beam waist} ($z=0$), the width $W(z=0) = W_0$ describes the radial 
 
 We can define a \emph{divergence}, or opening angle $\Theta$ of the Gaussian beam. Far away from the beam waist, i.e. $z \ll z_0$ we have
 \begin{equation}
-    W(z) \approx W_0 \frac{z}{z_0} = \Theta \, z \quad \text{with} \quad \Theta = \frac{W_0}{z_0} = \frac{\lambda}{\pi W_0}
+    W(z) \approx W_0 \frac{z}{z_0} = \Theta \, z \quad \text{with} \quad \Theta = \frac{W_0}{z_0} = \frac{\lambda}{\pi W_0} \quad .
  \end{equation}
  Note that next to the wavelength $\lambda$ only the Rayleigh range $z_0$ \emph{or} the beam waist $W_0$ is a free parameter, not both. The divergence of the beam is fully contained in the beam waist. One can interpret this as diffraction of the Gaussian beam at its own waist. For comparison, diffraction at a circular aperture of radius $R$ would  lead to an angle $\Theta_\text{app} = 0.61 \lambda  / R$.
 
@@ -248,16 +249,16 @@ The phase of the Gaussian beam is given by the imaginary factors of the exponent
 \end{equation}
 and the curvature of the phase fronts by 
 \begin{equation}
-    R(z) = z \left[ 1 + \left( \frac{z_0}{z} \right)^2 \right] 
+    R(z) = z \left[ 1 + \left( \frac{z_0}{z} \right)^2 \right]  \quad .
 \end{equation}
 At the focus ($z=0$) and for $z \rightarrow \infty$ we find a diverging radius of curvature, i.e., a plane wave. For large distances this is the same as for a circular wave. Around the focus, the Gaussian beam differs as the radius of curvature changes such that we also get a plane wave exactly at $z=0$. Another peculairity of Gaussian beams is the \emph{Gouy phase} $\zeta(z)$
 \begin{equation}
-    \zeta(z) =  \arctan \frac{z}{z_0} 
+    \zeta(z) =  \arctan \frac{z}{z_0}  \quad .
 \end{equation}
 When passing through the focus, the wave undergoes a $pi$ phase shift. An intuitive picture could be the following\footcite{Boyd1980IntuitiveEO}: In geometrical optics, the ray would go through the focus. In a Gaussian beam, the path along the $1/e$ contour stays on the same side of the optical axis and in thus around the focus a bit shorter. This is compensated by the Gouy phase shift.
 
 
-XXX M Parameter ??
+%XXX M Parameter ??
 
 
 \section{Gaussian beams as eigenmodes of a resonator}
@@ -278,14 +279,14 @@ We search for the positions $z_1$ and $z_2$ of the mirrors and the Rayleigh rang
 \begin{align}
     z_2 = & z_1 + d \\
     R_1 = & z_1 \left[ 1 + \left( \frac{z_0}{z_1} \right)^2 \right] \\
-    R_2 = & z_2 \left[ 1 + \left( \frac{z_0}{z_2} \right)^2 \right] 
+    R_2 = & z_2 \left[ 1 + \left( \frac{z_0}{z_2} \right)^2 \right]  \quad .
 \end{align}
 
 The solution is
 \begin{align}
     z_1 = & \frac{-d (R_2 + d)}{R_1 + R_2 + 2d} \\
     z_2 = &z_1 + d  \\
-    z_0^2 = & \frac{-d (R_1 +d)(R_2 + d)(R_1 + R_2 +d)}{(R_1 + R_2 + 2d)^2}
+    z_0^2 = & \frac{-d (R_1 +d)(R_2 + d)(R_1 + R_2 +d)}{(R_1 + R_2 + 2d)^2} \quad .
 \end{align}
 For a Gaussian beam $z_0$ must be real (or $z_0^2 > 0$). Otherwise $q = z - i z_0$ would be real and we would get a paraboloidal wave. This results in the \emph{stability condition} of a spherical cavity
 \begin{equation}
@@ -298,13 +299,13 @@ XXX sketch of stability condition
 
 What happens when a Gaussian beam passes through a thin lens? We assume a thin lens, so $z$ does not change. The radial amplitude distribution $ \tilde{u}(\rho, z)$ also does not change, which means that the width parameter $W$ remains the same, i.e,
 \begin{equation}
-    W^{(L)} = W^{(R)}
+    W^{(L)} = W^{(R)} \quad .
 \end{equation}
 The phase needs a bit more attention. Just before the lens, the phase of the Gaussian beam is
 \begin{equation}
    \phi^{(L)} =  k z + k  \frac{\rho^2}{2 R}  -  \zeta(z) 
 \end{equation}
-The phase effect of a lens is (see eq XXX)
+The phase effect of a lens is (see eq.~\ref{eq:2_phase_of_lens})
 \begin{equation}
   \Delta\phi_\text{lens} =   - k \frac{\rho^2}{2f}
 \end{equation}
@@ -314,13 +315,13 @@ so that after the lens we have in total
 \end{equation}  
 i.e. 
 \begin{equation}
-    \frac{1}{R^{(R)}} = \frac{1}{R^{(L)}} - \frac{1}{f}
+    \frac{1}{R^{(R)}} = \frac{1}{R^{(L)}} - \frac{1}{f} \quad .
 \end{equation}
 
-What does this mean for the other properties of a Gaussian beam? How are Rayleigh range $z_0$ and beam waits $W_0$ modified by a lens? Knowing $\lambda$, $W(z)$ and .$R$, i.e, the beam properties at the lens, we can use eqs XXX to calculate $z_0$, $W_0$ and $z$, i.e. the focal parameter and the distance $z$ of focus and lens. We get
+What does this mean for the other properties of a Gaussian beam? How are Rayleigh range $z_0$ and beam waits $W_0$ modified by a lens? Knowing $\lambda$, $W(z)$ and $R$, i.e, the beam properties at the lens, we can use eqs.~\ref{eq:2_wz}--\ref{eq:2_w0}  to calculate $z_0$, $W_0$ and $z$, i.e. the focal parameter and the distance $z$ of focus and lens. We get
 \begin{align}
     W_0 = & \frac{W(z)}{\sqrt{1 + \left(\frac{\pi W(z)}{ \lambda R(z)} \right)^2}} \\
-    z = & \frac{R(z)}{1 + \left(\frac{\pi W(z)}{ \lambda R(z)} \right)^2}
+    z = & \frac{R(z)}{1 + \left(\frac{\pi W(z)}{ \lambda R(z)} \right)^2} \quad .
 \end{align}
 We thus can connect the left and right beam parameters.
 
@@ -334,11 +335,11 @@ We thus can connect the left and right beam parameters.
 
 When the left beam waist is far from the lens, then we can see this arrangement as imaging of the left beam waist to a position $z^{(R)}$ on the right side  of the lens, which will magnify the beam waist radius. The magnification factor in ray optics is 
 \begin{equation}
-    M_r = \left| \frac{f}{z^{(L)} -f}  \right| \quad \text{and} \quad W_0^{(R)} \approx M_r W_0^{(L)} 
+    M_r = \left| \frac{f}{z^{(L)} -f}  \right| \quad \text{and} \quad W_0^{(R)} \approx M_r W_0^{(L)}  \quad .
 \end{equation}
 The requirement 'far enough' means $z^{(L)} - f \gg z_0^{(L)} $, or
 \begin{equation}
-    r = \frac{z_0^{(L)} }{z^{(L)}  - f} \ll 1
+    r = \frac{z_0^{(L)} }{z^{(L)}  - f} \ll 1 \quad .
 \end{equation}
 We can calculate the beam parameters without  this approximation using a general magnification factor $M$ and obtain
 \begin{align}
@@ -346,7 +347,7 @@ We can calculate the beam parameters without  this approximation using a general
     W_0^{(R)}  = & M W_0^{(L)}  \\
     (z^{(R)} - f) = &M^2 (z^{(L)} -f) \\
     z_0^{(R)} = & M^2 z_0^{(L)}  \\
-    \Theta_0^{(R)} = & \frac{\Theta_0^{(L)} }{M}
+    \Theta_0^{(R)} = & \frac{\Theta_0^{(L)} }{M} \quad .
 \end{align}
 
 \section{ABCD Law and q parameter}
@@ -354,7 +355,7 @@ We can calculate the beam parameters without  this approximation using a general
 Things become simpler when we realize that the $q$ parameter is governing the Gaussian beam. We introduced above the Gaussian beams by 
 \begin{equation}
     q(z) = z - i z_0 \quad \text{and} \quad
-    \frac{1}{q(z)} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)}
+    \frac{1}{q(z)} = \frac{1}{R(z)} + i \frac{\lambda}{\pi W^2(z)} \quad .
 \end{equation} 
 As soon as we know $q$ at a single position along the beam, we can calculate all the rest. When $q_1$  and $q_2$ describe the $q$ parameters left and right of an optical element, both are connected by the \emph{ABCD law}
 \begin{equation}
@@ -371,11 +372,11 @@ is the $2\times2$ matrix of the matrix method in ray optics, as introduced in th
 
 \emph{Propagation} by a distance $d$ thus leads to 
 \begin{equation}
-    q_2 = q_1 + d
+    q_2 = q_1 + d \quad .
 \end{equation}
 The action of a \emph{lens} is described by
 \begin{equation}
-    q_2 = \frac{f q_1}{f - q_1}
+    q_2 = \frac{f q_1}{f - q_1} \quad .
 \end{equation}
 
 
@@ -387,11 +388,11 @@ The action of a \emph{lens} is described by
 
 A common tool for determining the properties of a Gaussian beam is a knife edge or razor blade. We mount it so that it can be moved perpendicular to the optical axis, cutting out a variable part of the beam. If we measure the power in the beam after the knife edge as a function of its position, we get a partial integral over the cross-section of the beam.
 \begin{equation}
-    P(x_0) = \int_{x=x_0}^\infty \int_{y=-\infty}^\infty I(x,y) \, dx \, dy
+    P(x_0) = \int_{x=x_0}^\infty \int_{y=-\infty}^\infty I(x,y) \, dx \, dy \quad .
 \end{equation}
 Taking the numerical derivative yields the beams intensity profile.
 \begin{equation}
-    I(x) \propto \frac{\partial P(x_0)}{\partial x_0}
+    I(x) \propto \frac{\partial P(x_0)}{\partial x_0} \quad .
 \end{equation}
 
 
