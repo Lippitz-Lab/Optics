@@ -89,10 +89,11 @@ This is called the \emph{Fresnel approximation}. We put it into eq.  \ref{eq:2_s
 For points close to the optical axis but far from the origin, a spherical wave approaches a planar wave. In between, the paraboloidal wave is a useful approximation.
 
 
-\begin{marginfigure}
-    \includegraphics[width=\textwidth]{\currfiledir sketches/paraboloidal.png}
-   \caption{XXX sketch Fig 2.2.4 S/T}
-\end{marginfigure}
+\begin{figure}
+    %\includegraphics[width=\textwidth]{\currfiledir sketches/paraboloidal.png}
+    \inputtikz{\currfiledir spherical_to_plane}
+   \caption{Wave fronts of a spherical wave, showing the transition to plane waves far from the origin.}
+\end{figure}
 
 
 \section{A transparent plate}
@@ -242,6 +243,13 @@ We can define a \emph{divergence}, or opening angle $\Theta$ of the Gaussian bea
     \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_phase.png}
    \caption{Phase fronts and radius of curvature $R$ around the beam waist.}
 \end{figure}
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir gauss_R}
+   \caption{Radius of curvature $R$ around the beam waist. Dashed: spherical wave}
+\end{marginfigure}
+
+
 
 The phase of the Gaussian beam is given by the imaginary factors of the exponential function, i.e.
 \begin{equation}
