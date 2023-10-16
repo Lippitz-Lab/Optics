@@ -1,4 +1,4 @@
-\renewcommand{\lastmod}{October 11, 2023}
+\renewcommand{\lastmod}{October 16, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Gaussian Beams}
@@ -239,16 +239,11 @@ We can define a \emph{divergence}, or opening angle $\Theta$ of the Gaussian bea
  \end{equation}
  Note that next to the wavelength $\lambda$ only the Rayleigh range $z_0$ \emph{or} the beam waist $W_0$ is a free parameter, not both. The divergence of the beam is fully contained in the beam waist. One can interpret this as diffraction of the Gaussian beam at its own waist. For comparison, diffraction at a circular aperture of radius $R$ would  lead to an angle $\Theta_\text{app} = 0.61 \lambda  / R$.
 
- \begin{figure}
-    \includegraphics[width=\textwidth]{\currfiledir sketches/gauss_phase.png}
-   \caption{Phase fronts and radius of curvature $R$ around the beam waist.}
-\end{figure}
 
 \begin{marginfigure}
     \inputtikz{\currfiledir gauss_R}
    \caption{Radius of curvature $R$ around the beam waist. Dashed: spherical wave}
 \end{marginfigure}
-
 
 
 The phase of the Gaussian beam is given by the imaginary factors of the exponential function, i.e.
@@ -265,6 +260,12 @@ At the focus ($z=0$) and for $z \rightarrow \infty$ we find a diverging radius o
 \end{equation}
 When passing through the focus, the wave undergoes a $pi$ phase shift. An intuitive picture could be the following\footcite{Boyd1980IntuitiveEO}: In geometrical optics, the ray would go through the focus. In a Gaussian beam, the path along the $1/e$ contour stays on the same side of the optical axis and in thus around the focus a bit shorter. This is compensated by the Gouy phase shift.
 
+\begin{marginfigure}
+    \inputtikz{\currfiledir gauss_wavefront}
+   \caption{Wavefronts of a plane wave, a spherical wave and a Gaussian wave.}
+\end{marginfigure}
+
+
 
 %XXX M Parameter ??
 
@@ -276,9 +277,12 @@ In a laser, we are interested in eigenmodes, i.e. optical wave functions that do
 
 
 \begin{marginfigure}
-    \includegraphics[width=\textwidth]{\currfiledir sketches/cavity.png}
+    \inputtikz{\currfiledir gauss_resonator}
    \caption{Eigenmodes of a laser cavity}
 \end{marginfigure}
+
+
+
 
 
 For an eigenmode to occur, the wavefront of the mode at the position of the mirror must match the shape of the mirror, otherwise it will reflect back into itself. The design of the cavity gives the radius of curvature $R_1$ and $R_2$ and the distance $d$ between the mirrors. We now show that under certain conditions a Gaussian beam is an eigenmode of such a cavity.
@@ -301,7 +305,15 @@ For a Gaussian beam $z_0$ must be real (or $z_0^2 > 0$). Otherwise $q = z - i z_
     0 \le \left( 1 + \frac{d}{R_1} \right) \left( 1 + \frac{d}{R_2} \right) \le 1
 \end{equation}
 
-XXX sketch of stability condition
+\begin{marginfigure}
+    \inputtikz{\currfiledir resonator_stability}
+   \caption{A laser cavity is stable inside the shaded region ($g_i = 1 + d/R_i$). Symmetric cavities are along the diagonal, flat mirrors at $g=1$.}
+\end{marginfigure}
+
+
+
+
+
 
 \section{Thin lens}
 

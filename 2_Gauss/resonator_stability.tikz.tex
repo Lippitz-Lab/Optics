@@ -1,0 +1,42 @@
+% \documentclass{standalone}
+
+% \input{../tikz_header}
+
+% \begin{document}
+
+
+\begin{tikzpicture}
+
+
+    %\useasboundingbox (-2.5,-1.5) rectangle (3,2.3);
+    %\draw (-2.5,-1.5) rectangle (3,2.3);
+ 
+   % 0 \le \left( 1 + \frac{d}{R_1} \right) \left( 1 + \frac{d}{R_2} \right) \le 1
+    \begin{axis}[
+        axis equal,
+        xmin=-2.5,xmax=2.5,
+        ymin=-2.5,ymax=2.5,
+        axis lines=middle,
+        width=60mm,
+        xlabel = $g_1$, 
+        ylabel = $g_2$, 
+        xtick = {1},
+        ytick = {1},   
+        x label style={anchor=north},
+        y label style={anchor=east},
+        ]
+        \path [name path=xaxis]
+		(\pgfkeysvalueof{/pgfplots/xmin},0) --
+		(\pgfkeysvalueof{/pgfplots/xmax},0);
+
+        \addplot[samples=100,  thick, name path= f]{1/x};
+        \addplot[ thick]{0};
+        \addplot[ dashed]{x};
+
+        \addplot[black!10, opacity=0.5] fill between [of=f and xaxis];
+    \end{axis}
+
+\end{tikzpicture}
+
+
+%\end{document}

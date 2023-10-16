@@ -7,75 +7,11 @@ using InteractiveUtils
 # ╔═╡ ae3e23de-690d-11ee-12f9-5192fc9fbecc
 using PGFPlotsX, Plots
 
-# ╔═╡ 36303312-d665-492b-94cc-4912173cbb9e
-md"""
-$e^{ikz} e^{ik x^2 / 2 z}$
-"""
-
-# ╔═╡ acc1c0c6-f869-42af-b813-be2be6987cf3
-zp(x,n) = real(0.5  * ( n + sqrt(complex(n^2 - 2 * x^2 ))))
-
-# ╔═╡ 7ad150f2-951b-44c6-9bc7-9147e586f639
-function zk(x,n)
-	y = real(sqrt(complex(n^2 -  x^2 )))
-	if (abs(x)> abs(n))
-		y = NaN
-	end
-	return y
-end
+# ╔═╡ 4b543594-555d-4130-93c2-af5560d6129c
+using Roots
 
 # ╔═╡ f488b2f4-757f-4ed6-8892-6986309ff4d0
-xs = (-5:0.1:5)
-
-# ╔═╡ 853a4b32-457f-4b35-8fa1-adafc047ad58
-begin
-	plot(xs, @. zk(xs,1))
-	for u = 2:20
-		plot!(xs, @. zk(xs,u))
-	end
-
-	plot!(xs,  @. zk(xs,1); legend=false)
-end
-
-# ╔═╡ 65b8d440-93c7-4fbc-96ad-4b9fe99fcd19
-let
-	myaxis = @pgf PGFPlotsX.Axis(
-	    {
-	      	#ymin = -46, 
-		    #ymax = 100,
-	        xmin =1e-2, xmax =38.5,
-			#ylabel = raw"Reflektivität $R$",
-			#xlabel=raw"Wellenzahl $\tilde{\nu}$ (cm$^{-1}$) ",
-			#ytick = [10^-6,10^-3,1, 10^3], 
-			#xtick = (0:5:25),
-			#xticklabels = [],
-			#xmajorgrids,
-			width= "125mm", height= "50mm", 
-			yticklabels = [],
-			xticklabels = [],
-	axis_line_style="{draw=none}",ticks="none",
-	unit_vector_ratio="{1 1}",
-	    },	
-		);
-
-
-	for u = 1:38
-		y = @. zk(xs,u)
-	@pgf    p = PGFPlotsX.Plot(
-	        { no_marks, thick},
-	        Table([ y, xs] )
-			)
-	push!(myaxis, p)
-	end
-
-
-	#push!(myaxis, raw"\draw[dotted] (219,-0.1) -- (219,1);")
-	#push!(myaxis, raw"\draw[dotted] (243,-0.1) -- (243,1);")
-
-		
-	 pgfsave("../spherical_to_plane.tikz.tex",myaxis; include_preamble= false)
-	myaxis
-end
+xs = (-4.5:0.1:4.5)
 
 # ╔═╡ 272073e6-0aeb-4552-a038-c4b827154cc2
 let
@@ -123,48 +59,193 @@ let
 	myaxis
 end
 
+# ╔═╡ 0a45f8ae-aad4-47aa-b877-1bc2c60b5a5f
+function zk(x,n)
+	y = real(sqrt(complex(n^2 -  x^2 )))
+	if (abs(x)> abs(n))
+		y = NaN
+	end
+	return y
+end
+
+# ╔═╡ 066285ac-4daa-42f9-8ffc-26926e23bf33
+z0 = 3;
+
+# ╔═╡ 0acbf4b5-5093-4f4e-bc38-140985157316
+gauss_phase(z,x,n) =  z - atan(z/z0) + x^2/(2 * z * (1 + (z0/z)^2)) 
+
+# ╔═╡ 7101a1ca-84fd-47fa-b815-206a8b890331
+function zf2(n) 
+	if (abs(n) > 0)
+		zs = [ find_zero( z -> gauss_phase(z, x ,n) - n, (0.001,100)) for x in xs]
+	else
+		zs =[0.0 for x in xs]
+	end
+	la = 1/ ( 2 * pi);
+	w0 = sqrt(la .* z0/ pi);
+	ws = w0 .* sqrt.(1 .+ (zs ./ z0).^2)
+
+	a = (w0 ./ ws) .* exp.(- xs.^2 ./ ws.^2);
+	zs[a .< exp(-1)./10000] .= NaN
+	return zs
+end
+
+# ╔═╡ b772a990-0d6c-42f7-843e-563da9312ede
+plot(xs, zf2(3))
+
 # ╔═╡ 0b535b65-ccf8-48d3-ad6e-8e904a30cf7c
 let
 	myaxis = @pgf PGFPlotsX.Axis(
 	    {
-	      	ymin = -4, 
-		    ymax = 4,
-	        xmin =-3, xmax =3,
-			ylabel = raw"$R / z_0$",
-			xlabel=raw"$z/z_0$",
+	      	ymin = -14, 
+		    ymax = 16,
+	        xmin =-10.5, xmax =10.5,
+			#ylabel = raw"Reflektivität $R$",
+			#xlabel=raw"Wellenzahl $\tilde{\nu}$ (cm$^{-1}$) ",
 			#ytick = [10^-6,10^-3,1, 10^3], 
-			#xtick = (0:5:25),
+			ticks="none",
 			#xticklabels = [],
 			#xmajorgrids,
-			axis_lines = "middle",
-			width= "105mm", height= "50mm", 
-	#yticklabels = [],
-	#		xticklabels = []
-
+			width= "90mm",#, height= "50mm", 
+			#yticklabels = [],
+			#xticklabels = [],
+			unit_vector_ratio="{1 1}",
+	unbounded_coords="jump",
+	axis_line_style="{draw=none}"
 	    },	
 		);
 
-		zs = (0:0.01:3);
-	
+
+	for u = 1:10
+		y = @. zk(xs,u)
 	@pgf    p = PGFPlotsX.Plot(
 	        { no_marks, thick},
-	        Table([ zs, zs .* (1 .+ zs.^(-2))] )
+	        Table([ [y; NaN; -y], [xs; NaN; -xs]] )
 			)
 	push!(myaxis, p)
+	end
 
-		@pgf    p = PGFPlotsX.Plot(
+	for u = -10:10
+		push!(myaxis, "\\draw[dotted] ($(u),-20) -- ($(u),20);")
+	end
+
+	for u = -10:10
+		push!(myaxis, "\\draw[thick] ($(u),7) -- ($(u),15);")
+	end
+
+		for u = 0:10
+			y = zf2(u)
+	@pgf    p = PGFPlotsX.Plot(
 	        { no_marks, thick},
-	        Table([ -zs, -zs .* (1 .+ zs.^(-2))] )
+	        Table([ [y; NaN; -y], [xs; NaN; -xs] .- 10] )
 			)
 	push!(myaxis, p)
-
+	end
 	
-
-	push!(myaxis, raw"\draw[dashed] (-5, -5) -- (5,5);")
+	#push!(myaxis, raw"\draw[dotted] (219,-0.1) -- (219,1);")
 	#push!(myaxis, raw"\draw[dotted] (243,-0.1) -- (243,1);")
 
 		
-	 #pgfsave("../spherical_to_plane.tikz.tex",myaxis; include_preamble= false)
+	pgfsave("../gauss_wavefront.tikz.tex",myaxis; include_preamble= false)
+	myaxis
+end
+
+# ╔═╡ fecd2c2d-0cb3-434b-b690-55ca5cce3330
+zf20(n) = find_zero( z -> gauss_phase(z, 0 ,n) - n, (0.001,100)) 
+
+# ╔═╡ 1bd0175a-a105-4391-90b1-53cf80da5cc4
+zf20(9)
+
+# ╔═╡ eb8afbac-5131-41e9-800f-d0faf5334b3c
+function rf(n) 
+
+	z = zf20(n)
+
+	return z * (1 + (z0/z)^2)
+
+end
+
+# ╔═╡ 9596bf42-925a-44dc-acc4-052d3895ca34
+rf(9)
+
+# ╔═╡ e4e4af5b-431c-4020-b119-b7a884889d7b
+let
+	myaxis = @pgf PGFPlotsX.Axis(
+	    {
+	      	#ymin = -14, 
+		    #ymax = 16,
+	        #xmin =-10.5, xmax =10.5,
+			#ylabel = raw"Reflektivität $R$",
+			#xlabel=raw"Wellenzahl $\tilde{\nu}$ (cm$^{-1}$) ",
+			#ytick = [10^-6,10^-3,1, 10^3], 
+			ticks="none",
+			#xticklabels = [],
+			#xmajorgrids,
+			width= "70mm",#, height= "50mm", 
+			#yticklabels = [],
+			#xticklabels = [],
+			unit_vector_ratio="{1 1}",
+	unbounded_coords="jump",
+	axis_line_style="{draw=none}"
+	    },	
+		);
+
+
+	nr = 9;
+	nl = 6;
+
+	
+
+		for u = 0:(nr-1)
+			y = zf2(u)
+	@pgf    p = PGFPlotsX.Plot(
+	        { no_marks, thin},
+	        Table([ y, xs ] )
+			)
+	push!(myaxis, p)
+	end
+	
+	for u = 1:(nl-1)
+			y = zf2(u)
+	@pgf    p = PGFPlotsX.Plot(
+	        { no_marks, thin},
+	        Table([ -y, xs ] )
+			)
+	push!(myaxis, p)
+	end
+
+	y = zf2(nr)
+	@pgf    p = PGFPlotsX.Plot(
+	        { no_marks, thick},
+	        Table([ y, xs ] )
+			)
+	push!(myaxis, p)
+
+	y = zf2(nl)
+	@pgf    p = PGFPlotsX.Plot(
+	        { no_marks, thick},
+	        Table([ -y, xs ] )
+			)
+	push!(myaxis, p)
+
+
+	z0 = zf20(nr) - rf(nr);
+	z1 = z0 + cosd(10) .* rf(nr);
+	x1 = sind(10) .* rf(nr)
+	push!(myaxis, "\\draw[->] ($(z0),0) -- node[above] {\\footnotesize \$ R_2 \$ }($(z1),$(x1));")
+
+	z0 = zf20(nl) - rf(nl);
+	z1 = z0 + cosd(10) .* rf(nl);
+	x1 = sind(10) .* rf(nl)
+	push!(myaxis, "\\draw[->] ($(-z0),0) -- node[above] {\\footnotesize \$ R_1 \$ }($(-z1),$(x1));")
+
+
+	za = zf20(nr) ;
+	
+	zb = zf20(nl) ;
+	push!(myaxis, "\\draw[<->] ($(-zb),0) -- node[below] {\\footnotesize \$ d \$ }($(za),0);")
+
+	pgfsave("../gauss_resonator.tikz.tex",myaxis; include_preamble= false)
 	myaxis
 end
 
@@ -173,10 +254,12 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 PGFPlotsX = "8314cec4-20b6-5062-9cdb-752b83310925"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+Roots = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
 
 [compat]
 PGFPlotsX = "~1.6.0"
 Plots = "~1.39.0"
+Roots = "~2.0.20"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -185,7 +268,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.9.3"
 manifest_format = "2.0"
-project_hash = "bd5d15806058e1ef36445eb8e26253ab78334429"
+project_hash = "cbf8f6bc84328e35e98f7def03f1bf3a6e33e7fe"
 
 [[deps.ArgCheck]]
 git-tree-sha1 = "a3a402a35a2f7e0b87828ccabbd5ebfbebe356b4"
@@ -218,6 +301,12 @@ deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jl
 git-tree-sha1 = "4b859a208b2397a7a623a03449e4636bdb17bcf2"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.16.1+1"
+
+[[deps.ChainRulesCore]]
+deps = ["Compat", "LinearAlgebra", "SparseArrays"]
+git-tree-sha1 = "e30f2f4e20f7f186dc36529910beaedc60cfa644"
+uuid = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+version = "1.16.0"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
@@ -255,6 +344,11 @@ git-tree-sha1 = "fc08e5930ee9a4e03f84bfb5211cb54e7769758a"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
 version = "0.12.10"
 
+[[deps.CommonSolve]]
+git-tree-sha1 = "0eee5eb66b1cf62cd6ad1b460238e60e4b09400c"
+uuid = "38540f10-b2f7-11e9-35d8-d573e4eb0ff2"
+version = "0.2.4"
+
 [[deps.Compat]]
 deps = ["UUIDs"]
 git-tree-sha1 = "8a62af3e248a8c4bad6b32cbbe663ae02275e32c"
@@ -275,6 +369,20 @@ deps = ["Serialization", "Sockets"]
 git-tree-sha1 = "5372dbbf8f0bdb8c700db5367132925c0771ef7e"
 uuid = "f0e56b4a-5159-44fe-b623-3e5288b988bb"
 version = "2.2.1"
+
+[[deps.ConstructionBase]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "c53fc348ca4d40d7b371e71fd52251839080cbc9"
+uuid = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
+version = "1.5.4"
+
+    [deps.ConstructionBase.extensions]
+    ConstructionBaseIntervalSetsExt = "IntervalSets"
+    ConstructionBaseStaticArraysExt = "StaticArrays"
+
+    [deps.ConstructionBase.weakdeps]
+    IntervalSets = "8197267c-284f-5f27-9208-e0e47529a953"
+    StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [[deps.Contour]]
 git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
@@ -386,6 +494,10 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "aa31987c2ba8704e23c6c8ba8a4f769d5d7e4f91"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
 version = "1.0.10+0"
+
+[[deps.Future]]
+deps = ["Random"]
+uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
@@ -850,6 +962,24 @@ git-tree-sha1 = "838a3a4188e2ded87a4f9f184b4b0d78a1e91cb7"
 uuid = "ae029012-a4dd-5104-9daa-d747884805df"
 version = "1.3.0"
 
+[[deps.Roots]]
+deps = ["ChainRulesCore", "CommonSolve", "Printf", "Setfield"]
+git-tree-sha1 = "06b5ac80ff1b88bd82df92c1c1875eea3954cd6e"
+uuid = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
+version = "2.0.20"
+
+    [deps.Roots.extensions]
+    RootsForwardDiffExt = "ForwardDiff"
+    RootsIntervalRootFindingExt = "IntervalRootFinding"
+    RootsSymPyExt = "SymPy"
+    RootsSymPyPythonCallExt = "SymPyPythonCall"
+
+    [deps.Roots.weakdeps]
+    ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+    IntervalRootFinding = "d2bf35a9-74e0-55ec-b149-d360ff49b807"
+    SymPy = "24249f21-da20-56a4-8eb1-6a02cf4ae2e6"
+    SymPyPythonCall = "bc8888f7-b21e-4b7c-a06a-5d9c9496438c"
+
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 version = "0.7.0"
@@ -862,6 +992,12 @@ version = "1.2.0"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+
+[[deps.Setfield]]
+deps = ["ConstructionBase", "Future", "MacroTools", "StaticArraysCore"]
+git-tree-sha1 = "e2cc6d8c88613c05e1defb55170bf5ff211fbeac"
+uuid = "efcf1570-3423-57d1-acb7-fd33fddbac46"
+version = "1.1.1"
 
 [[deps.Showoff]]
 deps = ["Dates", "Grisu"]
@@ -886,6 +1022,11 @@ version = "1.1.1"
 [[deps.SparseArrays]]
 deps = ["Libdl", "LinearAlgebra", "Random", "Serialization", "SuiteSparse_jll"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+
+[[deps.StaticArraysCore]]
+git-tree-sha1 = "36b3d696ce6366023a0ea192b4cd442268995a0d"
+uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
+version = "1.4.2"
 
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
@@ -1288,13 +1429,19 @@ version = "1.4.1+1"
 
 # ╔═╡ Cell order:
 # ╠═ae3e23de-690d-11ee-12f9-5192fc9fbecc
-# ╠═36303312-d665-492b-94cc-4912173cbb9e
-# ╠═acc1c0c6-f869-42af-b813-be2be6987cf3
-# ╠═7ad150f2-951b-44c6-9bc7-9147e586f639
 # ╠═f488b2f4-757f-4ed6-8892-6986309ff4d0
-# ╠═853a4b32-457f-4b35-8fa1-adafc047ad58
-# ╠═65b8d440-93c7-4fbc-96ad-4b9fe99fcd19
 # ╠═272073e6-0aeb-4552-a038-c4b827154cc2
+# ╠═0a45f8ae-aad4-47aa-b877-1bc2c60b5a5f
+# ╠═066285ac-4daa-42f9-8ffc-26926e23bf33
+# ╠═0acbf4b5-5093-4f4e-bc38-140985157316
+# ╠═4b543594-555d-4130-93c2-af5560d6129c
+# ╠═b772a990-0d6c-42f7-843e-563da9312ede
+# ╠═7101a1ca-84fd-47fa-b815-206a8b890331
 # ╠═0b535b65-ccf8-48d3-ad6e-8e904a30cf7c
+# ╠═fecd2c2d-0cb3-434b-b690-55ca5cce3330
+# ╠═1bd0175a-a105-4391-90b1-53cf80da5cc4
+# ╠═eb8afbac-5131-41e9-800f-d0faf5334b3c
+# ╠═9596bf42-925a-44dc-acc4-052d3895ca34
+# ╠═e4e4af5b-431c-4020-b119-b7a884889d7b
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
