@@ -1,4 +1,4 @@
-\renewcommand{\lastmod}{October 16, 2023}
+\renewcommand{\lastmod}{November 8, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Fourier Optics}
@@ -108,7 +108,7 @@ High spatial frequencies $\nu$ near $1/\lambda$ are far away from the paraxial a
     H(\nu_x, \nu_y)_\text{Fresnel} = H_0 \exp \left(  
     -  \pi \, i  \, d \lambda \, (
  \nu_x^2 + \nu_y^2 )
-    \right) \quad \text{with} \quad H_0 = e^{i k d} \quad .
+    \right) \quad \text{with} \quad H_0 = e^{i k d} \quad . \label{eq:3_transfer_free_space}
 \end{equation}
 The term $H_0$ factors out the trivial phase evolution due to propagation along the optical axis.
 
@@ -229,15 +229,36 @@ The inverse filter, i.e. a opaque disc, acts as high-pass filter, increasing the
 
 \section{Resolution of a microscope}
 
-\section {Optical data processing: Correlation by Fourier transform }
+In an optical microscope, a sample is imaged on a detector by a system of lenses. Not all spatial frequencies are transmitted equally well. A fundamental limit is the transfer function of free space (eq. \ref{eq:3_transfer_free_space}), which limits the spatial frequencies to $\nu_{x,y} \le n / \lambda_0$. A short vacuum wavelength $\lambda_0$, i.e. blue or ultraviolet light, or a high refractive index $n$, i.e. immersion oil instead of air, shifts the limit to higher spatial frequencies. The highest observable spatial frequency is the wavelength of light in the medium.
 
-\cite{Goodman2005}, chap. 8
+A technical limitation sets in earlier. High spatial frequencies correspond to plane waves with a large angle $\theta$ to the optical axis. In the limiting case, the plane wave propagates perpendicular to the optical axes, i.e. parallel to the sample surface. The microscope objective has to capture as many of these rays as possible, i.e. it has to have a large aperture angle $\theta_\text{objective}$. This is quantified in the \emph{numerical aperture} 
+\begin{equation}
+    NA = n \sin \theta_\text{objective}
+\end{equation}
+so that the maximum spatial frequencies are $\nu_{x,y} \le NA / \lambda_0$. Numerical apertures greater than one require the use of an immersion medium. Glycerin ($n=1.47$) allows to obtain NA $\approx 1.3 \dots 1.45$.
+
+Another approach to the resolution of a microscope is the \emph{point spread function} (PSF). It is the impulse response of the imaging system, i.e., the image of a point source in the sample plane. Diffraction at the circular aperture of the microscope objective leads to the Airy-pattern of the Bessel function $J_1$ (see \ref{chap:appendix_Fourier})
+\begin{equation}
+    PSF(\rho) = \left( \frac{J_1( k_0 \, {NA} \, \rho )}{ k_0 \, {NA} \, \rho}  \right)^2
+\end{equation}
+where $\rho$ is the radial coordinate in the sample plane, i.e., the point placed there appears to be larger. Two points are said to be resolvable if they are separated so that the image of one point falls into the first zero of the PSF of the second point. This results in the value 
+\begin{equation}
+    \Delta x = 0.61 \frac{\lambda_0}{{NA}} \quad .
+\end{equation}
+
+
+%\section {Optical data processing: Correlation by Fourier transform }
+%\cite{Goodman2005}, chap. 8
 
 
 %-----------------------------------------------------------------------------
-\section{Hands on: Align  a pin hole}
+\section{Hands on: Align  a pinhole}
 
-Alignment strategy. Optimum diameter
+A spatial filter in the form of a pinhole at the combined focus of two lenses is often used to clean up a beam. Optical surfaces of lenses, mirrors, beam splitters and crystals are never perfectly flat, but contain more or less strong deviations from the ideal shape. This results in a more or less distorted shape of the beam, which deviates from the ideal Gaussian shape. These deviations cause high spatial frequencies in the beam. They distort the optical resolution because, for example, we would excite emitters that would otherwise not be in the ideal laser focus. It is therefore common to clean the beam at one or more points in an optical setup.
+
+The design is that of a spatial filter as described above: two lenses with a combined focus. The focal lengths of the lenses can be different to adjust the beam diameter. At the position of the focus we place a pinhole, a metal foil with a hole of a few tens of microns in diameter. The smaller the diameter of the hole, the better the high spatial frequency is filtered, but also the overall transmission is reduced and laser power is lost. So you have to balance filtering and transmission. A good starting value is a radius of $\Delta x$ as above.
+
+The alignment is rather sensitive in a direction perpendicular to the beam and rather insensitive in a direction parallel to the beam. In the parallel direction, only distances on the scale of the ray range matter. In the perpendicular direction, it is often advisable to start with a larger diameter, optimize the alignment, and then move to a smaller diameter. However, this assumes that we can change the pinhole without losing much of the alignment. Another approach is to center the pinhole first at a position away from the focus where the beam diameter is larger and the overlap of beam and pinhole is easier to achieve.
 
 
 %--------------------
