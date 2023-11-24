@@ -1,62 +1,261 @@
-\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\lastmod}{November 24, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Dielectric Materials}
-\ziel{Ich kann die reduzierte Reflektivität am kritischen Winkel des Oberflächen-Plasmons experimentell \wort{demonstrieren} und \wort{erklären}.} 
+
+\goal{By the end of this chapter you should be able to explain and experimentally demonstrate total internal reflection and the Brewster effect.}
+
+
+
 \section{Overview}
 
-\section{Energie und Impuls von Licht}
-\ziel{Ich kann messbare Eigenschaften von Licht als elektromagnetische Welle und als Photon miteinander \wort{verknüpfen}.}
-
-\begin{itemize}
-
-\item{Intensität}
-
-\item {Poynting-Vektor}
-
-\item {Impuls eines Photons}
-\end{itemize}
-
-\lit{Saleh/Teich  Kap. 5, Hecht Kap. 3}
+With this chapter we begin to consider the optical properties of media beyond their refractive index. The physics of the medium will play a role and have consequences for the propagation of light. To be able to do this, we also have to describe light as an electromagnetic wave, with three components for the electric and magnetic field, and not only as a scalar wave as in the last chapters. This will lead to the phenomenon of absorption and dispersion. We will also be able to assign a value to the amplitude of the reflected and transmitted waves at an interface.  These topics are described in chapter 5 and 6 of \cite{SalehTeich1991} and chapter 3 of \cite{Hecht_Optics}.
 
 
-%-----------------------------------------------------------------------------
-\section{Dispersionsrelation}
-\ziel{Ich kann den Brechungsindex und die Absorption bzw. die dielektrische Funktion von isotropen Materialien im Lorentz-Oszillator-Modell \wort{erklären}.}
+\section{Maxwells equations}
+
+For completeness, let us start with the Maxwell equations in their macroscopic form
+\begin{align}
+\nabla \, \bD = & \rho \\
+\nabla \, \bB = & 0 \\
+\nabla \times \bE =  & - \dot{\bB} \\
+\nabla \times \bH = & \dot{\bD} + \bj \quad .
+\end{align} 
+Matter comes in by the respective material equations
+\begin{align}
+    \bD = & \epsilon_0 \bE +  \bP = \epsilon \epsilon_0 \bE \\
+    \bH = & \frac{1}{\mu_0} \bB - \bM =   \frac{1}{\mu \mu_0} \bB \\
+    \bj = & \sigma \bE \quad .
+\end{align}
+Note that I use a unit-free dielectric function $\epsilon$. In literature, one finds different other methods to write the term $\epsilon \epsilon_0$. At the second equal sign we have assumed in each case a linear and isotropic medium. Let us define these and similar terms:
+%
+\begin{description}
+    \item[linear] The relation between the electric field $\bE(\br, t)$ and the polarization $\bP(\br, t)$ is linear.
+    \item[isotropic] The relation between $\bE$ and $\bP$ is independent of the direction of $\bE$. This also means that $\bE$ and $\bP$ are parallel.
+    \item[homogeneous] The relation between $\bE$ and $\bP$ is independent of the position $\br$.
+    \item[nondispersive] The relation between $\bE$ and $\bP$ is instantaneous, i.e., it depends only on the value of $\bE$ at time $t$, but not on earlier times. As we will see, this is equivalent to saying that the relation does not depend on the frequency $\omega$ of light. This is a thought model and is only approximated by real materials.
+    \item[local] The relation between $\bE$ and $\bP$ depends only on the value of $\bE$ at one point $\br$, not at other points. This is also called \emph{spatially nondispersive}. Optical active media (next chapter) are nonlocal.
+\end{description}
 
 
-\begin{itemize}
-\item Phänomenologischer Absorptionskoeffizient
-\item Kramers-Kronig-Relation und Kausalität
-\item  Lorentz-Oszillator-Modell
-\item Vorzeichen-Konventionen: $e^{+ i \omega t}$ und $e^{- i \omega t}$
-\end{itemize}
+\section{Wave equations}
+When we assume a source-free medium ($\bj = 0$, $\rho = 0$), one can derive the wave equation for an isotropic  and linear medium
+\begin{equation}
+    \nabla^2 \, \bE = \frac{n^2}{c_0^2} \ddot{\bE} \quad \text{with} \quad c_0^2 = \frac{1}{\mu_0 \epsilon_0} \quad ; \quad   n^2 = \epsilon \quad; \quad  \mu \approx 1 
+\end{equation}
+A similar equation exists for $\bH$. The individual vector components of the electrical and magnetic field fulfil thus the scalar wave equation of chapter \ref{chap:2_gauss}.
 
-\lit{Saleh/Teich  Kap. 5, Hecht Kap. 3}
+The flow of electromagnetic energy is described by the Poynting vector\sidenote{John Henry Poynting, 1852--1914}
+\begin{equation}
+    \bS = \bE \times \bH
+\end{equation}
+The intensity $I$ of a wave on a surface with normal $\boldsymbol{n}$ is the temporal average of the Poynting vector, i.e.
+\begin{equation}
+    I = \braket{\bS \cdot \boldsymbol{n}}_T = \frac{c \, n \, \epsilon_0}{2} \, | \bE_0 |^2 = \frac{1}{2 \eta } \, | \bE_0 |^2
+\end{equation}
+where $\bE_0 $ is the amplitude of the electrical field and $\eta = \sqrt{ \mu \mu_0 / (\epsilon \epsilon_0)}$ the impedance of the medium. For vacuum, $\eta_0 \approx$~\SI{377}{\ohm} . An intensity of 10~W/cm$^2$ corresponds to an electric field of about 87~V/m.
+
+The Poynting vector fulfills the Poynting theorem: the flow of energy through a surface enclosing a volume either changes the energy density within that volume or performs work on magnetic or electric dipoles. As equation:
+\begin{equation}
+    \nabla \bS = - \frac{\partial}{\partial t} \left( \frac{1}{2}  \epsilon \epsilon_0 \bE^2 + \frac{1}{2} \mu \mu_0 \bH^2  \right)
+    + \bE \cdot \frac{\partial \bP}{\partial t} +   \mu_0 \bH \cdot \frac{\partial \bM}{\partial t}
+\end{equation}
 
 
-%-----------------------------------------------------------------------------
-\section{Fresnel-Koeffizienten}
-\ziel{Ich kann Amplitude und Phase der an einer Grenzfläche reflektierten bzw. transmittieren Welle \wort{erklären} und \wort{berechnen}.}
+As with scalar waves, we find different solutions to the wave equation. The plain wave also exists as electromagnetic wave:
+\begin{align}
+    \bH(\br, t) = & \bH_0 \, e^{i (\bk \br - \omega t)} \\
+    \bE(\br, t) = & \bE_0 \, e^{i (\bk \br - \omega t)} 
+\end{align}
+with $|\bk| = k = 2 \pi n / \lambda_0$ and $\bH_0$, $\bB_0$ and $\bk$  orthogonal on each other. The electromagnetic wave is thus a \emph{transversal} wave.
 
-\begin{itemize}
-\item Polarisation von Licht
-\item Fresnel-Koeffizienten
-\end{itemize}
+The vectorial electromagnetic forms of paraboloidal wave and Gaussian beams can be constructed by vectorizing the scalar waves $u(\br)$ of the preceding chapters:
+\begin{equation}
+    \bE(\br) = \mathcal{E}_0 \left( - \hat{\bx} + \frac{x}{z + i z_0} \hat{\bz} \right) u(\br)
+\end{equation}
+where $\hat{\bx}$ and $\hat{\by}$ are unit vectors pointing in x and z direction, respectively, and $\mathcal{E}_0 $ is a scalar amplitude. $z_0$ is set to zero for a paraboloidal wave.
 
-\lit{Saleh/Teich  Kap. 6, Hecht Kap. 4}
+\section{Phenomenological approach to absorption}
 
-%-----------------------------------------------------------------------------
-\section{Metalle und andere absorbierende Medien}
-\ziel{Ich kann Plasmonen \wort{erklären} und ihre Dispersionsrelation \wort{berechnen}.}
+Let us begin by describing absorption in media without attributing a microscopic origin. The susceptibility $\chi$ is complex-valued
+%\sidenote{note the minus in front of the $i$!}
+, i.e. $\chi = \chi' + i \chi''$ and thus the dielectric function 
+\begin{equation}
+    \epsilon = 1 + \chi = 1 + \chi' + i \chi'' = \epsilon' + i \epsilon''
+\end{equation}
+This means that the wave number $k$ will become complex, too
+\begin{equation}
+    k = \frac{\omega}{c} =  k_0 \sqrt{\epsilon} = k_0 \sqrt{1 + \chi' + i \chi''} = \beta + i \frac{\alpha}{2}
+\end{equation}
+The meaning of the real-valued $\alpha$ and $\beta$ will become clear when we use this definition in a plane wave:
+\begin{equation}
+    \mathcal{E}(z,t) =  \mathcal{E}_0 \,  e^{ i (k z - \omega t)} =
+     \mathcal{E}_0 \, e^{-i \omega t} \, e^{i \beta z} \, e^{- \alpha z / 2}
+\end{equation}
+The intensity of this waves thus drops as
+\begin{equation}
+    I(z) \propto |\mathcal{E}(z,t) |^2 = |\mathcal{E}_0|^2 \, e^{- \alpha z}
+\end{equation}
+$\alpha$ is thus the absorption coefficient\sidenote{or attenuation or extinction coefficient}. Positive $\alpha$ means a decay of intensity, negative $\alpha$ would mean a gain, as in a laser. $\beta$ describes the progression of the phase or wave fronts. It is related to the real part $n$ of the refractive index\sidenote{I use the form $\tilde{n}= n + i \kappa$.} by $\beta = n k_0$. Everything together we have
+\begin{equation}
+    n + i \kappa = \frac{\beta}{k_0} + i \, \frac{1}{2} \, \frac{\alpha}{k_0} = \pm \sqrt{1 + \chi' + i \chi''}
+    \label{eq:4_n_chi}
+\end{equation}
+The sign of the square root is chosen such that a  positive (absorbing) $\chi''$ leads to a positive (absorbing) $\alpha$, independent of the sign of $\chi'$. As we will see below $\chi' < 0$ is possible, e.g., near resonances.
 
-\begin{itemize}
-\item Drude-Modell der freien Elektronen in Metallen
-\item Plasmonen als gebundene EM-Wellen
-\item Fresnel-Koeffizienten bei absorbierenden Medien
-\end{itemize}
+It is convenient to have approximate forms of eq.  \ref{eq:4_n_chi} for the limiting cases of weak and strong absorption
+\begin{align}
+    \chi'' \ll 1 + \chi' &  \rightarrow& n \approx \sqrt{1 + \chi'} && \alpha \approx  \frac{k_0}{n} \chi'' \\
+    \chi'' \gg |1 + \chi'| & \rightarrow & n \approx \sqrt{\chi'' / 2} && \alpha \approx 2 k_0 \sqrt{ \chi'' / 2}
+\end{align}
 
-\lit{Saleh/Teich  Kap. 5, Hecht Kap. 4}
+
+
+\section{The Kramers-Kronig relations}
+
+So far, we have only discussed the relationship between the applied external field $E(t)$ and the resulting polarization $P(t)$ for 'monochromatic' fields of the type $\exp(-i \omega t)$, i.e. for a precisely defined frequency $\omega$:
+\begin{equation}
+P(t) = \chi(\omega) \epsilon_0 E(t) \quad \text{for} \quad E(t) = E_0 e^{-i \omega t} \quad .
+\end{equation}
+This gave the frequency dependence of $\chi(\omega)$. We can generalize this for any time evolution of the field $E(t)$. The susceptibility is the \emph{impulse response} of the material, the memory so to speak:
+\begin{equation}
+P(t) = \epsilon_0 \int_{-\infty}^{+\infty} \chi( \Delta t = t - t') \, E(t') \, dt' \quad \text{for} \quad E(t) = \text{any} \quad .
+\end{equation}
+The polarization $P$ now, i.e. at time $t$, depends on the electric field at all other times $t'$. How strong the fields are depends only on the time interval $\Delta t$. Causality requires that the polarization 'now' does not depend on the field amplitudes in the future. Therefore $\chi( \Delta t = t - t' < 0) $ must be zero. This means that the susceptibility $\chi( \Delta t ) $ is complex, but known over half of the time ray as fixed to zero. This has consequences for the Fourier transform, i.e. for $\chi(\omega)$.
+
+These consequences can be derived with the help of function theory\sidenote{see also Appendix A of \cite{Yariv1989}} and are the Kramers-Kronig relations. The following relationship exists between the real ($\chi'$) and imaginary ($\chi''$) parts of the susceptibility if they obey causality:
+\begin{align}
+ \chi'(\nu) = & \frac{2}{\pi} \, P \int_0^\infty \frac{s \, \chi''(s)}{s^2 - \nu^2} \, ds \\
+ \chi''(\nu) = & \frac{2}{\pi}\, P \int_0^\infty \frac{\nu \, \chi'(s)}{\nu^2 - s^2} \, ds \quad .
+ \label{eq:diel_KK}
+\end{align}
+$P$ denotes the Cauchy principal value integral. Similar relationships also exist for $\chi(\omega)$ and $\epsilon(\omega)$ as well as for all other variables that are subject to causality.
+
+In principle, it is therefore sufficient to measure the real part of the susceptibility $\chi(\omega)$ in order to determine the imaginary part and thus the complete complex-valued function. Unfortunately, however, the integrals in Eq~\ref{eq:diel_KK} run over the entire frequency range from zero to infinity, which is of course not accessible experimentally. The Kramers-Kronig relations can still be used sensibly by making appropriate assumptions about the course outside the measured interval.
+
+
+
+\section{Lorentz oscillator model}
+
+The response of matter to an electric field is governed by the charged ions and electrons. Restoring forces lead to resonances depending on the frequency of the optical field. In the infrared, bound ions resonate, while in the ultraviolet, bound electrons dominate.
+
+
+\begin{marginfigure}
+\inputtikz{\currfiledir lorentz_oscillator}
+
+\caption{Frequency dependence of the real and imaginary parts of the Lorentz oscillator. The real and imaginary parts of the complex-valued refractive index $\tilde{n}$ look qualitatively the same. \label{fig:diel_lorentz}}
+\end{marginfigure}
+
+The Lorentz oscillator model is a simple model that can be used to describe the frequency dependence of the dielectric function in the vicinity of resonances. In a damped harmonic oscillator (mass $m$, damping constant $\gamma$, natural frequency $\omega_0$), the mass is deflected by a periodic electric field (amplitude $E_0$, frequency $\omega$) by $x$ because the mass carries a charge $e$. All together
+\begin{equation}
+ m \ddot{x} + \gamma \dot{x} + m \omega_0^2 x = e E_0 e^{- i \omega t} \quad .
+\end{equation}
+The stationary solution of this differential equation is
+\begin{equation}
+ x(t) = \frac{e \, E_0}{m (\omega_0^2 - \omega^2) - i \gamma \omega} \, e^{- i \omega t} \quad .
+\end{equation}
+The macroscopic polarization $P$ is the sum of all microscopic polarizations, i.e.
+\begin{equation}
+P(t) = N \, e \,x(t) = (\epsilon -1 ) \epsilon_0 \, E_0 e^{- i \omega t}
+= \chi \epsilon_0 E(t) \quad .
+\end{equation}
+This results in the dielectric function
+\begin{equation}
+\epsilon(\omega) = 1 + N \alpha = 1 +\frac{N e^2}{\epsilon_0} \frac{1}{m (\omega_0^2 - \omega^2) - i \gamma \omega} = \epsilon' + i \epsilon'' \quad .
+\end{equation}
+Explicit real and imaginary parts are
+\begin{align}
+ \epsilon' = & 1 + \frac{N e^2}{\epsilon_0} \frac{ m (\omega_0^2 - \omega^2)}{m^2 (\omega_0^2 - \omega^2)^2 + \gamma^2 \omega^2}  \\
+  \epsilon'' = & \frac{N e^2}{\epsilon_0} \frac{ \gamma \omega }{m^2 (\omega_0^2 - \omega^2)^2 + \gamma^2 \omega^2}  \quad .
+\end{align}
+
+
+\begin{questions} 
+\item Analogous to Figure \ref{fig:diel_lorentz}, show the frequency dependence of the components of the refractive index, i.e. of $n$ and $k$.
+
+\item Approximate the real and imaginary parts of $\epsilon$ near resonance at $\omega_0$ as a function of $\Delta \omega = \omega - \omega_0$. In the case of the real part, only the range $| \Delta \omega | \gg \gamma/m$ is of interest.
+\end{questions}
+
+
+
+
+\section{Normal and  anomalous dispersion}
+
+The visible spectral region is at a higher frequency than the resonance of the bound ions in the infrared, but at a lower frequency than that of the bound electrons in the ultraviolet. The real part $n$ of the refractive index   increases  with frequency, i.e. $n(\text{blue}) > n(\text{red})$ (see Fig. \ref{fig:diel_lorentz}). This is called 'normal' dispersion. It causes red light to deviate less than blue light in a prism and to be focused by a lens at a greater distance. On the energetically 'other' side of a resonance, the opposite behavior can be observed, 'anomalous dispersion'.
+\begin{marginfigure}
+    \inputtikz{\currfiledir multiple_lorentz_oscillator}
+\caption{The visible spectral range lies between two resonances. \label{fig:diel_lorentz}}
+\end{marginfigure}
+
+
+The Lorentz-shaped resonance can be shown in a demonstration experiment. The imaginary part of the dielectric function Fig.~\ref{fig:diel_lorentz} determines the absorption and thus the line shape in the absorption spectrum of atoms or molecules. The real part determines the dispersion, i.e. the refractive index of a medium. A simple method of determining the refractive index is to use a prism made of the material to be examined. In a prism, the deflection of the light beam is proportional to the difference of the refractive index inside compared to outside (actually always air $\approx$ vacuum). However, the electronic resonance  must also be shifted from the ultraviolet to the visible. In the experiment, a prism made of sodium vapor is used for this purpose. The strong absorption of the sodium D lines at a wavelength of around 589~nm produces a highly visible effect. 
+
+
+\begin{marginfigure}
+\includegraphics[width=\textwidth]{\currfiledir dispersion.png}
+\caption{Anomalous dispersion in sodium vapor. }
+\end{marginfigure}
+
+
+Sodium vapor is generated in an evacuated tube by strongly heating solid sodium.  The tube is heated from below and cooled from above so that the vapor density decreases towards the top. This corresponds to a prism with its tip pointing upwards. Here, too, the effective glass thickness decreases towards the top when averaged over the entire beam path. The light beam is then passed through a glass prism with a vertical axis to create a horizontal wavelength axis. The result is a spectrum as shown in the adjacent figure. The horizontal axis is proportional to the wavelength, the vertical axis to the deviation of the refractive index from unity. The spectrum is interrupted at the absorption line itself because the sodium vapor completely absorbs the light there. It can be seen that the refractive index falls below unity at the higher energy side of the resonance.
+
+
+\section{Reflection and transmission}
+
+Now that we can describe matter, we want to know how much of a wave is transmitted through an interface between two media and how much is reflected. Let us assume that the ray travels in the xz-plane. The surface is an xy plane. As we will see in the next chapter on polarization optics, it is sufficient to examine the response for linearly polarized light, where the direction of polarization is either in the plane defined by the rays (xz) or perpendicular to it (y). The first case is called p-polarized (p for parallel) or transverse magnetic (TM), since the magnetic field is orthogonal to the xz-plane of incidence. The second case is called s-polarized (s as 'senkrecht', perpendicular) or transverse electric (TE) because the electric field is perpendicular to the xz-plane of incidence.
+
+At the interface, the sum of incident and reflected wave on each side has to match the transmitted wave on the other side. Matching means that the phases need to agree and the amplitudes need to follow the continuity conditions of electromagnetic fields. The phase argument defines the angles of reflected and transmitted waves, luckily identical to geometrical optics. The continuity argument defines the amplitudes as reflection $r_{12}$ and transmission $t_{12}$ coefficients for the electric field. These are called the \emph{Fresnel equations}. This calculation can be found in textbooks on electrodynamics, e.g, \cite{Nolting-ED}.
+
+
+We follow here \cite{Novotny-Hecht2012}, who follow \cite{BornWolf2002}, especially in the direction of the field vectors, see Fig. 2.2 in \cite{Novotny-Hecht2012}. In this definition,  $r^s$ and $r^p$ differ at normal incidence by a factor of $-1$. We assume non-magnetic materials ($\mu = 1$) and describe the propagation direction by the z component $k_z$ of the wave vector $\bk$. For a wave traveling from medium 1 towards medium 2 we get
+\begin{align}
+ r_{12}^s = & \frac{k_{z,1} - k_{z,2}}{k_{z,1} + k_{z,2}}  = - r_{21}^s\\
+ t_{12}^s = & \frac{2 \, k_{z,1}}{k_{z,1} + k_{z,2}} =  \frac{k_{z,1}}{k_{z,2}}  \,  t_{21}^s\\
+  r_{12}^p = & \frac{\epsilon_2	 k_{z,1} - \epsilon_1 k_{z,2}}
+				  {\epsilon_2 k_{z,1} + \epsilon_1 k_{z,2}}  = - r_{21}^p\\
+  t_{12}^p = & \frac{2 \sqrt{\epsilon_1 \epsilon_2}	 \,k_{z,1} }
+				  {\epsilon_2 k_{z,1} + \epsilon_1 k_{z,2}}  = \frac{k_{z,1}}{k_{z,2}}  \,  t_{21}^p \quad . 
+\end{align}
+We could also write these coefficients in terms of angle of incidence $\theta$ with
+\begin{equation}
+ \theta = \arcsin \frac{k_x}{n k_0} = \arcsin \sqrt{1 - \left( \frac{k_z}{n k_0} \right)^2 } \quad . 
+\end{equation}
+This would also hold in the case of evanescent waves ($k_x > n k_0$) when we allow complex angles $\theta$. We nowhere need that $\theta$ is a geometrical angle. We only need that $n \sin \theta$ is the same on both sides.
+
+\begin{marginfigure}
+\inputtikz{\currfiledir Fresnel_field_external}
+
+\inputtikz{\currfiledir Fresnel_field_internal}
+\caption{Fresnel coefficients  $r = |r|e^{i \phi}$ for external (top) and internal (bottom) reflection at an air--glass interface. red: s-polarized, blue: p-polarized. dashed: phase \label{fig:4_Fresnel_field}}
+\end{marginfigure}
+
+Figure \ref{fig:4_Fresnel_field} shows the amplitude and phase of the reflection coefficient $r$ for a reflection at an air--glass and a glass--air interface. Coming from the less dense medium, we find a zero reflectivity for p-polarized light. This is the Brewster effect: the incident field induces oscillating dipoles at the surface of the medium, aligned with the polarization direction of the field. A dipole emits radiation in all directions, but not in the direction of its oscillation. If this direction of oscillation is in the expected direction of the outgoing wave, the amplitude of that wave must be zero.
+
+When light is incident from the dense medium, we observe total internal reflection for both polarization directions above a critical angle. As we have already seen with Fourier optics, in these cases the in-plane component of the wave vector on the glass side is larger than the total length of the wave vector on the air side. So we have evanescent waves on the air side. Note that even though the reflectivity $|r|$ is always one above the critical angle, the reflected field acquires a phase that depends on the angle of incidence and the direction of polarization.
+
+
+These coefficients are for the fields. The reflected power is the fraction $R = |r|^2$ of the incident power. The transmitted power is the fraction $T$ with
+\begin{equation}
+    T = 1 - R \neq |t|^2 \quad .
+\end{equation}
+This inequality is caused by the differing impedance on both sides of the interface and the differing direction of travel due tue refraction. The orientation of the 'power meter surface' needs to change. Both can be corrected so that we get for a wave traveling from 1 to 2
+\begin{equation}
+    T = \frac{n_2 \cos \theta_2}{n_1 \cos \theta_1} \, |t|^2 \quad .
+\end{equation}
+
+
+
+
+\begin{marginfigure}
+\inputtikz{\currfiledir Fresnel_power_external}
+
+\inputtikz{\currfiledir Fresnel_power_internal}
+
+\caption{Reflected (thick) and transmitted (thin) power for external (top) and internal (bottom) reflection at an air--glass interface. red: s-polarized, blue: p-polarized \label{fig:4_Fresnel_power}}
+
+\end{marginfigure}
+
+
 
 
 %--------------------
