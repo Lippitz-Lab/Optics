@@ -92,3 +92,35 @@
 \draw (\x1,\y2) -- (\x2,\y1) -- (\x3,\y1) -- (\x4,\y2) --(\x3,\y3) 
 -- (\x2,\y3) -- (\x1,\y2);
 }
+
+%from https://tex.stackexchange.com/questions/464580/drawing-a-perspective-ellipse-with-tikz/464588#464588
+% and https://tex.stackexchange.com/a/438695/121799
+
+\makeatletter
+%along x axis
+\define@key{x sphericalkeys}{radius}{\def\myradius{#1}}
+\define@key{x sphericalkeys}{theta}{\def\mytheta{#1}}
+\define@key{x sphericalkeys}{phi}{\def\myphi{#1}}
+\tikzdeclarecoordinatesystem{x spherical}{% %%%rotation around x
+    \setkeys{x sphericalkeys}{#1}%
+    \pgfpointxyz{\myradius*cos(\mytheta)}{\myradius*sin(\mytheta)*cos(\myphi)}{\myradius*sin(\mytheta)*sin(\myphi)}}
+
+%along y axis
+\define@key{y sphericalkeys}{radius}{\def\myradius{#1}}
+\define@key{y sphericalkeys}{theta}{\def\mytheta{#1}}
+\define@key{y sphericalkeys}{phi}{\def\myphi{#1}}
+\tikzdeclarecoordinatesystem{y spherical}{% %%%rotation around x
+    \setkeys{y sphericalkeys}{#1}%
+    \pgfpointxyz{\myradius*sin(\mytheta)*cos(\myphi)}{\myradius*cos(\mytheta)}{\myradius*sin(\mytheta)*sin(\myphi)}}
+
+%along z axis
+\define@key{z sphericalkeys}{radius}{\def\myradius{#1}}
+\define@key{z sphericalkeys}{theta}{\def\mytheta{#1}}
+\define@key{z sphericalkeys}{phi}{\def\myphi{#1}}
+\tikzdeclarecoordinatesystem{z spherical}{% %%%rotation around x
+    \setkeys{z sphericalkeys}{#1}%
+    \pgfpointxyz{\myradius*sin(\mytheta)*cos(\myphi)}{\myradius*sin(\mytheta)*sin(\myphi)}{\myradius*cos(\mytheta)}}
+
+
+\makeatother % https://tex.stackexchange.com/a/438695/121799
+

@@ -1,0 +1,38 @@
+
+% \documentclass[tikz,border=3.14mm]{standalone}
+% \usepackage{tikz-3dplot}
+
+
+
+%\begin{document}
+
+
+
+\tdplotsetmaincoords{60}{130}
+\begin{tikzpicture}[scale=1,tdplot_main_coords,>=latex,line join=bevel]
+    \coordinate (O) at (0,0,0);
+
+    % \draw[thick,->] (0,0,0) -- (1,0,0) node[anchor=north east]{$x$};
+    % \draw[thick,->] (0,0,0) -- (0,1,0) node[anchor=north west]{$z$};
+    % \draw[thick,->] (0,0,0) -- (0,0,1) node[anchor=south]{$y$};
+
+    \pgfmathsetmacro{\mya}{2}
+    \pgfmathsetmacro{\myb}{3}
+
+    \draw[] (\mya,0,\mya) -- (\mya,0,-\mya) -- (-\mya,0,-\mya) -- (-\mya,0,\mya) --cycle;
+    \draw[] (0,0,\mya) -- (0,\myb,\mya) -- (0,\myb,-\mya) -- (0,0,-\mya) --cycle;
+
+    \draw [thick, ->] (O) -- (0, 2.5, 0) node [anchor=west]{$k$};
+    \draw [thick, -> ] (O) -- (0, {2.5 * cos(-20)}, {2.5 * sin(-20)} ) node  [anchor=west]{$S$};
+
+    \draw [thick, -> ] (O) -- (0, 0, 1.5,) node  [anchor=east]{$D$};
+    \draw [thick, -> ] (O) -- (0,{1.5 * sin(20)}, {1.5 * cos(-20)}) node  [anchor=west] {$E$};
+
+    \draw [thick, ->] (O) -- (1.5, 0, 0) node  [anchor=south] {$H,B$};
+
+
+\end{tikzpicture}
+
+%\end{document}
+
+

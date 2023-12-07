@@ -1,0 +1,87 @@
+% %from https://tex.stackexchange.com/questions/464580/drawing-a-perspective-ellipse-with-tikz/464588#464588
+
+% \documentclass[tikz,border=3.14mm]{standalone}
+% \usepackage{tikz-3dplot}
+% \usetikzlibrary{intersections,backgrounds}
+
+% \input{../tikz_header}
+
+% \begin{document}
+
+%from https://tex.stackexchange.com/a/375604/121799
+
+% definitions to make your life easier
+\tikzset{rotate axes about y axis/.code={
+\path (y spherical cs:radius=1,theta=90,phi=0+#1) coordinate(xpp)
+(y spherical cs:radius=1,theta=00,phi=90+#1) coordinate(ypp) 
+(y spherical cs:radius=1,theta=90,phi=90+#1) coordinate(zpp);
+},rotate axes about x axis/.code={
+\path (x spherical cs:radius=1,theta=00,phi=90+#1) coordinate(xpp)
+(x spherical cs:radius=1,theta=90,phi=00+#1) coordinate(ypp) 
+(x spherical cs:radius=1,theta=90,phi=90+#1) coordinate(zpp);
+},
+pitch/.style={rotate axes about y axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}},
+roll/.style={rotate axes about x axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}}
+}
+
+\tdplotsetmaincoords{60}{130}
+\begin{tikzpicture}[scale=2.4,tdplot_main_coords,>=latex,line join=bevel]
+    \coordinate (O) at (0,0,0);
+    \draw[thick,->] (O) -- (1.,0,0) node[anchor=north east]{$x_1$};
+    \draw[thick,->] (O) -- (0,1.,0) node[anchor=north west]{$x_2$};
+    \draw[thick,->] (O) -- (0,0,1.2) node[anchor=south]{$x_3$};
+    \pgfmathsetmacro{\mya}{0.4}
+    \pgfmathsetmacro{\myb}{0.8}
+    \pgfmathsetmacro{\mytheta}{65}
+    % lines in the background
+    \draw[gray,dashed] plot[variable=\x,domain=-70:-250,smooth,samples=51]({\mya*cos(\x)},{0},{\myb*sin(\x)});
+    \draw[gray,dashed] plot[variable=\x,domain=-70:-250,smooth,samples=51]({0},{\mya*cos(\x)},{\myb*sin(\x)});
+    \draw[gray,dashed] plot[variable=\x,domain=\tdplotmainphi:\tdplotmainphi+180,smooth,samples=51]({\mya*cos(\x)},{\mya*sin(\x)},0);   
+    % fill
+    \tdplotsetrotatedcoords{0}{0}{\tdplotmainphi}   
+    \begin{scope}[tdplot_rotated_coords]
+    \begin{scope}[roll=-5]
+    \draw[gray!40] plot[variable=\x,domain=0:360,smooth,samples=51]({\mya*cos(\x)},{0},{{\myb*sin(\x)}});
+    \end{scope}
+    \end{scope}
+
+    \begin{scope}[roll=\mytheta]
+        \draw[fill=gray!40, opacity=0.6] plot[variable=\x,domain=0:360,smooth,samples=51]({\mya*cos(\x)},{0},{
+            {sin(\x) * sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )}
+            });
+
+         \node [anchor=east] at    (0,0, {sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )}) {$n_{eo}$};
+    \end{scope}
+
+    % lines in the foreground
+    \draw[gray] plot[variable=\x,domain=-70:110,smooth,samples=51]({\mya*cos(\x)},{0},{\myb*sin(\x)});
+    \draw[gray] plot[variable=\x,domain=-70:110,smooth,samples=51]({0},{\mya*cos(\x)},{\myb*sin(\x)});
+    \draw[gray] plot[variable=\x,domain=\tdplotmainphi-180:\tdplotmainphi,smooth,samples=51]({\mya*cos(\x)},{\mya*sin(\x)},0);  
+    % redraw "visible" part of the axes
+    \draw[thick,->] (\mya,0,0) -- (1.,0,0);
+    \draw[thick,->] (0,\mya,0) -- (0,1.,0);
+    \draw[thick,->] (0,0,\myb) -- (0,0,1.2);   
+
+    \draw[thick,->] (O) -- (0, {1* cos(\mytheta)}, {1*sin(\mytheta)}) node[anchor=west] {$\hat{u}$};   
+
+    \node[anchor=west] at (\mya,0,0) {$n_0$};
+  
+    % \pgfmathsetmacro{\rvec}{1.5}
+    % \pgfmathsetmacro{\thetavec}{40}
+    % \pgfmathsetmacro{\phivec}{60}
+    % \tdplotsetrotatedcoords{0}{0}{\phivec}  
+    % \begin{scope}[tdplot_rotated_coords]
+    % \path[name path=elli] plot[variable=\x,domain=0:360,smooth,samples=51]({\mya*cos(\x)},{0},{{\myb*sin(\x)}});
+    % \end{scope}
+    % \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
+    % \node[anchor=south west,color=red] at (P) {P};
+    % \begin{scope}[on background layer]
+    % \draw[-stealth,color=red,very thick,name path global=P] (O) -- (P);
+    % \end{scope}
+    % \draw[-stealth,color=red,very thick,name intersections={of=P and elli}] 
+    % (intersection-1) -- (P);
+\end{tikzpicture}
+
+%\end{document}
+
+
