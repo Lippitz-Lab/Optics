@@ -20,8 +20,14 @@
 (x spherical cs:radius=1,theta=90,phi=00+#1) coordinate(ypp) 
 (x spherical cs:radius=1,theta=90,phi=90+#1) coordinate(zpp);
 },
+rotate axes about z axis/.code={
+\path (z spherical cs:radius=1,theta=90,phi=0+#1) coordinate(xpp)
+(z spherical cs:radius=1,theta=90,phi=90+#1) coordinate(ypp) 
+(z spherical cs:radius=1,theta=0,phi=90+#1) coordinate(zpp);
+},
 pitch/.style={rotate axes about y axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}},
-roll/.style={rotate axes about x axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}}
+roll/.style={rotate axes about x axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}},
+yaw/.style={rotate axes about z axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}}
 }
 
 \tdplotsetmaincoords{60}{130}
@@ -45,12 +51,18 @@ roll/.style={rotate axes about x axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}}
     \end{scope}
     \end{scope}
 
+    \begin{scope}[yaw=30]
     \begin{scope}[roll=\mytheta]
         \draw[fill=gray!40, opacity=0.6] plot[variable=\x,domain=0:360,smooth,samples=51]({\mya*cos(\x)},{0},{
             {sin(\x) * sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )}
             });
 
-         \node [anchor=east] at    (0,0, {sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )}) {$n_{eo}$};
+            \draw (O) -- (\mya, 0,0) node[anchor=north]  {$n_o$};
+            \draw (O) -- (0,0,{sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )})  node [anchor=east]  {$n_{eo}$};
+
+            \draw[thick,->] (O) -- (0, 1, 0) node[anchor=west] {$\hat{u}$};   
+
+        \end{scope}   
     \end{scope}
 
     % lines in the foreground
@@ -62,24 +74,8 @@ roll/.style={rotate axes about x axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}}
     \draw[thick,->] (0,\mya,0) -- (0,1.,0);
     \draw[thick,->] (0,0,\myb) -- (0,0,1.2);   
 
-    \draw[thick,->] (O) -- (0, {1* cos(\mytheta)}, {1*sin(\mytheta)}) node[anchor=west] {$\hat{u}$};   
 
-    \node[anchor=west] at (\mya,0,0) {$n_0$};
-  
-    % \pgfmathsetmacro{\rvec}{1.5}
-    % \pgfmathsetmacro{\thetavec}{40}
-    % \pgfmathsetmacro{\phivec}{60}
-    % \tdplotsetrotatedcoords{0}{0}{\phivec}  
-    % \begin{scope}[tdplot_rotated_coords]
-    % \path[name path=elli] plot[variable=\x,domain=0:360,smooth,samples=51]({\mya*cos(\x)},{0},{{\myb*sin(\x)}});
-    % \end{scope}
-    % \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
-    % \node[anchor=south west,color=red] at (P) {P};
-    % \begin{scope}[on background layer]
-    % \draw[-stealth,color=red,very thick,name path global=P] (O) -- (P);
-    % \end{scope}
-    % \draw[-stealth,color=red,very thick,name intersections={of=P and elli}] 
-    % (intersection-1) -- (P);
+
 \end{tikzpicture}
 
 %\end{document}

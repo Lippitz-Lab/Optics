@@ -224,7 +224,7 @@ We can depict such a symmetric tensor as ellipsoidal surface defined by
 \begin{equation}
      \sum_{i,j} \epsilon_{i j}  x_i x_j = 1
 \end{equation}
-When we change the coordinate system, then both the $x_i$ and the $\epsilon_{ij}$ change and the ellipsoid remains unchanged. There is one coordinate system in which the $\epsilon_{ij}$ matrix is diagonal. This are the principal axes.  In these directions, $\bE$ amd $nD$ are parallel. In the following, my spatial coordinate system is always this principal system, labeled as $x_1$, $x_2$, $x_3$ The semi-axes of the ellipsoid, i.e., where the ellipsoid crosses the axes, have the values $1/\sqrt{\epsilon_i} = 1/n_i$. Here $n_i$ is the index of refraction along one of the principal axes.
+When we change the coordinate system, then both the $x_i$ and the $\epsilon_{ij}$ change and the ellipsoid remains unchanged. There is one coordinate system in which the $\epsilon_{ij}$ matrix is diagonal. This are the principal axes.  In these directions, $\bE$ amd $\bD$ are parallel. In the following, my spatial coordinate system is always this principal system, labeled as $x_1$, $x_2$, $x_3$. The semi-axes of the ellipsoid, i.e., where the ellipsoid crosses the axes, have the values $1/\sqrt{\epsilon_i} = 1/n_i$. Here $n_i$ is the index of refraction along one of the principal axes.
 
 
 \begin{marginfigure}
@@ -255,6 +255,8 @@ In this chapter, we will only discuss  uniaxial crystals. Their two index values
 
 
 \section{Propagation along a principal axis}
+
+We are interested in how a wave propagates in anisotropic media. In which direction does the energy flow, how are the wave fronts oriented, and what is the polarization state. We are especially interested in "normal modes", i.e. situations that do not change. In this case, this means polarization states that do not change, that travel unperturbed through the crystal.
 
 Let us start discussing the propagation of light in anisotropic media by assuming that we travel along a principal axis. This means that the wavevector $\bk$ is parallel to one of the $x_i$. When the electric field $\bE$ is parallel to another principal $x_j$, then also $\bD$ remains parallel to $x_j$. The wave travels as in an homogenous medium with index of refraction $n_j$ and the state of polarization remains unchanged.
 
@@ -310,7 +312,7 @@ At a given frequency $\omega$, this is a linear equation system for the thee com
 \end{equation}
 This equation describes a surface in the 3d space of $\bk$, the k-surface. In fact, we find two solutions: the first factor becomes zero, leading to a spherical surface related to  the ordinary wave 
 \begin{equation}
-    | \bk| = k = n_o \, k_0
+    | \bk| = k  = \sqrt{k_1^2 + k_2^2 + k_3^2} = n_o \, k_0
 \end{equation}
 The second factor describes an ellipsoid and the extraordinary wave
 \begin{equation}
@@ -321,8 +323,10 @@ The second factor describes an ellipsoid and the extraordinary wave
 
 How does one use these k-surfaces? We start by defining the direction $\boldsymbol{\hat{u}}$ of the wavevector $\bk$. The distance of the surface from the origin in the direction of $\boldsymbol{\hat{u}}$ gives the index of refraction of that wave. This recover its dependence on angle $\theta$ between $\bk$ and the optics axis $x_3$, as discussed in the last section. Additionally, one can show\footcite{SalehTeich1991} that the Poynting vector $\bS$ is perpendicular to the surface at these points. And the wave fronts are perpendicular to $\bk$ and thus $\boldsymbol{\hat{u}}$ as usual.
 
-XXX fig sketches
-
+\begin{marginfigure}
+    \inputtikz{\currfiledir k-surface}
+    \caption{$k$ surface cutting the $yz$-plane for an uniaxial crystal with $n_{eo}  > n_o$.}
+\end{marginfigure}
 
 \section{Birefringence}
 
@@ -335,10 +339,11 @@ When $\theta_a$ is the angle of the optics axis with the surface normal, then we
 Snell's law describes the direction of the wave vector $\bk$ and the wave fronts, but it does not describe the energy flow or the direction of the Poynting vector $\bS$, at least not in the case of anisotropic media. We see this when letting the plane wave impinge perpendicular on the crystal surface, i.e., set $\theta_{air} = 0$. So also inside the crystal, the wave fronts remain parallel to the crystal surface, all angles remain equal to zero. But the Poynting vector is perpendicular to the k-surface. When the optics axis of the crystal is neither parallel nor perpendicular to the crystal surface, the Poynting vector for the extraordinary beam will deviate. A beam with the extraordinary polarization direction will be displaced in an anisotropic plate. This is used in different types of polarizing beam-splitter prisms.
 
 
-XXX Fig. 6.32 S/T
+\begin{figure}
+    \inputtikz{\currfiledir k-surface_wavefronts}
+    \caption{Ordinary (left) and extraordinary (right) wave traveling in direction $\bk$. The electric field $\bE$ point out of the plane for the ordinary wave, and is in the plane for the extraordinary wave. For the extraordinary wave, the wave fronts are perpendicular to $\bk$, but not to $\bS$.}
+\end{figure}
 
-
-XXX discuss pol BS ???
 
 \section{Optical activity and magneto-optics}
 
