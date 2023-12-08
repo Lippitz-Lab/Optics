@@ -58,7 +58,7 @@ yaw/.style={rotate axes about z axis=#1,x={(xpp)},y={(ypp)},z={(zpp)}}
             });
 
             \draw (O) -- (\mya, 0,0) node[anchor=north]  {$n_o$};
-            \draw (O) -- (0,0,{sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )})  node [anchor=east]  {$n_{eo}$};
+            \draw (O) -- (0,0,{sqrt(1 / ( cos(\mytheta)^2 / \myb^2 + sin(\mytheta)^2 / \mya^2   ) )})  node [anchor=east]  {$n(\theta)$};
 
             \draw[thick,->] (O) -- (0, 1, 0) node[anchor=west] {$\hat{u}$};   
 
