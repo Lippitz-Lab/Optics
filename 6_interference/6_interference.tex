@@ -1,0 +1,292 @@
+\renewcommand{\lastmod}{December 18, 2023}
+\renewcommand{\chapterauthors}{Markus Lippitz}
+
+\chapter{Interference}
+
+\section{Overview}
+
+
+Interference in general
+
+Interferometer: Michelson, Mach-Zehnder, Fabry-Perot, Sagnac
+
+IOR-Bestimmung
+FTIR Spewktroskopie
+optischer Kreisel
+
+
+layered media
+
+
+DBR / dieelctric filter : examples
+
+
+
+
+
+\section{Optics of layered media: Transmission and scattering matrix}
+We present here the T-matrix method, a versatile technique for studying the optical properties of layered media, i.e. stacks of unstructured films of materials with different dielectric functions. These can be dielectric materials leading to e.g. Bragg reflections and dielectric filters, or metal films leading to surface plasmons. We will discuss transmission and reflection of these stacks.
+
+In a layered medium, a wave traveling through the stack of layers is partially reflected and partially transmitted at each interface. The multiple reflections interfere with each other. To keep track of this, we use in each layer a combined wave traveling in the $+z$ direction and one traveling in the $-z$ direction. These waves mix at interfaces. This formalism is described in chapter 7 of \cite{SalehTeich1991} and \cite{Yeh2005}. A similar formalism with an $E$ and $B$ field traveling in the same direction is described in \cite{Pedrotti2008} and \cite{Macleod2001}.
+
+\begin{marginfigure}
+\includegraphics[width=50mm]{\currfiledir T-matrix.png}
+
+\caption{The operation of the transmission matrix
+\label{fig:6_T_matrix}}
+\end{marginfigure}
+
+Let us assume that we have left of the interface a wave traveling to the right ($+z$ direction) of amplitude $U_1^+$, and one wave traveling to the left of amplitude $U_1^-$. On the right side of the interface, we get the amplitudes $U_2^\pm$ by multiplication with a \emph{transmission} or \emph{transfer} matrix $\mathbf{M}$
+\begin{equation}
+\begin{pmatrix}
+U_2^+ \\ U_2^-
+\end{pmatrix}
+= 
+\begin{pmatrix}
+A & B \\ C & D \\
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+U_1^+ \\ U_1^-
+\end{pmatrix}
+%
+= \mathbf{M}
+\begin{pmatrix}
+U_1^+ \\ U_1^-
+\end{pmatrix} \quad . \label{eq:6_def_T_matrix}
+\end{equation}
+Below we will derive transmission matrices $\mathbf{M}_i$ for every interface and the homogeneous space in between. The full stack can then be described by a product matrix, multiplying together all partial matrices $\mathbf{M}_i$ along the stack
+\begin{equation}
+\mathbf{M}_\text{total} = \mathbf{M}_n \cdot  \mathbf{M}_{n-1} \cdots\mathbf{M}_2 \cdot  \mathbf{M}_{1} \quad . 
+\end{equation}
+This is a very convenient feature of the transmission matrix.
+Note that we label the interactions from left to right with $1$ to $n$, but the matrices are multiplied from right to left, as mathematics has it origin in Arabic culture.
+
+
+
+An inconvenient feature of the transmission matrix is that its matrix element have no direct physical meaning. The problem is that we multiply on the matrix a vector that is half an input, half an output of this interface. We know what comes out (travels to the left), and the matrix should tell us what comes in from the other side. In this sense, the related \emph{scattering} matrix $\mathbf{S}$ is closer to physical meaning:
+\begin{equation}
+\begin{pmatrix}
+U_2^+ \\ U_1^-
+\end{pmatrix}
+= 
+\begin{pmatrix}
+t_{12} & r_{21}  \\ r_{12} & t_{21}
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+U_1^+ \\ U_2^-
+\end{pmatrix}
+%
+= \mathbf{S}
+\begin{pmatrix}
+U_1^+ \\ U_2^-
+\end{pmatrix} \quad . 
+\end{equation}
+The scattering matrix connects waves traveling towards the interface with those traveling away from the interface. The entries $t_{ij}$ and $r_{ij}$ are the transmission and reflection coefficients for the amplitudes of the waves traveling from $i$ to $j$ (i.e. $12$ is traveling towards the right, $+z$ direction). However, for the scattering matrix $\mathbf{S}$, the full stack can not be calculated by multiplying together all partial matrices.
+
+\begin{marginfigure}
+\includegraphics[width=50mm]{\currfiledir S-matrix.png}
+
+\caption{The operation of the scattering matrix
+\label{fig:6_S_matrix}}
+\end{marginfigure}
+
+It is therefore convenient to switch between both representations, derive the scattering matrix $\mathbf{S}$ for each situation, and then convert into a transmission matrix $\mathbf{M}$. The relations are\sidenote{\cite{SalehTeich1991}  eq. 7.7}
+\begin{align}
+\mathbf{M} =  &
+\begin{pmatrix}
+A & B \\ C & D \\
+\end{pmatrix}
+=
+\frac{1}{t_{21}}
+\begin{pmatrix}
+t_{12} t_{21} - r_{12}r_{21} & r_{21} \\ - r_{12} & 1 \\
+\end{pmatrix} \label{eq:6_M_from_S}
+\\
+\mathbf{S} =  &
+\begin{pmatrix}
+t_{12} & r_{21}  \\ r_{12} & t_{21}
+\end{pmatrix}
+=
+\frac{1}{D}
+\begin{pmatrix}
+AD - BC & B \\ -C & 1 \\
+\end{pmatrix} \label{eq:6_S_from_M}
+\end{align}
+as long as $D$ or $t_{21}$ are not zero.
+
+
+The transmission in backward direction $t_{21}$ is thus the reciprocal of the $D$-element of $\mathbf{M}_\text{total} $. The transmission in forward direction is 
+\begin{equation}
+t_{12} = \frac{\text{det } \mathbf{M}_\text{total} }{D}
+\end{equation}
+and similar for the reflection from the front side
+\begin{equation}
+r_{12} = - \frac{C }{D} \quad . 
+\end{equation}
+
+
+
+
+\section{Electrical fields}
+
+We need to define the physical meaning of the amplitudes $U_i^\pm$ to be able to calculate the reflection ($r_{ij}$) and transmission ($t_{ij}$) coefficients. We assume plane waves 
+\begin{equation}
+\mathbf{E} \, e^{i (\mathbf{k}  \cdot \mathbf{r} - \omega t)}
+=
+\mathbf{\hat{E}} \, U \, e^{i \, k_z z} \, e^{i \, k_x x} \, e^{-i \omega t}
+\end{equation}
+where the wave vector $\mathbf{k} $ lies in the $xz$-plane, $U$ defines the amplitude of the wave and $\mathbf{\hat{E}} $  the polarization direction.
+With   the full length of the wave vector in vacuum $k_0 = 2 \pi / \lambda$ and the refractive index $n$ of the medium we get
+\begin{equation}
+k_{z}^2 + k_{x}^2  = n^2 \, k_0^2  \quad . 
+\end{equation}
+The polarization directions are
+\begin{equation}
+\mathbf{\hat{E}}^{(s)} = \begin{pmatrix}
+ 0 \\ 1 \\ 0 \\
+\end{pmatrix}
+\quad 
+\text{and}
+\quad
+\mathbf{\hat{E}}^{(p)} =\frac{1}{n \, k_0} \begin{pmatrix}
+\pm k_z \\ 0 \\  k_x  \\
+\end{pmatrix} \quad . \label{eq:6_Esp_def}
+\end{equation}
+The $\pm$-sign takes the sign of the direction of travel, see Fig. 2.2 in \cite{Novotny-Hecht2012}. Note that with this definition we have $|\mathbf{\hat{E}}| = 1$, which differs from problem 12.4 in \cite{Novotny-Hecht2012}.
+
+The left and right traveling waves are thus
+\begin{equation}
+\mathbf{E}^+ = \mathbf{\hat{E}} \, U^+ \, \, e^{+ i \, k_z z}
+\quad
+\text{and}
+\quad
+\mathbf{E}^- = \mathbf{\hat{E}} \, U^- \, \, e^{- i \, k_z z}
+\end{equation}
+where we have split off the global term $ e^{i \, ( k_x x - \omega t)}$.
+
+\section{Propagation matrix}
+
+Before we come to interfaces, let us discuss the transmission matrix of a homogeneous material layer $j$ of thickness $d_j$ and (complex) refractive index $n_j$. Relevant is the $z$-component of the (complex) wave vector $k_{z,j}$. Note that we do \emph{not} use the sign of  $k_{z,j}$ to describe the direction of travel.
+Independent of the propagation direction, each wave sees a reflection coefficient $r=0$ and a (complex) transmission coefficient $t$
+\begin{equation}
+t = t_{12} = t_{21} = e^{+ i \, k_{z,j} \, d_j } \quad . 
+\end{equation}
+The transmission matrix of a homogeneous medium is thus
+\begin{equation}
+\mathbf{M} = 
+\begin{pmatrix}
+e^{+i \, k_{z,j} \, d_j } & 0 \\0 & e^{-i \, k_{z,j} \, d_j } \\
+\end{pmatrix} \quad . 
+\label{eq:6_M_prob}
+\end{equation}
+
+
+\section{Interface matrix}
+
+The transmission and reflection coefficients of an interface are the Fresnel coefficients $r$ and $t$ for s and p polarization, as defined in chapter \ref{chap:dielectrics}. We assume non-magnetic materials ($\mu = 1$).
+
+
+% We follow here \cite{Novotny-Hecht2012}, who follow \cite{BornWolf2002}, especially in the direction of the field vectors, see Fig. 2.2 in \cite{Novotny-Hecht2012}. In this definition,  $r^s$ and $r^p$ differ at normal incidence by a factor of $-1$. We assume non-magnetic materials ($\mu = 1$) and get for a wave traveling from medium 1 towards medium 2
+% \begin{align}
+%  r_{12}^s = & \frac{k_{z,1} - k_{z,2}}{k_{z,1} + k_{z,2}}  = - r_{21}^s\\
+%  t_{12}^s = & \frac{2 \, k_{z,1}}{k_{z,1} + k_{z,2}} =  \frac{k_{z,1}}{k_{z,2}}  \,  t_{21}^s\\
+%   r_{12}^p = & \frac{\epsilon_2	 k_{z,1} - \epsilon_1 k_{z,2}}
+% 				  {\epsilon_2 k_{z,1} + \epsilon_1 k_{z,2}}  = - r_{21}^p\\
+%   t_{12}^p = & \frac{2 \sqrt{\epsilon_1 \epsilon_2}	 \,k_{z,1} }
+% 				  {\epsilon_2 k_{z,1} + \epsilon_1 k_{z,2}}  = \frac{k_{z,1}}{k_{z,2}}  \,  t_{21}^p \quad . 
+% \end{align}
+% We could also write these coefficients in terms of angle of incidence $\theta$ with
+% \begin{equation}
+%  \theta = \arcsin \frac{k_x}{n k_0} = \arcsin \sqrt{1 - \left( \frac{k_z}{n k_0} \right)^2 } \quad . 
+% \end{equation}
+% This would also hold in the case of evanescent waves ($k_x > n k_0$) when we allow complex angles $\theta$. We nowhere need that $\theta$ is a geometrical angle. We only need that $n \sin \theta$ is the same for all layers.
+
+With eq.~\ref{eq:6_M_from_S} we get for both polarization directions the transmission matrix
+\begin{equation}
+\mathbf{M}_{12} = \frac{1}{t_{21}} 
+\begin{pmatrix}
+1 & r_{21} \\ r_{21} & 1 \\
+\end{pmatrix} \quad ,
+\end{equation}
+as 
+\begin{equation}
+t_{12} t_{21} - r_{12}r_{21} = t_{21}^2 \frac{k_{z,1}}{k_{z,2}} + r_{21}^2 = 1 \quad . 
+\end{equation}
+Note that the transmission matrix from medium 1 to medium 2 uses the Fresnel coefficients of the backwards direction!
+We can abbreviate this to\sidenote{In problem 12.4 in \cite{Novotny-Hecht2012} the leading $1/\eta$ seems to be missing!} (see also appendix at the end of this chapter)
+\begin{equation}
+\mathbf{M}_{12} 
+=\frac{ 1}{2 \eta }
+\begin{pmatrix}
+1 + \kappa & 1  -\kappa \\  1  - \kappa  & 1 + \kappa \\
+\end{pmatrix} \label{eq:6_M_kappa}
+\end{equation}
+with 
+\begin{equation}
+\kappa = \eta^2 \,
+\frac{  k_{z,1} }{ k_{z,2}}
+\quad
+\text{and}
+\quad
+\eta^s = 1 \quad \text{or} \quad \eta^p = \sqrt{ \frac{\epsilon_2}{\epsilon_1} } \quad . 
+\end{equation}
+The factors $\eta$ in front of the transmission matrix $\mathbf{M}_{12} $ can be collected in front of the total transmission matrix $\mathbf{M}_\text{total}$, in case one is not interested in the distribution of the fields inside the stack. Then, all $\eta^p$ collapse into $\sqrt{\epsilon_\text{first} / \epsilon_\text{last}}$, which is equal to one in case the terminating half-spaces of the layered medium have both the same dielectric constant. 
+
+
+
+\section{Appendix: derivation of eq. \ref{eq:6_M_kappa}}
+
+
+We start from 
+\begin{equation}
+\mathbf{M}_{12} = \frac{1}{t_{21}} 
+\begin{pmatrix}
+1 & r_{21} \\ r_{21} & 1 \\
+\end{pmatrix}
+\end{equation}
+and abbreviate the Fresnel coefficients as
+\begin{align}
+  r_{21}^s = & \frac{k_{z,2} - k_{z,1}}{k_{z,1} + k_{z,2}}  = \frac{b - a}{a + b} \\
+ t_{21}^s = & \frac{2 \, k_{z,2}}{k_{z,1} + k_{z,2}} =   \frac{2 b \eta }{a + b}   \\
+  r_{21}^p = & \frac{\epsilon_1	 k_{z,2} - \epsilon_2 k_{z,1}}
+				  {\epsilon_2 k_{z,1} + \epsilon_1 k_{z,2}}  =   \frac{b - a}{a + b}\\
+  t_{21}^p = & \frac{2 \sqrt{\epsilon_1 \epsilon_2}	 \,k_{z,2} }
+				  {\epsilon_2 k_{z,1} + \epsilon_1 k_{z,2}}  =   \frac{2 b  \eta }{a + b} 
+\end{align}
+with $a = \epsilon_2 k_{z,1}$, $b =     \epsilon_1 k_{z,2}$ and $\eta = \sqrt{\epsilon_2 / \epsilon_1}$. In the case of s-polarization, the $\epsilon_i$ are ignored / set to one. With this we get
+\begin{align}
+\mathbf{M}_{12} = & \frac{a+b}{2 b \eta} 
+\begin{pmatrix}
+1 & (b-a)/(a+b) \\  (b-a)/(a+b) & 1 \\
+\end{pmatrix}
+= 
+ \frac{1}{2 b \eta} 
+\begin{pmatrix}
+b+a & b-a \\  b-a & b+a \\
+\end{pmatrix} \\
+= &
+ \frac{1}{2  \eta} 
+\begin{pmatrix}
+1+\frac{a}{b} & 1- \frac{a}{b} \\  1- \frac{a}{b} & 1+\frac{a}{b} \\
+\end{pmatrix}
+= 
+ \frac{1}{2  \eta} 
+\begin{pmatrix}
+1+\kappa & 1- \kappa \\  1- \kappa & 1+\kappa \\
+\end{pmatrix} 
+\end{align}
+with 
+\begin{equation}
+\kappa = \frac{a}{b} = \eta^2 \,
+\frac{  k_{z,1} }{ k_{z,2}}
+\quad
+\text{and}
+\quad
+\eta^s = 1 \quad \text{or} \quad \eta^p = \sqrt{ \frac{\epsilon_2}{\epsilon_1} } \quad .
+\end{equation}
+
+
+%--------------------
+\printbibliography[segment=\therefsegment,heading=subbibliography]
