@@ -117,7 +117,7 @@ A fiber-loop increases the effect.
 All of the examples above were two-wave interference. The Fabry-Perot interferometer is an example of multiwave interference. It consists of two parallel, partially reflecting mirrors. The transmitted beam is composed of several waves: the directly transmitted wave, a wave with one round trip, a wave with two round trips, and so on. Compare to the direly transmitted wave $E_1$, all other waves acquire for each round trip a complex factor $h$ that contains two reflections at the mirrors and a phase lag due to the distance between the mirrors.
 As equation, this reads
 \begin{equation}
-  E_\text{out} = E_1 \left( 1 + h + h^2 + \dots  \right) = \frac{ E_1 }{1 - h}  \quad .
+  E_\text{out} = E_1 \left( 1 + h + h^2 + \dots  \right) = \frac{ E_1 }{1 - h}  \quad . \label{eq:6_FP_Eout}
 \end{equation}
 The intensity is thus
 \begin{equation}
@@ -153,7 +153,8 @@ and defines the usefulness of the interferometer by peak width per free span bet
 
 
 \section{Optics of layered media: Transmission and scattering matrix}
-We present here the T-matrix method, a versatile technique for studying the optical properties of layered media, i.e. stacks of unstructured films of materials with different dielectric functions. These can be dielectric materials leading to e.g. Bragg reflections and dielectric filters, or metal films leading to surface plasmons. We will discuss transmission and reflection of these stacks.
+
+Multiple beam interference is tedious because you have to keep track of the multiple reflection and transmission paths. In the case of the Fabry-Perot interferometer, we could identify the series and have an analytical solution. With three or more layers, this becomes difficult. One way out is the T-matrix method. It is a versatile technique for studying the optical properties of layered media, which are stacks of unstructured films of materials with different dielectric functions. These can be dielectric materials leading to e.g. Bragg reflections and dielectric filters, or metal films leading to surface plasmons. We will discuss transmission and reflection of such stacks.
 
 In a layered medium, a wave traveling through the stack of layers is partially reflected and partially transmitted at each interface. The multiple reflections interfere with each other. To keep track of this, we use in each layer a combined wave traveling in the $+z$ direction and one traveling in the $-z$ direction. These waves mix at interfaces. This formalism is described in chapter 7 of \cite{SalehTeich1991} and \cite{Yeh2005}. A similar formalism with an $E$ and $B$ field traveling in the same direction is described in \cite{Pedrotti2008} and \cite{Macleod2001}.
 
@@ -188,8 +189,6 @@ Below we will derive transmission matrices $\mathbf{M}_i$ for every interface an
 \end{equation}
 This is a very convenient feature of the transmission matrix.
 Note that we label the interactions from left to right with $1$ to $n$, but the matrices are multiplied from right to left, as mathematics has it origin in Arabic culture.
-
-
 
 An inconvenient feature of the transmission matrix is that its matrix element have no direct physical meaning. The problem is that we multiply on the matrix a vector that is half an input, half an output of this interface. We know what comes out (travels to the left), and the matrix should tell us what comes in from the other side. In this sense, the related \emph{scattering} matrix $\mathbf{S}$ is closer to physical meaning:
 \begin{equation}
@@ -313,7 +312,15 @@ e^{+i \, k_{z,j} \, d_j } & 0 \\0 & e^{-i \, k_{z,j} \, d_j } \\
 
 \section{Interface matrix}
 
-The transmission and reflection coefficients of an interface are the Fresnel coefficients $r$ and $t$ for s and p polarization, as defined in chapter \ref{chap:dielectrics}. We assume non-magnetic materials ($\mu = 1$).
+The transmission and reflection coefficients of an interface are the Fresnel coefficients $r$ and $t$ for s and p polarization, as defined in chapter \ref{chap:dielectrics}, especially  $r^s$ and $r^p$ differ at normal incidence by a factor of $-1$. We assume non-magnetic materials ($\mu = 1$). Independent of polarization dirction, the forward  and backward coffeicients are related:
+\begin{align}
+ r_{12} = &   - r_{21}\\
+ t_{12} = &   \frac{k_{z,1}}{k_{z,2}}  \,  t_{21}
+\end{align}
+so that
+\begin{equation}
+  t_{12} t_{21} - r_{12} r_{21} = t_{21}^2 \frac{k_{z,1}}{k_{z,2}} + r_{21}^2 = 1 \quad . 
+  \end{equation}
 
 
 % We follow here \cite{Novotny-Hecht2012}, who follow \cite{BornWolf2002}, especially in the direction of the field vectors, see Fig. 2.2 in \cite{Novotny-Hecht2012}. In this definition,  $r^s$ and $r^p$ differ at normal incidence by a factor of $-1$. We assume non-magnetic materials ($\mu = 1$) and get for a wave traveling from medium 1 towards medium 2
@@ -336,14 +343,10 @@ With eq.~\ref{eq:6_M_from_S} we get for both polarization directions the transmi
 \mathbf{M}_{12} = \frac{1}{t_{21}} 
 \begin{pmatrix}
 1 & r_{21} \\ r_{21} & 1 \\
-\end{pmatrix} \quad ,
-\end{equation}
-as 
-\begin{equation}
-t_{12} t_{21} - r_{12}r_{21} = t_{21}^2 \frac{k_{z,1}}{k_{z,2}} + r_{21}^2 = 1 \quad . 
+\end{pmatrix} \quad .
 \end{equation}
 Note that the transmission matrix from medium 1 to medium 2 uses the Fresnel coefficients of the backwards direction!
-We can abbreviate this to\sidenote{In problem 12.4 in \cite{Novotny-Hecht2012} the leading $1/\eta$ seems to be missing!} (see also appendix at the end of this chapter)
+We can write this without referring to Fresnel coefficients as\sidenote{In problem 12.4 in \cite{Novotny-Hecht2012} the leading $1/\eta$ seems to be missing!} (see also appendix at the end of this chapter)
 \begin{equation}
 \mathbf{M}_{12} 
 =\frac{ 1}{2 \eta }
@@ -362,6 +365,102 @@ with
 \end{equation}
 The factors $\eta$ in front of the transmission matrix $\mathbf{M}_{12} $ can be collected in front of the total transmission matrix $\mathbf{M}_\text{total}$, in case one is not interested in the distribution of the fields inside the stack. Then, all $\eta^p$ collapse into $\sqrt{\epsilon_\text{first} / \epsilon_\text{last}}$, which is equal to one in case the terminating half-spaces of the layered medium have both the same dielectric constant. 
 
+
+\section{Example: Fabry-Perot etalon}
+
+A simple way to construct a Fabry-Perot interferometer is a glass plate with parallel surfaces. Each surface acts as (weak) mirror. Let us use the T-matrix method to calculate its transmission properties. We have three media, where medium 2 is glass and media 1 and 3 are air. The total transmission matrix is thus
+\begin{equation}
+  \mathbf{M}_\text{total}  = \mathbf{M}_{23} \, \mathbf{M}_\text{prop,2} \, \mathbf{M}_{12}  
+\end{equation}
+Inserting the definition from above and using $r_{12} = r_{32} = - r_{21}$ and $t_{12} = t_{32} = (k_{z,3} / k_{z,2}) \, t_{21}$ we get
+\begin{equation}
+  \mathbf{M}_\text{total}
+  = 
+  \frac{k_{z,1}}{k_{z,2}} 
+  \begin{pmatrix}
+  1 & -r_{21} \\ -r_{21} & 1 \\
+  \end{pmatrix} 
+\, 
+\begin{pmatrix}
+  e^{+i \, \phi_2 } & 0 \\0 & e^{-i \, \phi_2 } \\
+  \end{pmatrix}
+\,
+\begin{pmatrix}
+1 & r_{21} \\ r_{21} & 1 \\
+\end{pmatrix} 
+\end{equation}
+with $\phi_2 = k_{z,2} \, d_2$. The overall transmission is 
+\begin{equation}
+  t = \frac{\text{det } \mathbf{M}_\text{total} }{D} = 
+  \frac{(1 - r_{21}^2)^2   e^{+ i \, \phi_2}} {  1 - r_{21}^2 \, e^{+i \,2 \phi_2 }}
+  \end{equation}
+which agrees with eq. \ref{eq:6_FP_Eout} using $h = r_{21}^2 \, e^{+i \,2 \phi_2 }$.
+
+\begin{marginfigure}
+  \inputtikz{\currfiledir FP-transmission}
+  \caption{Transmission of a 1 \textmu m  thick glass layer in air. }
+\end{marginfigure}
+
+\section{Quarter-wave film as anti-reflection coating}
+
+The most simple anti-refection coating for an interface between two media of refractive index $n_1$ and $n_3$ is a film of refractive index $n_2 = \sqrt{n_1 \, n_3}$ of thickness $d = \lambda / 4 = \lambda_0 / (4 n_2)$. In this case
+\begin{equation}
+  \mathbf{M}_\text{total}
+  = 
+  \frac{k_{z,1}}{k_{z,2}} 
+  \begin{pmatrix}
+  1 & r_{32} \\ r_{32} & 1 \\
+  \end{pmatrix} 
+\, 
+\begin{pmatrix}
+  i & 0 \\0 & -i \\
+  \end{pmatrix}
+\,
+\begin{pmatrix}
+1 & r_{21} \\ r_{21} & 1 \\
+\end{pmatrix} 
+\end{equation}
+The total reflection vanishes when the $B$ and $C$ elements of the transmission matrix vanish, which is the case, when
+\begin{equation}
+  r_{32} = r_{21} \quad .
+\end{equation}
+This holds for perpendicular incidence at the design wavelength. At other wavelength the reflection increases, also beyond the value of an uncoated $n_1$--$n_3$ interface.
+
+\begin{marginfigure}
+  \inputtikz{\currfiledir V-coating}
+  \caption{Quarter-wave AR coating on air-glass interface.}
+\end{marginfigure}
+
+
+A spectrally broader antireflective coating requires multiple layers with at least two different refractive indices. Designing such multilayer stacks is an art in itself. Some details are discussed in \cite{Melles_griot_filter}.
+
+
+
+\section{Distributed Bragg reflector (DBR) }
+
+An example of a multilayer coating is the distributed Bragg reflector (DBR).  It consists of alternative layers of refractive indices $n_1$ and $n_2$, with thicknesses $d_1$ and $d_2$, embedded in a medium of index $n_1$. The difference between $n_1$ and $n_2$ will be small because we have to stack similar materials. Each surface will reflect only a little. But we let the many single reflections add up coherently, in phase, but with a good choice of the distances $d_i$. In this way a very large total reflectivity can be achieved. These DBRs are used as cavity mirrors in semiconductor lasers.
+
+\begin{marginfigure}
+  \inputtikz{\currfiledir DBR}
+  \caption{Transmission of 10 pairs of air and glass.}
+\end{marginfigure}
+
+The transmission matrix of one pair of layers is
+\begin{equation}
+  \mathbf{M}_\text{pair}
+  = 
+  \mathbf{M}_\text{prop,1}    \mathbf{M}_{2,1}  \mathbf{M}_\text{prop,2}    \mathbf{M}_{1,2}
+\end{equation}
+The full stack consists  of $N$ pairs
+\begin{equation}
+  \mathbf{M}_\text{full}
+  = 
+  \mathbf{M}_\text{pair}^N    
+\end{equation}
+\cite{SalehTeich1991} show steps of the analytical solution in chapter 7.1. One finds \emph{stop bands}, i.e., spectral regions of high reflectivity, around the Bragg frequency $\nu_B$ at which the round-trip phase in a pair is  $2 \pi$, i.e.
+\begin{equation}
+  2 \, \frac{2 \pi}{c_0} \, \nu_B \left( n_1 d_1 + n_2 d_2 \right) = 2 \pi
+\end{equation}
 
 
 \section{Appendix: derivation of eq. \ref{eq:6_M_kappa}}
