@@ -43,7 +43,7 @@ When only two (complex-valued) wave amplitudes contribute, we can write
 \end{align} 
 where $\Delta \phi$ is the phase difference $\phi_2 - \phi_1$ between the waves with $E_i = |E_i| e^{i \phi_i}$. The detected intensity changes periodically with the phase difference  $\Delta \phi$. When both waves have the same intensity, then 
 \begin{equation}
-  I = 2 I_0 (1 + \cos \Delta \phi ) = 4 I_0 \cos^2 \Delta \phi /2
+  I = 2 I_0 (1 + \cos \Delta \phi ) = 4 I_0 \cos^2 \Delta \phi /2  \quad .
 \end{equation}
 
 
@@ -51,22 +51,27 @@ where $\Delta \phi$ is the phase difference $\phi_2 - \phi_1$ between the waves 
 
 In a Michelson interferometer one and the same beam splitter splits and recombines the waves that travel along the two arms. After recombination, they have acquired a phase difference $\Delta \phi$ due to a path length difference or a difference in index of refraction of the medium in the interferometer arm.
 
-The Michelson interferometer has two outputs: one through the fourth facet of the beam splitter, and another one in reverse direction of the incoming beam. The beam-splutter is reciprocal and loss-free, i.e. its (complex valued) refection and transmission coefficients $r$ and $t$ do not depend on the direction of travel, and theirs squares add up to one: $|r|^2+ |t|^2 = 1$. The fields at the outputs are
+\begin{marginfigure}
+  \inputtikz{\currfiledir michelson}
+  \caption{Michelson interferometer}
+\end{marginfigure}
+
+The Michelson interferometer has two outputs: one through the fourth facet of the beam splitter, and another one in reverse direction of the incoming beam. The beam-splitter is reciprocal and loss-free, i.e. its (complex valued) refection and transmission coefficients $r$ and $t$ do not depend on the direction of travel, and theirs squares add up to one: $|r|^2+ |t|^2 = 1$. The fields at the outputs are
 \begin{align}
   E_a = & E_0 \, \left( r \, t  + t \, r \, e^{i \Delta \phi} \right) \\
-  E_b = & E_0 \, \left( r \, r  + t \, t  \, e^{i \Delta \phi} \right) 
+  E_b = & E_0 \, \left( r \, r  + t \, t  \, e^{i \Delta \phi} \right)   \quad .
 \end{align}
 Energy conservation requires that 
 \begin{equation}
   |E_a|^2 +  |E_b|^2 =  |E_0|^2
 \end{equation}
-independent of $\Delta \phi$. This is fulfilled when the phases of refection and transmission coefficients differ by 90 degrees, i.e.
-\begin{equation}
-  r = |r| e^{i \alpha} \quad \text{and} \quad  t = |t| e^{i (\alpha \pm \pi/2) } 
-\end{equation}
-which is equivalent with
+independent of $\Delta \phi$. This is fulfilled when 
 \begin{equation}
   \frac{r}{t} = - \frac{r^\star}{t^\star} \quad.
+\end{equation}
+This means that  the phases of refection and transmission coefficients differ by 90 degrees, i.e.
+\begin{equation}
+  r = |r| e^{i \alpha} \quad \text{and} \quad  t = |t| e^{i (\alpha \pm \pi/2) } \quad .
 \end{equation}
 The Fresnel coefficients of a single interface fulfill this requirement, as do all combinations of interfaces and materials. When one output of the interferometer is at its maximum, the other is at its minimum. Total power is conserved.
 
@@ -75,14 +80,27 @@ The Fresnel coefficients of a single interface fulfill this requirement, as do a
 
 In a Mach-Zehnder interferometer, one beam splitter separates the waves and a second beam splitter recombines them. Again, we have two output ports of the interferometer. In a Mach-Zehnder interferometer, they are more easily accessible than in a Michelson interferometer because the incoming beam takes a different path. When the path length in both arms is the same ($\Delta \phi = 0$) the symmetric output takes all power, i.e., each beam is transmitted and reflected once.
 
+\begin{marginfigure}
+  \inputtikz{\currfiledir mach_zehnder}
+  \caption{Mach-Zehnder interferometer}
+\end{marginfigure}
+
+
 Mach-Zehnder interferometers are used in optical telecommunications to modulate the intensity of a beam in an optical fiber. By slightly changing the refractive index in one arm of the interferometer, a phase difference is built up that switches one output from bright to dark. The power of the second output is then dumped.
 
 \section{Sagnac interferometer}
 The Sagnac interferometer is an example of a common-path interferometer. Both beams travel the same path, but in reverse direction. When both beams have seen the same index of refraction, the total power is reflected back through the input port, as in this direction, each beam is reflected and transmitted once by the only beam splitter of the interferometer.
 
+
+\begin{marginfigure}
+  \inputtikz{\currfiledir sagnac}
+  \caption{Sagnac interferometer}
+\end{marginfigure}
+
+
 Only a few effects are capable of causing an effective path length difference for the counterpropagating beams: The interferometer could rotate, magneto-optical effects of non-reciprocal media could be involved, or short laser pulses could interact with a rapidly changing medium. The rotating Sagnac interferometer is the basis of a laser gyroscope. The phase difference between the beams depends on the angular velocity of rotation $\omega$, the area $A$ of the interferometer, and the dot product between their directions:
 \begin{equation}
-  \phi = \frac{8 \pi}{\lambda c} \, \boldsymbol{\omega} \cdot  \boldsymbol{A}
+  \phi = \frac{8 \pi}{\lambda c} \, \boldsymbol{\omega} \cdot  \boldsymbol{A}  \quad .
 \end{equation}
 A fiber-loop increases the effect.
 
@@ -90,10 +108,16 @@ A fiber-loop increases the effect.
 \section{Fabry-Perot interferometer}
 
 
-All of the examples above were two-wave interference. The Fabry-Perot interferometer is an example of multiwave interference. It consists of two parallel, partially reflecting mirrors. For simplicity, we will assume that both mirrors are identical. The transmitted beam is composed of several waves: the directly transmitted wave, a wave with one round trip, a wave with two round trips, and so on. Compare to the direly transmitted wave $E_1$, all other waves acquire for each round trip one complex factor $h$ that contains two reflections at the mirrors and a phase lag due to the distance between the mirrors.
+\begin{marginfigure}
+  \inputtikz{\currfiledir fabry_perot}
+  \caption{Fabry-Perot interferometer. The mirrors reflect less than 100\% of the light.}
+\end{marginfigure}
+
+
+All of the examples above were two-wave interference. The Fabry-Perot interferometer is an example of multiwave interference. It consists of two parallel, partially reflecting mirrors. The transmitted beam is composed of several waves: the directly transmitted wave, a wave with one round trip, a wave with two round trips, and so on. Compare to the direly transmitted wave $E_1$, all other waves acquire for each round trip a complex factor $h$ that contains two reflections at the mirrors and a phase lag due to the distance between the mirrors.
 As equation, this reads
 \begin{equation}
-  E_\text{out} = E_1 \left( 1 + h + h^2 + \dots  \right) = \frac{ E_1 }{1 - h}
+  E_\text{out} = E_1 \left( 1 + h + h^2 + \dots  \right) = \frac{ E_1 }{1 - h}  \quad .
 \end{equation}
 The intensity is thus
 \begin{equation}
@@ -105,10 +129,9 @@ with $h = |h| e^{i \phi}$. This can be written as
 \end{equation}
 with the \emph{finesse} $\mathcal{F}$
 \begin{equation}
-  \mathcal{F} = \frac{\pi \sqrt{|h|}}{1 - |h|}
+  \mathcal{F} = \frac{\pi \sqrt{|h|}}{1 - |h|}  \quad .
 \end{equation}
-The higher the quality of the mirrors, the better their reflective, and the closer comes $|h|$ to one, and the higher the finesse becomes.
-
+The higher the quality of the mirrors, the better their reflectivity, the closer $|h|$ gets to one, and the higher the finesse.
 
 The Fabry-Perot interferometer is a spectral filter. Let us assume that the reflectivity $r$ of the mirrors does not depend on the wavelength. The distance $d$ between the mirrors leads to a wavelength-dependent phase shift $\phi$
 \begin{equation}
@@ -120,7 +143,7 @@ with the optical frequency $\nu$. We get a peak in transmission when $\phi/2  = 
 \end{equation}
 which is called the \emph{free spectral range}. The FWHM of a peak is as phase $ \delta \phi $ or frequency $ \delta \nu$ 
 \begin{equation}
-  \delta \phi = \frac{2 \pi }{\mathcal{F}} \qquad\qquad \delta \nu = \frac{c}{2 d \mathcal{F}}
+  \delta \phi = \frac{2 \pi }{\mathcal{F}} \qquad\qquad \delta \nu = \frac{c}{2 d \mathcal{F}}  \quad .
 \end{equation}
 The finesse $\mathcal{F}$ can be written as
 \begin{equation}

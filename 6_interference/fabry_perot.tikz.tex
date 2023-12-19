@@ -1,0 +1,32 @@
+% \documentclass{standalone}
+
+% \input{../tikz_header}
+
+% \begin{document}
+
+
+\begin{tikzpicture}[BS style/.style={draw=gray, line width=3pt},
+    mirror style/.style={draw=black!50!gray, line width=3pt},]
+    %\useasboundingbox (-2.5,-1.5) rectangle (3,2.3);
+    %\draw (-2.5,-1.5) rectangle (3,2.3);
+ 
+    \pgfmathsetmacro{\len}{0.3}
+
+
+    \coordinate (m1) at (0,0);
+    \coordinate (m2) at (1,0);
+    \coordinate (in) at (-1,0);
+    \coordinate (out) at (2, 0);
+
+    \draw[thick, -> ] (in) -- (out) node[below] {$E_{out}$};
+    \draw[thick, -> ] (in) -- ++(0:0.5) node[below] {$E_{in}$};
+
+    \draw[style=mirror style] (m1) ++ (90:\len) -- ++(-90:{2*\len});
+    \draw[style=mirror style] (m2) ++ (90:\len) -- ++(-90:{2*\len});
+
+
+
+\end{tikzpicture}
+
+
+%\end{document}
