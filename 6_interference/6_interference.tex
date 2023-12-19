@@ -370,7 +370,7 @@ The factors $\eta$ in front of the transmission matrix $\mathbf{M}_{12} $ can be
 
 A simple way to construct a Fabry-Perot interferometer is a glass plate with parallel surfaces. Each surface acts as (weak) mirror. Let us use the T-matrix method to calculate its transmission properties. We have three media, where medium 2 is glass and media 1 and 3 are air. The total transmission matrix is thus
 \begin{equation}
-  \mathbf{M}_\text{total}  = \mathbf{M}_{23} \, \mathbf{M}_\text{prop,2} \, \mathbf{M}_{12}  
+  \mathbf{M}_\text{total}  = \mathbf{M}_{23} \, \mathbf{M}_\text{prop,2} \, \mathbf{M}_{12}   \quad . 
 \end{equation}
 Inserting the definition from above and using $r_{12} = r_{32} = - r_{21}$ and $t_{12} = t_{32} = (k_{z,3} / k_{z,2}) \, t_{21}$ we get
 \begin{equation}
@@ -418,7 +418,7 @@ The most simple anti-refection coating for an interface between two media of ref
 \,
 \begin{pmatrix}
 1 & r_{21} \\ r_{21} & 1 \\
-\end{pmatrix} 
+\end{pmatrix}  \quad . 
 \end{equation}
 The total reflection vanishes when the $B$ and $C$ elements of the transmission matrix vanish, which is the case, when
 \begin{equation}
@@ -449,17 +449,17 @@ The transmission matrix of one pair of layers is
 \begin{equation}
   \mathbf{M}_\text{pair}
   = 
-  \mathbf{M}_\text{prop,1}    \mathbf{M}_{2,1}  \mathbf{M}_\text{prop,2}    \mathbf{M}_{1,2}
+  \mathbf{M}_\text{prop,1}    \mathbf{M}_{2,1}  \mathbf{M}_\text{prop,2}    \mathbf{M}_{1,2} \quad . 
 \end{equation}
 The full stack consists  of $N$ pairs
 \begin{equation}
   \mathbf{M}_\text{full}
   = 
-  \mathbf{M}_\text{pair}^N    
+  \mathbf{M}_\text{pair}^N     \quad . 
 \end{equation}
 \cite{SalehTeich1991} show steps of the analytical solution in chapter 7.1. One finds \emph{stop bands}, i.e., spectral regions of high reflectivity, around the Bragg frequency $\nu_B$ at which the round-trip phase in a pair is  $2 \pi$, i.e.
 \begin{equation}
-  2 \, \frac{2 \pi}{c_0} \, \nu_B \left( n_1 d_1 + n_2 d_2 \right) = 2 \pi
+  2 \, \frac{2 \pi}{c_0} \, \nu_B \left( n_1 d_1 + n_2 d_2 \right) = 2 \pi \quad . 
 \end{equation}
 
 
