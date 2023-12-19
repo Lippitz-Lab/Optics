@@ -1,0 +1,70 @@
+% \documentclass{standalone}
+
+% \input{../tikz_header}
+
+% \begin{document}
+
+
+\begin{tikzpicture}[font=\small,every right delimiter/.style={xshift=-2mm}]]
+   % \useasboundingbox (-2.8,-1.2) rectangle (5.3,1.2);
+   % \draw (-2.8,-1.2) rectangle (5.3,1.2);
+ 
+   \pgfmathsetmacro{\len}{0.4}
+   \pgfmathsetmacro{\arr}{0.5}
+   \pgfmathsetmacro{\sh}{0.6}
+
+
+
+    \matrix(L) [matrix of math nodes,  inner sep=0pt,  nodes={inner ysep=0.2em},
+    left delimiter=(,right delimiter=), ] at (-1.6,0)
+    {
+        U_1^+  \\
+        U_2^- \\
+    };
+
+  
+    \draw[thick] (-\len,-\len) rectangle node {$S_{12}$} (\len, \len) ;
+
+    \draw[dashed] (0,\len) -- (0,{2*\len});
+    \draw[dashed] (0,-\len) -- (0,{-2*\len});
+
+    \node[anchor=south west] at (0,\len) {$2$};
+    \node[anchor=south east] at (0,\len) {$1$};
+
+    \matrix(R) [matrix of math nodes,  inner sep=0pt, nodes={inner ysep=0.2em},
+    left delimiter=(,right delimiter={)}, ] at (1.6,0)
+    {
+        U_2^+  \\
+        U_1^- \\
+    };
+
+    \draw[thick, <-] (R-1-1)  ++ (0:-\sh) --  ++ (0:-\arr);
+    \draw[thick, ->] (L-1-1)  ++ (0:\sh) --  ++ (0:\arr);
+
+
+    \draw[red,thick, ->] (L-2-1)  ++ (0:\sh) 
+     to [out=0, in=180] (-0.1, -0.7) 
+     to [out=0, in = 0] (0.75, -0.25)
+     to [out=180, in = 0] (0.5, -0.25);
+
+     \draw[blue,thick, ->] (-0.5, -0.25)
+      to [out=180, in=0] (-0.65, -0.25)
+     to [out=180, in=180] (0, -0.8) 
+     to [out = 0, in = 180] (1, -0.25);
+
+
+
+   \node at (2.65,0) {$= S_{12}$};     
+
+    \matrix [matrix of math nodes,  inner sep=0pt, nodes={inner ysep=0.2em},
+    left delimiter=(,right delimiter={)}, ] at (3.7,0)
+    {
+        U_1^+  \\
+        U_2^- \\
+    };
+
+
+\end{tikzpicture}
+
+
+%\end{document}

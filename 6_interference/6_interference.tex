@@ -158,8 +158,7 @@ We present here the T-matrix method, a versatile technique for studying the opti
 In a layered medium, a wave traveling through the stack of layers is partially reflected and partially transmitted at each interface. The multiple reflections interfere with each other. To keep track of this, we use in each layer a combined wave traveling in the $+z$ direction and one traveling in the $-z$ direction. These waves mix at interfaces. This formalism is described in chapter 7 of \cite{SalehTeich1991} and \cite{Yeh2005}. A similar formalism with an $E$ and $B$ field traveling in the same direction is described in \cite{Pedrotti2008} and \cite{Macleod2001}.
 
 \begin{marginfigure}
-\includegraphics[width=50mm]{\currfiledir T-matrix.png}
-
+\inputtikz{\currfiledir T-matrix}
 \caption{The operation of the transmission matrix
 \label{fig:6_T_matrix}}
 \end{marginfigure}
@@ -214,7 +213,8 @@ U_1^+ \\ U_2^-
 The scattering matrix connects waves traveling towards the interface with those traveling away from the interface. The entries $t_{ij}$ and $r_{ij}$ are the transmission and reflection coefficients for the amplitudes of the waves traveling from $i$ to $j$ (i.e. $12$ is traveling towards the right, $+z$ direction). However, for the scattering matrix $\mathbf{S}$, the full stack can not be calculated by multiplying together all partial matrices.
 
 \begin{marginfigure}
-\includegraphics[width=50mm]{\currfiledir S-matrix.png}
+%\includegraphics[width=50mm]{\currfiledir S-matrix.png}
+\inputtikz{\currfiledir S-matrix}
 
 \caption{The operation of the scattering matrix
 \label{fig:6_S_matrix}}
