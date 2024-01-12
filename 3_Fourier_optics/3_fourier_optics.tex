@@ -2,6 +2,7 @@
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Fourier Optics}
+\label{chap:Fourier}
 
 \goal{By the end of this chapter you should be able to explain and experimentally demonstrate the filtering of spatial frequencies.}
 
@@ -123,7 +124,7 @@ We can Fourier transform the equation to obtain
 where $\otimes$ signals a convolution. The impulse response of free space is in the Fresnel approximation
 \begin{equation}
     h(x,y)_\text{Fresnel} \approx h_0 \, \exp \left(i k \frac{x^2 + y^2 }{2d} \right) \quad \text{with} \quad
-    h_0 = -\frac{i}{\lambda d} \,  e^{i k d } \quad .
+    h_0 = -\frac{i}{\lambda d} \,  e^{i k d } \quad . \label{eq:3_h_free_space}
 \end{equation}
 Eq. \ref{eq:2_gfh_conv} means that we get from one plane to the other by convolving each source point with a wave of shape $h$. This is equivalent to the Huygens principle, where each point should be a source of a spherical wave. When we take the paraxial approximation of a spherical wave we obtain $ h(x,y)_\text{Fresnel}$.
 
@@ -165,6 +166,7 @@ We now identify  the factor $x / \lambda d$ with the spatial frequency  $\nu_x$ 
      F \left( \nu_x,\nu_y \right) 
      =  h_0
      F \left( \frac{x}{\lambda d}, \frac{y}{\lambda d} \right) \quad .
+     \label{eq:3_FT_by_prop}
 \end{equation}
 
 When we place a screen $g$ at a distance fulfilling the Fraunhofer condition after a diffracting obstacle $f$, the interference pattern visible on the screen will be described by the Fourier transform $F$ of $f$. This simplifies a lot the calculation of single slit, double slit and grating, as typically  presented in the  introductory optics lecture.

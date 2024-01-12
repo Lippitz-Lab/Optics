@@ -1,20 +1,268 @@
-\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\lastmod}{January 12, 2023}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Coherence}
 
+
+\goal{By the end of this chapter you should be able identify requirements for intereferce contrast.}
+
+
 \section{Overview}
 
+So far we have always assumed perfectly deterministic light. We wrote something like
+\begin{equation}
+    u(\br, t) = U(\br) \, e^{-i \omega t} \quad \text{with} \quad U(\br) = \frac{A}{r} \, e^{i \bk \br}
+\end{equation}
+and could thus determine the field amplitude at each point in space $\br$ for all times $t$. This is what we call 'coherent'. It is in contrast to a light field which contains some randomness. In this chapter we will discuss ways to describe the statistical nature of a partially random light field. As always when randomness is involved, we will not be able to predict every realization of a random process, but only the average and some other statistical properties of an ensemble of realizations. We will define a measure of the average intensity and the 'randomness' of the light field. The latter is called the coherence function or autocorrelation.
+
+We will discuss a relationship between the coherence function and the spectrum of light (the Wiener-Khinchin theorem), and a method for measuring the diameter of a distant star by analyzing the coherence of the detected light (the Michelson stellar interferometer).
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir temp_noise}
+
+    \inputtikz{\currfiledir space_noise}
+
+    \caption{Partially coherent waves in space and time.}
+\end{marginfigure}
+\section{Intensity}
+
+We have written the intensity of a scalar wave (and similar for a vectorial electromagnetic wave) as
+\begin{equation}
+    I(\br, t) = \left| u(\br, t ) \right|^2 \quad . \label{eq:7_coherent_wave}
+\end{equation}
+This assumes perfect coherence. If we allow randomness, we have to average over many realizations of the same random process, similar to rolling the dice very often and averaging over the result. We write this as
+\begin{equation}
+    I(\br, t) =  \left< \left| u(\br, t ) \right|^2 \right>
+\end{equation}
+where the pointed brackets denote the ensemble average. From now on, we will call $I$ the (average) intensity and $|u|^2$ the instantaneous intensity.
+
+The intensity $I$ can be time-dependent or time-independent. The latter case is a statistically stationary process, which means that the average is independent of time, although each individual realization may still vary with time. The light from a light bulb is an example. In the case of a \emph{stationary process}, we can  write
+\begin{equation}
+    I(\br) =  \lim_{T \rightarrow \infty} \, \frac{1}{2T} \, \int_{-T}^T \left| u(\br, t ) \right|^2  dt \quad .
+\end{equation}
 
 
-\begin{itemize}
-\item Überlagerung von Wellen verschiedener Frequenz  
-\item Interferenz bei ausgedehnten Lichtquellen 
-\item Korrelationsfunktion erster und zweiter Ordnung (Feld und Intensität)
-\item Wiener-Khinchin(-Einstein)-Theorem 
-\end{itemize}
 
-\lit{Saleh/Teich  Kap. 11, Hecht Kap. 12}
+\begin{marginfigure}
+    \inputtikz{\currfiledir stationary}    
+    \caption{Stationary (top) and non-stationary (bottom) wave. \newline Plotted is $|u(t)]^2$.}
+\end{marginfigure}
+
+\section{Temporal coherence}
+
+Let us drop the spatial dependence on $\br$ for a moment and just look at a single point in space. We want to describe the 'randomness' of the complex-valued field $u$, assuming a stationary process. The question is how similar are the amplitudes $u(t)$ now and a time $\tau$ later, i.e. $u(t + \tau)$. The more similar they are, the more memory the process has, the less random it is. We quantify this by the \emph{temporal coherence function} or \emph{autocorrelation function} $G(\tau)$:
+\begin{equation}
+    G(\tau) = \left< u^\star(t) \, u(t + \tau) \right> = 
+    \lim_{T \rightarrow \infty} \, \frac{1}{2T} \, \int_{-T}^T u^\star(t) \, u(t + \tau)  \,  dt
+\end{equation}
+with the properties
+\begin{equation}
+    G(\tau) = G^\star(- \tau) \quad \text{and} \quad I = G(0) \quad .
+\end{equation}
+
+As an example, consider a field $u$ that is either $+1$ or $-1$. On average, it should be as often positive as negative, i.e. its average $\braket{u(t)} = 0$. The expression $u^\star(t) \, u(t + \tau)$ is positive if $u$ does not change its sign, otherwise it is negative. If the relation between $u(t)$ and $u(t+\tau)$ is completely random, the mean of $u^\star(t) \, u(t + \tau)$ will be zero. On the other hand, if $u$ does not flip within the time $\tau$, $G$ is positive. If $u$ preferentially flips the sign within the time delay $\tau$, $G(\tau)$ will be negative.
+
+It is convenient to remove the intensity from the definition of the coherence function. We define the \emph{degree of temporal coherence} $g(\tau)$ as
+\begin{equation}
+    g(\tau) = \frac{G(\tau)}{G(0)}
+    = \frac{\left< u^\star(t) \, u(t + \tau) \right>}{\left< u^\star(t) \, u(t) \right>}
+\end{equation}
+so that $g(0) = 1$ and $|g(\tau)| \le 1$. For a coherent wave such as eq.  \ref{eq:7_coherent_wave}, we have  $|g(\tau)| = 1$.
+
+For partially coherent light, $|g(\tau)|$ decreases with increasing delay $\tau$. The \emph{coherence time} $\tau_c$ is a characteristic time of this decrease, describing the width of $|g(\tau)|$. One defines 
+\begin{equation}
+    \tau_c = \int_{-\infty}^{\infty} |g(\tau)|^2 \, d\tau \quad .
+\end{equation}
+Together with the speed of light we get a coherence length $l_c = c_0 \, \tau_c$.
+
+
+
+
+\section{Power spectral density}
+
+Lets discuss Fourier transformations of random fields $u(t)$. We could just obtain the Fourier transform $v(\nu)$ of $u(t)$ by
+\begin{equation}
+    v(\nu) = \int_{-\infty}^\infty u(t) \, e^{i 2 \pi \nu t} \, dt \quad . \label{eq:7_FT_full}
+\end{equation}
+Since $I = \braket{|u|^2}$ is the intensity (energy per time and area), $\braket{|v(\nu)|^2}$ is an energy spectral density (energy per frequency interval and area). If the process is really stationary, it lasts forever, so its total energy is infinite. It thus makes more sense to truncate the Fourier integral
+\begin{equation}
+    v_T(\nu) = \int_{-T/2}^{T/2} u(t) \, e^{i 2 \pi \nu t} \, dt
+\end{equation}
+and defining the \emph{power spectral density} or spectrum  $S(\nu)$ (energy per frequency interval, area and time) as
+\begin{equation}
+    S(\nu) = \lim_{T \rightarrow \infty} \, \frac{1}{2T} \, 
+    \braket{|v_T(\nu)|^2} \quad .
+\end{equation}
+
+The interesting point for us in this chapter is that the  spectrum  $S(\nu)$  is the Fourier transform of the autocorrelation function $G(\tau)$. 
+\begin{equation}
+    S(\nu) = \int_{-\infty}^\infty  G(\tau) \,  \, e^{i 2 \pi \nu \tau} \, d\tau \quad . \label{eq:7_S_G}
+\end{equation}
+This relation is the \emph{Wiener-Khinchin theorem}. It is rather trivial if the Fourier transform \ref{eq:7_FT_full} exists, i.e. the integral eq. \ref{eq:7_FT_full} converges, because the field $u(t)$ is some kind of non-stationary pulse. The important point of the theorem is that it also works for stationary processes.
+
+As spectrum and autocorrelation function are related by a Fourier transform, also the spectral width $\Delta \nu$ and coherence time $\tau_c$ are related by
+\begin{equation}
+    \Delta \nu = \frac{1}{\tau_c}
+\end{equation}
+using a suitable definition of $\Delta \nu$ (see \cite{SalehTeich1991}, eq.11.1-18). The narrower the spectrum of  a light source is, the longer is its coherence length.
+
+
+
+\section{Interference and temporal coherence}
+
+Let us consider a partially coherent wave $u(t)$ described by its autocorrelation function $g(\tau)$, traveling through a Michelson interferometer. At the symmetric output of the interferometer, the total field is $u(t) + u(t + \tau)$, dropping the reflection and transmission coefficients  $r t$ in the prefactor. The arm length difference $d$ defines the time lag $\tau = 2 d / c_0$. We measure the \emph{interferogram}, the relation between $I$ and $\tau$
+\begin{align}
+    I(\tau) = & \braket{|u(t) + u(t + \tau)|^2} \\
+    = &  2 \braket{|u|^2} + \braket{u^\star(t) u(t + \tau)} + \braket{u(t) u^\star(t + \tau)} \\
+    = & 2 I_0 + 2 \Re\{G(\tau)\} \\
+    = & 2 I_0 \left( 1 + |g(\tau)| \cos [ \arg \{ g(\tau )\} ] \right)  \label{eq:7_intfer_g}
+\end{align}
+where $\arg\{|a| e^{i \phi} \} = \phi$. For a perfectly coherent wave with frequency $\omega$, we have $g(\tau) = e^{-i \omega \tau}$ and recover the usual result. For a partially coherent wave, $|g(\tau)|$ drops in amplitude with delay $\tau$, so that the oscillation fringes reduce in amplitude. We call the \emph{visibility} $\mathcal{V}$ (or modulation contrast or depth)
+\begin{equation}
+    \mathcal{V} = \frac{I_\text{max}- I_\text{min} }{I_\text{max}+ I_\text{min} } = |g(\tau)| \quad .
+\end{equation}
+The magnitude of the autocorrelation gives the contrast of the interference fringes; its phase shifts the peaks relative to the perfectly coherent case. 
+
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir interferogram}    
+    \caption{Interferogram of a partially coherent wave.}
+\end{marginfigure}
+
+\section{Fourier-transform spectroscopy}
+
+Using the Wiener-Khinchin theorem in reverse direction
+\begin{equation}
+    G(\tau) = I_0 g(\tau) = \int_0^\infty S(\nu) e^{-i 2 \pi \nu \tau} \, d\nu
+\end{equation}
+and noting that $S(\nu)$ is real, we can write eq.  \ref{eq:7_intfer_g} as
+\begin{equation}
+    I(\tau) = 2 \int_0^\infty S(\nu) \left[1 + \cos( 2 \pi \nu \tau ) \right] \, d\nu \quad .
+\end{equation}
+This can be reversed to obtain the power spectral density $S(\nu) $ from the interferogram $I(\tau)$
+\begin{equation}
+    S(\nu) = 2 \int_0^\infty \left[ I(\tau) - \frac{1}{2} I(0) \right] \cos( 2 \pi \nu \tau ) \, d\tau \quad .
+    \label{eq:7_FTIR}
+\end{equation}
+Measuring the spectrally integrated transmitted power through a Michelson interferometer as a function of delay $\tau$ and roughly Fourier transforming the result gives the spectrum of the light source.
+
+How does this happen? The spectral transmission function of a Michelson interferometer is similar to that of a Fabry-Perot interferometer, a $\cos^2$ function where the distance between the peaks increases with decreasing path length difference $d$. When we transmit our unknown light spectrum $S(\nu)$ through the Michelson interferometer, we multiply it by this transmission function. Measuring the total power is a spectral integration. This is what a cosine transform does. Eq.  \ref{eq:7_FTIR} simply reverses the operation of the interferometer.
+
+Fourier transform spectroscopy is particularly useful in cases where no other spectrometer can be used, such as in the infrared spectral range. This is called Fourier Transform Infrared (FTIR) spectroscopy. In this spectral region, it is technically challenging to build bright light sources and efficient detectors. The advantage of FTIR is that you only need one detector (not an array of detectors) and about half of the light power is always incident on that detector. In a grating spectrometer, on the other hand, the total power is distributed over many pixels. However, controlling the delay $\tau$ accurately enough is a challenge.
+
+
+
+\section{Spatial coherence}
+
+
+Similar to two points $t$ and $t + \tau$ in time we can also compare two points $\br_1$ and $\br_2$ in space. We define spatial autocorrelation functions
+\begin{equation}
+    G(\br_1, \br_2) = \braket{u^\star(\br_1,t) \,  u(\br_2, t)} \label{eq:7:G_space}
+\end{equation}
+and
+\begin{equation}
+    g(\br_1, \br_2) = \frac{  G(\br_1, \br_2)}{\sqrt{I(\br_1) \, I(\br_2)}} \quad .
+\end{equation}
+Again, the coherence or autocorrelation typically decreases with the distance between $\br_1$ and $\br_2$. The \emph{coherence area} $A_c$ is an area within which $g(\br_1, \br_2)$ has only dropped to a critical value. For a hot emitting surface, the coherence area is about $\lambda^2$, so in most cases this source can be assumed to be incoherent. If the coherence area is larger than, say, the size of a pinhole, the beam can be assumed to be fully spatially coherent.
+
+Sometimes it is useful or necessary to combine spatial and temporal coherence:
+\begin{equation}
+    g(\br_1, \br_2, \tau ) = \frac{ \braket{u^\star(\br_1,t) \,  u(\br_2, t + \tau)}}{\sqrt{I(\br_1) \, I(\br_2)}} \quad .
+\end{equation}
+
+
+
+\section{Double-slit experiment with partially coherent waves}
+
+Above, we used a Michelson interferometer to test and demonstrate the effect of temporal coherence by interfering a wave with a time-shifted copy of it. Now we do the same with spatial coherence using a Young double-slit experiment.
+
+A partially coherent wave $u$ is described by its autocorrelation function $g(\br_1, \br_2, \tau )$. It hits an opaque screen with two small spherical holes at positions $\br_{1,2} = (\pm a, 0,0)$. Each hole results in a diffracted spherical wave. On a screen at distance $d$ we find an interference pattern which we observe along a line $\br = (x, 0, d)$. For simplicity, we assume that the intensity $I_0$ of both spherical waves is the same.
+
+At point $x$ along our line of observation $\br$, two waves interfere. We calculate the difference $\tau$ in the travel time between the hole at $\br_{1,2}$ and the screen at $\br$, since this time difference $\tau$ enters the coherence function. By simple geometry we get
+\begin{equation}
+    \tau = \frac{| \br - \br_1| - | \br - \br_2|}{c_0} = \frac{ (x+a)^2 - (x-a)^2}{2d c_0} = 
+    \frac{2ax}{d c_0} = \frac{\theta}{c_0} \, x
+\end{equation}
+where $\theta$ is the angle between the holes as seen from the screen. Following the same scheme as above with the Michelson interferometer, we get
+\begin{equation}
+    I(x) = 2 I_0 \left( 1 + |g(\br_1, \br_2, \tau)| \cos [ \arg \{ g(\br_1, \br_2, \tau)\} ] \right) \quad .
+\end{equation}
+As above, the visibility $\mathcal{V}$ of the fringes drops with deceasing coherence. The characteristic decay length is coherence length divided by the opening angle $\theta$. The period of the spatial oscillation is $\bar{\lambda}/ \theta$.
+
+
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir young_fringes}    
+    \caption{Young double slit interference of a partially coherent wave, assuming very small holes.}
+\end{marginfigure}
+
+
+\section{Gain of spatial coherence by propagation}
+
+A spatially incoherent light source can result in spatially coherent light! One way to achieve this is simply to let it propagate long enough. We can divide the light source into patches of the size of the spatial coherence area, $A_c$. Within this area (which can be just a point) the source is coherent. Since the area has a finite size, the light is diffracted as it propagates, covering a larger and larger area.  At a distance, neighboring points on a screen will see a very similar mixture of fields from the individual coherence areas of the source. Spatial coherence thus has increased.
+
+Lets look at this more formally. We use the impulse response $h$ to connect the field $u_1$ in the source plane with the field $u_2$ in the target plane, as introduced in the chapter \ref{chap:Fourier} on Fourier optics (see, e.g. eq. \ref{eq:3_h_free_space})
+\begin{equation}
+    u_2(\br) = \int h(\br, \br') \, u_1(\br') \, d\br'  \quad .
+\end{equation}
+Using the definition of spatial coherence function $G(\br_1, \br_2)$ (eq. \ref{eq:7:G_space}), we can calculate the spatial coherence in the target plane as function of the coherence in the source plane
+\begin{equation}
+    G_2(\br_1, \br_2) = \iint  h^\star(\br_1, \br'_1) \,  h(\br_2, \br'_2) \,  G_1(\br'_1, \br'_2) \, d\br'_1  d\br'_2  \quad .
+\end{equation}
+When the light source is fully incoherent, then $G_1$ is different from zero only for $\br'_1 = \br'_2$ and at these points it is identical to the intensity $I$. Things thus simplify to 
+\begin{equation}
+    G_2(\br_1, \br_2) = \int  h^\star(\br_1, \br') \,  h(\br_2, \br') \,  I(\br') \, d\br'  \quad .
+\end{equation}
+Now we can use the same approximations that led to the optical Fourier transform by propagation in the Fraunhofer approximation (eq. \ref{eq:3_FT_by_prop}). When propagating in free space over a long distance, each impulse response effectively contributes an exponential function identical to that of a Fourier transform. The normalized coherence function $g_2$ at the target plane is thus the spatial 2D Fourier transform $\mathcal{I}_1$ of the intensity at the source plane.
+\begin{equation}
+    \left| g_2(x_1, y_1, x_2, y_2) \right| = \frac{\left| \mathcal{I}_1 \left( \frac{x_1 - x_2}{\lambda d}, \frac{y_1-y_2}{\lambda d} \right)  \right|}{\mathcal{I}_1 (0,0)}  \quad .
+\end{equation}
+
+\section{Radiation of an incoherent circular source}
+
+As an example, lets look at the sun. We model it as incoherent circular source. Within the circle, it should have a constant intensity. It is  convenient to combine the radius $a$ and the distance $d$ to the apparent opening angle $\theta_s$ of the source as seen from the target plane
+\begin{equation}
+    \theta_s = \frac{2a}{d}  \quad .
+\end{equation}
+The 2D Fourier transform of a circle is similar to a sinc-function, replacing the sine by a Bessel function  $J_1$ (see Appendix \ref{chap:appendix_Fourier}). In total we get
+\begin{equation}
+    \left| g_2(x_1, y_1, x_2, y_2) \right| = \left|  
+ \frac{2 J_1( \pi \rho \theta_s / \lambda)}{\pi \rho \theta_s / \lambda}
+    \right|
+\end{equation}
+using $\rho^2 = (x_1-x_2)^2 + (y_1-y_2)^2$. The first zero of the Bessel function defines a characteristic radius in the target plane
+\begin{equation}
+    \rho_c = 1.22 \frac{\lambda}{\theta_s}  \quad .
+\end{equation}
+We see our sun under an angle of about $0.5^\circ \approx 8.7 \cdot 10^{-3}$~rad. At a wavelength of 500~nm, the coherence radius $ \rho_c$ is about 70~\textmu m.
+
+To generate spatially coherent light it is thus sufficient to let sunlight shine through about 140~\textmu m diameter pinhole, without any lens or similar. The sun's intensity is about 1~kW/m$^2$ on earth on a bright day, so that about 15~\textmu W pass through the pinhole. To also obtain temporally coherent light, we need to spectrally filter to a narrow enough spectral range (eq. \ref{eq:7_S_G}), which reduces the power further.
+
+
+\section{Michelson stellar interferometer}
+
+We can also turn the argument around. By measuring the coherence radius $\rho_c$ of a distant star, we can determine its apparent angle $\theta_s$. Together with a known distance $d$ we can thus measure its radius $a$. This is the idea behind the Michelson stellar interferometer. The star Betelgeuse\sidenote{dt. Beteigeuze} in the constellation Orion ($\alpha$-Orionis) is one of the brightest stars in our northern sky.  At a wavelength of 570~nm  a coherence radius of $\rho_c = 3.1$~m was measured, corresponding to a source angle of $\theta_s = 22.6 \cdot 10^{-8}$~rad. The distance to Betelgeuse is 548 light-years ($5.2 \cdot 10^{18}$~m), so its diameter is $1.2 \cdot 10^{12}$~m, which is within 20~\% of the Wikipedia value. Betelgeuse is a red supergiant. Its diameter is 1500 times larger than the Sun, or about 7 times larger than the Earth's orbit around the Sun.
+
+How do you do this in practice? We need to collect light from the star at two points on Earth, separated by a variable distance $\rho$, and determine the visibility $\mathcal{V}$ of the interference fringes when the light beams overlap. The advantage is that one does not need an optical telescope of diameter $\rho$. Even the optical telescopes at distance $\rho$ need not be of exceptionally high quality, since we only need to collect light, not resolve the star. As long as the star is much brighter than its immediate surroundings, even simple searchlights have been used.
+
+The collected light must be directed by mirrors to a central position and interfered. Fluctuations in the atmosphere will lead to a phase difference between the two telescopes, which will randomly shift the position of the fringes. But we are not interested in the position of the fringes, only in their contrast $\mathcal{V}$, so even these fluctuations can be tolerated.\sidenote{see \cite{Brooker_Optics} for a discussion}
+
+
+\section{Intensity autocorrelation}
+
+To detect interference fringes in the Michelson stellar interferometer, the light from the two remote telescopes must be brought to a common point without losing the phase relationship. This is possible, but inconvenient. Here the intensity (or second order)
+autocorrelation comes in handy, as R.~Hanbury~Brown and R.~Q.~Twiss demonstrated in 1956 (\cite{HanburyBrown1956}). We define
+\begin{equation}
+    G^{(2)}(\tau) = \braket{u^\star(t) \,  u^\star(t+\tau) \,  u( t) u( t + \tau)} 
+    =  \braket{I(t) \,  I(t+\tau) } 
+\end{equation}
+and label all our old (amplitude) correlations as $G^{(1)}$ or $g^{(1)}$. So we are correlating intensities, not fields. You have to think a bit about the term 'intensity' here. It means that we average over some time to get the envelope modulated by $e^{i \omega t}$, but that we do not average too much to preserve the fluctuations. Only the brackets average over a long time.
+
+Since second-order autocorrelation is also based on the same fields as first-order autocorrelation, there is a relationship between the two, at least for classical (chaotic) light\sidenote{light from a laser or an atom does not follow this relationship}.
+\begin{equation}
+    g^{(2)}(\tau) - 1 = \left|  g^{(1)}(\tau) \right|^2  \quad .
+\end{equation}
+It is therefore sufficient to measure the intensity of the light at the two telescopes with sufficient time resolution and then calculate $ g^{(2)}(\tau) $ to determine the diameter of the stars. This effectively replaces the light beam between the telescopes with a cable.
 
 
 
