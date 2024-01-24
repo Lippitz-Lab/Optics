@@ -1,38 +1,368 @@
-\renewcommand{\lastmod}{September 18, 2023}
+\renewcommand{\lastmod}{January 24, 2024}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Quantum Optics}
 
+
+\goal{By the end of this chapter, you should be able to explain the results of experiments by the properties of photons. }
+
+
 \section{Overview}
 
-\section{Photonen-Statistik: bunching und anti-bunching}
+Optics is the study of the interaction of light and matter. We can use different types of models to describe the light and the matter part of it. In all previous chapters we treated light as a scalar or electromagnetic wave. We have also described matter as a classical Lorentz oscillator. Although we have not used it in this lecture, you have seen in other places how to describe matter (especially electrons) with quantum mechanics. In most cases it is sufficient to use quantum mechanics only for the matter part and to keep a classical description for the light part. For example, the external photoelectric effect requires only that the electron be quantized. Light can be described classically.
 
-\ziel{Ich kann   Experimente zur Photonen-Statistik  \wort{erklären}.}
-
-
-\begin{itemize}
-\item Photonen-Zählstatistik
-\item Michelsons Sterneninterferometer
-\item Hanburry Brown-Twiss-Experiment
-\item Einzelphotonenquellen
-\item Quasi-Thermisches Licht
-\item Zusammenhang Kohärenz und Photonen-Statistik
-\end{itemize}
-
-\lit{Saleh/Teich  Kap. 12, }
-
-%-----------------------------------------------------------------------------
-\section{Der Strahlteiler in der Quantenoptik}
-
-\ziel{Ich kann  im Formalismus der zweiten Quantisierung die Wirkung eines Strahlteilers \wort{beschreiben}.}
+In this chapter we will go beyond this. We will discuss the so-called 'second quantization'. We now use quantum mechanics to describe the light part by introducing the photon. We will use this formalism to describe photon anti-bunching in the emission of atoms, the Hong-Ou-Mandel experiment of identical photons at a beam splitter, and entanglement between photons.
 
 
-\begin{itemize}
-\item Leiter-Operatoren für Photonen / Bosonen
-\item Hong-Ou-Mandel-Experiment (HOM)
-\item Ununterscheidbarkeit von Photonen
-\end{itemize}
 
+
+
+\section{The photon}
+
+A photon is the quantum of energy in a single optical mode. This idea goes back to Max Planck and the description of black-body radiation. We assume a resonator cavity that forms the optical mode at an angular frequency $\omega$. The mode is characterized by the associated electric field $\bE_\text{mode}(\br, t)$, the wave vector $\bk$ and a polarization state. The central idea is to quantize the energy of each mode:
+\begin{equation}
+    E_\text{mode} = \left( n + \frac{1}{2} \right) \, \hbar \omega
+\end{equation}
+where $n$ is the number of photons in this mode. 
+
+We can connect the photon description of electromagnetic fields to the classical description by defining a vacuum field amplitude. Independent of the description, a mode should contain the same energy. In the dark, i.e. in the state $n=0$, quantum mechanics gives an eigen-energy $E_0 = 1/2 \,  \hbar \omega$. This is what we require also from classical electrodynamics\footcite[chap. 7.5]{Fox}
+\begin{equation}
+E_0 = 
+ \int_\text{cavity} \frac{1}{2} 
+ \left( \boldsymbol{H} \cdot  \boldsymbol{B} + \boldsymbol{E} \cdot  \boldsymbol{D} \right) \, d\boldsymbol{r} = 
+  \int_\text{cavity}  \epsilon_0 \boldsymbol{E}^2 \, d\boldsymbol{r} = \frac{1}{2} \, \hbar \omega
+\end{equation}
+so that
+\begin{equation}
+E_{vac} = \sqrt{\frac{\hbar \omega}{2 \epsilon_0 \, V}} \label{eq:8_evac}
+\end{equation}
+is the amplitude of the field in the dark vacuum, with $V$ being the volume of the cavity.\sidenote{This is the reason we require a cavity. Otherwise the integral would diverge.} 
+
+A photon carries a \emph{momentum} of 
+\begin{equation}
+    \boldsymbol{p} = \hbar \bk
+\end{equation}
+leading to, e.g. recoil when emitting or reflecting a photon. Position and momentum are connected by an uncertainty relation, which also motivates diffraction of photons at apertures.
+
+The photon is a \emph{Boson}. All photons within a mode are identical, but  the decomposition of a given electric field into modes is not unique. As usual for Bosons, the spin is an integer multiple of $\hbar$. For a photon
+\begin{equation}
+    S = \pm \hbar \quad \text{but not } S = 0.
+\end{equation}
+The reason for the exclusion of $S=0$ is that the photon has no rest mass. The two spin states correspond to right and left circular polarized light. In these cases, the spin is oriented parallel (RCP) and anti-parallel (LCP) to the wave vector. Linear polarized light corresponds to a superposition of $S=+\hbar$ and $S=-\hbar$. Photons may also have orbital angular momentum. This is the case when the electromagnetic field depends like $\exp(i \ell \phi)$ on the angle $\phi$ in the cylindrical coordinate system, for example in Laguerre-Gaussian modes. Then $\ell$ is the quantum number and $L = \ell  \hbar$ is the orbital angular momentum.
+
+
+The \emph{position} of a photon is only known when a detectors reports an event. Before that, we only know a probability density to find a photon, which is proportional to the intensity of the optical wave at this position, i.e.
+\begin{equation}
+    p(\br) \propto I(\br)  \propto | u(\br) |^2 \quad .
+\end{equation}
+A beam splitter thus does not split a photon. It only splits the probability density to detect it at one output or the other.
+
+
+\section{Photon stream}
+
+For visible light, 1~W corresponds to about $3 \cdot 10^{18}$ photons per second. So in a beam of 1~nW, we have \emph{on average} 3 photons per nanosecond. Fast photodetectors have a time resolution of about 1~ps. Such a detector would see 0.005~photons per picosecond, i.e. most of the time it would detect nothing and every now and then a photon. The intensity of a beam only determines the average photon rate. The properties of the light source determine the photon statistics, which can be described by the probability of finding $n$ photons in a time interval $T$ or by the intensity correlation function $g^{(2)}(\tau)$ (see end of last chapter). In the following, we discuss first thermal light of low coherence time and coherent laser light, and later the emission of a single atom or dye molecule.
+
+\section{Photon stream of thermal light}
+
+Thermal light of a black body in a cavity is in thermal equilibrium. The probability $p$ to find the energy $E_n$ in the optical mode follows the Boltzmann distribution
+\begin{equation}
+    p(E_n) \propto \exp \left(  - \frac{E_n}{k_B T} \right)
+\end{equation}
+at a temperature $T$. With quantized photons, the energy of a mode is determined by the number of photons in it 
+\begin{equation}
+    E_n = \left( n + \frac{1}{2} \right) \, h \nu
+\end{equation}
+so that we get for the probability to find $n$ photons in a mode
+\begin{equation}
+    p(n) \propto  \exp \left(  - \frac{n h \nu}{k_B T} \right) = 
+    \left[ \exp \left(  - \frac{h \nu}{k_B T} \right) \right]^n
+\end{equation}
+where the  $1/2$ hides in the proportionally sign.
+We require that the $p(n)$ are normalized, i.e., their sum equals one. We define the mean photon number $\bar{n}$ by
+\begin{equation}
+    \bar{n} = \frac{1}{\exp( h \nu / k_b T) - 1}
+\end{equation}
+Everything together we get a geometric distribution or Bose-Einstein distribution 
+\begin{equation}
+    p(n) = \frac{1}{\bar{n} + 1} \left(\frac{\bar{n}}{\bar{n} + 1}  \right)^n
+\end{equation}
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir thermal}
+    \caption{Thermal light. Probability $p(n)$ to find $n$ photons in a time interval $T$ when on average we have $\bar{n} = 0.1$, 1, 5, or 10 photons per time bin.}
+\end{marginfigure}
+
+\section{Photon stream of coherent laser light}
+
+A coherent light beam is what we have been assuming all along, until we came to the last chapter's discussion of (in)coherence. It is described by an electric field $\bE(\br, t)$ with angular frequency $\omega$. If $P$ is the power of the beam, the photon flux $\Phi$ (units: photons per second) can be calculated as
+\begin{equation}
+    \Phi = \frac{P}{\hbar \omega}
+\end{equation}
+We now imagine a segment of length $L$ of such a beam. It contains
+\begin{equation}
+ \bar{n} = \frac{\Phi L}{c} = \frac{P \, l}{\hbar \omega c}
+\end{equation}
+photons, where we have assumed that $L$ is so large that $\bar{n}$ is well defined, i.e., the granularity of the photons has been averaged out. 
+
+Now we divide the length $L$ into a large number $N$ of segments. We make $N$ so large that the average number of photons per segment is far less than one. In each sub-segment we find either no photons or one photon. The probability of finding a photon is $p = \bar{n} / N$.
+
+
+Let us reconstruct the whole segment from these sub-segments by taking $N$ sub-segments. What is the probability of ending up with $n$ photons? This is the probability of finding $n$ subsegments with a photon (with probability $p$) and $N-n$ subsegments without a photon (with probability $1-p$). The order does not matter, so we end up with a binomial distribution
+\begin{equation}
+    P(n) = \frac{N!}{n! (N -n)!} \, p^n (1-p)^{N-n}
+ =
+ \frac{N!}{n! (N -n)!} \, \left( \frac{\bar{n}}{N}\right)^n \left(1- \frac{\bar{n}}{N} \right)^{N-n} 
+\end{equation}
+We let  $N \rightarrow \infty$ and obtain after some math the \emph{Poisson distribution}
+\begin{equation}
+    P(n) = \frac{\bar{n}^n}{n!} e^{- \bar{n}} \quad \text{for} \quad n = 0, 1, 2, \dots
+\end{equation}
+The same distribution also describes the number of events per time interval in a Geiger-Müller counter. The Poisson distribution has the important property that its variance is equal to its mean $\bar{n}$, or its standard deviation is $\sqrt{\bar{n}}$. For $\bar{n} \gtrsim 10$ the Poisson distribution approaches a normal distribution with the same mean and standard deviation. In the logarithmic plot, this appears as inverted parabola. 
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir poisson}
+    \caption{Coherent light. Same as above. }
+\end{marginfigure}
+
+
+\section{Photon stream of an atom}
+
+The fluorescence emission of a single atom or dye molecule differs in its photon statistics from both thermal light and coherent laser light. This was first observed experimentally by Kimble in 1977 for sodium ions (XXX REF). Let us examine the processes surrounding photon emission in a single atom or molecule described by quantum mechanics. The atom has a ground state and one or more excited states. Optical excitation brings the atom from the ground state to the excited state. This is a statistical process, so it takes some time after the excitation light source is turned on. The excited state decays with some probability to the ground state by emitting a photon. It may also decay without photon emission or into other states. However, after emission of the photon, the atom is certainly in the ground state. And by definition, a ground state cannot decay further, especially it cannot emit another photon. So it takes some time for the excitation light source to bring the atom back to the excited state where a second photon can be emitted. The average time between two emission events is thus given by the excitation rate and the emission rate, and under no circumstances can our quantum mechanical two-level system emit two photons simultaneously. This phenomenon is called \emph{anti-bunching}.
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir stream}
+    \caption{Sketch of photon detection events over time for thermal (top), coherent (mid), and anti-bunched (bottom) light.}
+\end{marginfigure}
+
+
+\section{Hanburry Brown-Twiss experiment for photons}
+
+We have introduced in the last chapter the intensity autocorrelation function or second-order correlation function that compared intensities $I(t)$ with those shifted in time
+\begin{equation}
+    G^{(2)}(\tau) = \braket{u^\star(t) \,  u^\star(t+\tau) \,  u( t) u( t + \tau)} 
+    =  \braket{I(t) \,  I(t+\tau) } 
+\end{equation}
+We can replace the intensity $I(t)$ with the number $n(t)$ of photons detected in the time interval $(t, t+T)$, with the bin integration time $T$
+\begin{equation}
+    G^{(2)}(\tau)     =  \braket{n(t) \,  n(t+\tau) } 
+\end{equation}
+When $T$ approaches the time resolution of the detector, then $n(t)$ is either zero or one. 
+
+To check for anti-bunching, we need to test whether two photons can be detected simultaneously. Typical photodetectors cannot distinguish between one or more photons at the same time. The experimental trick is the Hanburry Brown-Twiss experiment: one splits the photon stream from the atom into two streams and detects each stream with a separate detector. When two photons hit the beam splitter, in some cases they would separate into the two beams. In other cases, they would stay in the same beam, but that does no harm. So we look for coincidences, i.e. both detectors clicking at the same time. This is what $G^{(2)}(0)$ shows. Anti-bunching leads to a dip in the autocorrelation function around $\tau = 0$. The slope of the dip depends on the sum of the excitation and emission rates. 
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir HBT}
+    \caption{Hanbury Brown--Twiss experiment. The time interval $\tau$ between two photons is determined. \label{fig:8_HBT}}
+\end{marginfigure}
+
+We can determine $I(t)$ for light by counting photons within a short interval $T$ and then writing $g^{(2)}(\tau)$ with the counting rate $n(t)$. However, to detect antibunching, $T$ must be very small (about 100 ps). At the same time, averaging requires a long total time, i.e. a large amount of data. 
+A more data-efficient approximation is not to count arbitrary pairs of photons at a time separation $\tau$, as in $G(\tau)$, but only pairs of \emph{successive} photons, which we call $C(\tau)$. 
+Finding two photons at distance $\tau$ can happen with a varying number of other photons in between. No photon in between is described by $C(\tau)$. A single photon in between can occur at any time $\tau'$ with $0 < \tau' < \tau$. 
+We could integrate over these possibilities. So $C(\tau)$ and $G(\tau)$ are related:
+\begin{equation}
+    G(\tau) = C(\tau) + \int_0^\tau C(\tau') C(\tau-\tau') d\tau' + \dots \quad .
+\end{equation}
+Further double, triple, etc. integrals would then describe two, three, etc. photons in between. If the photon rate is small enough or the time of interest $\tau$ is short enough, we can assume $G(\tau) \approx C(\tau)$. So effectively we do not measure $n(t)$ for two detectors in the Hanburry Brown--Twiss experiment, but we start a clock by one detector and stop it via the other, so that we measure $C(\tau)$.
+
+The important point is that anti-bunching only is visible when a single atom or molecule is the source of the photon stream. Averaging over many emitters removes the effect, because sooner or later the emission from one emitter would surely coincide with the emission from another emitter, and the dip would disappear.
+
+\section{Anti-Bunching in semiconductor quantum dots}
+
+An emitter that exhibits antibunching, i.e. emits only a single photon at a time, is called a single-photon emitter or single-photon source. Such light sources are needed for quantum key distribution, as discussed below. Single atoms or dye molecules are single photon emitters. A technologically interesting alternative are quantum dots. These are droplets of a low bandgap semiconductor embedded in a matrix of a higher bandgap semiconductor. In essence, a 3D particle-in-a-box is formed for the electrons and holes. As the size of the droplet approaches the de Broglie wavelength of the electrons, the band structure disappears and the electron states become quantized and discrete, as in an atom or two-level system in general.
+
+
+For a two-level system, $C(\tau)$ is easy to determine. Immediately after the first photon you are in the ground state with absolute certainty. The excited state is reached with the excitation rate $W_P$, from there back to the ground state with the rate $\Gamma$ of the spontaneous emission. The characteristic time $t_d$ is the reciprocal of the total rate for one cycle.
+\begin{equation}
+    t_d = \frac{1}{W_P + \Gamma} \quad \text{and so} \quad g^{(2)}(\tau) \approx 1 - a e^{- \tau / t_d} \quad .
+\end{equation}
+The amplitude $a$ is $a=1$ in the ideal case. In reality, dark noise and background photons cause $a < 1$. However, the case $a> 0.5$ can only be generated by a single photon source or a single two-level system.  
+
+Such an experiment is shown in the figure  \ref{fig:8_gaas_antibunching} for a \ch{GaAs} quantum dot. The optical excitation here was via the surrounding semiconductor, not directly via the exciton. This leads to the 'overshoots' with $g>1$, which are taken into account in the model.
+
+\begin{figure}
+    \inputtikz{\currfiledir antibunching}
+    \caption{Anti-bunching in a GaAs quantum dot. Data from \cite{Wu2017a}. \label{fig:8_gaas_antibunching}}
+\end{figure}
+
+
+
+
+\section{Quantum Key Distribution}
+
+An increasingly important technological application of single-photon sources is the quantum-mechanically secure transmission of an encryption key. There are several ways to encrypt messages. For example, it is possible to exploit the fact that a large number can only be broken down into its prime factors with great effort, but the reverse is easy. However, the complexity of breaking the encryption depends on the available technologies and may be difficult to predict for the future. An encryption that can never be broken is the exclusive-or relation (XOR) of the source text with a key that is the same length as the message and is never used again. This key is called a one-time pad. The recipient needs the same key, performs another XOR with the encrypted message, and receives the plaintext. However, this only transforms the problem of encryption into the problem of transmitting the key. For example, you could distribute disks with the (very long) key in advance using a trusted messenger.
+
+This is where quantum key distribution comes in. The key is distributed in the form of individual photons so that both the sender (Alice) and the receiver (Bob) can later use the same key. The encrypted message can then be transmitted over a normal channel. 
+
+I describe here the BB84 protocol\sidenote{see also chapter 11.8.2 in \cite{Gerry_Knight_QO}, original in \cite{BB84}} by Charles Bennett and Gilles Brassard. We use four linear polarization states of light: horizontal ($\ket{h}$) and vertical ($\ket{v}$), diagonal ($\ket{+}$) and anti-diagonal ($\ket{-}$). They are not independent of each other, but $\ket{h}$ and $\ket{v}$ as well as $\ket{+}$ and $\ket{-}$ form a basis.
+
+Alice sends photons to Bob and randomly chooses one of the four states for each photon. Bob is unaware of this, chooses one of the two bases at random, and measures the polarization state of the incoming photon in that basis, for example using a polarization beam splitter and two photodetectors. The bases could be selected using an appropriately rotated waveplate. When Alice and Bob have finished transmitting and measuring, Alice transmits the basis she has chosen over an open channel, not the polarization state. Bob compares this to his list and also tells Alice via an open channel if they have chosen the same basis. Both delete the other photons. But now they both have a list of polarization states that Bob measured in the same basis that Alice transmitted in. The polarization state is now a bit of a key.
+
+Individual photons are essential. Otherwise, the eavesdropping Eve could intercept part of the beam and measure it herself, possibly even in both bases at the same time. Only if it is a single photon is it certain that the measurement destroys the state and it cannot be measured a second time.
+
+
+
+\section{Ladder operators}
+
+
+Let us look at the quantum mechanics of a photon. We have $n$ photons in our mode and an energy
+\begin{equation}
+    E_n = \left( n + \frac{1}{2} \right) \bar \omega
+\end{equation}
+as in a harmonic oscillator. We have a ladder of equidistant states, bounded at the bottom by $E_0$, but open at the top, since $n$ can be arbitrarily large. In quantum mechanics it is convenient to use ladder operators for the creation ($\hat{a}^\dagger$) and annihilation ($\hat{a}$) of an energy quantum, i.e.
+\begin{equation}
+ \hat{a}^\dagger \ket{n} = \sqrt{n+1}\, \ket{n+1}  \quad \text{and} \quad
+  \hat{a} \ket{n} = \sqrt{n}\, \ket{n-1} \quad .
+\end{equation}
+Useful properties are 
+\begin{equation}
+ \hat{a} \ket{0} = \ket{0}  \quad \text{and} \quad
+  \hat{a}^\dagger  \hat{a} \ket{n} = n \ket{n} \quad .
+\end{equation}
+
+
+The electrical field of a single optical mode in a cavity can then be written \footcite[chap. 2.1 and 2.4]{Gerry_Knight_QO}\footcite[chap. 6.1]{Rand2016} using the vacuum field amplitude (eq. \ref{eq:8_evac})
+\begin{equation}
+\hat{\boldsymbol{E}}(z,t) = \boldsymbol{\hat{x}} \, E_{vac} \, \left(\hat{a} \, e^{i (k z - \omega t)} + \hat{a}^\dagger   \, e^{-i (k z - \omega t)} \right) 
+\quad ,
+\end{equation}
+where $\boldsymbol{\hat{x}}$ is a unit vector defining the direction of polarization. The field in the cavity is a superposition of right and left propagating plane waves. The amplitude of each is related to the operators $\hat{a}$ and $\hat{a}^\dagger$, respectively.
+
+
+\section{Beam splitter}
+
+From the point of view of classical electrodynamics, a beam splitter seems to be a rather trivial device. But quantum optics will surprise you. Let us recall what electromagnetic waves do at a beam splitter: We shine in with a field $\bE_1$. Part of it is reflected (coefficient $r$), part is transmitted (coefficient $t$). The two output fields are
+\begin{equation}
+    \bE_2 = r \, \bE_1 \quad \text{and} \quad  \bE_3 = t \, \bE_1 \label{eq:8_bs_classic}
+\end{equation}
+where conservation of energy requires that 
+\begin{equation}
+    |r|^2 + |t|^2 = 1
+\end{equation}
+
+
+In quantum optics we describe the modes for the input, reflected and transmitted beam by three ladder operators $\hat{a}_i$ with $i = 1,2,3$. Operators on different modes commute, i.e. have a commutator of zero. Only the pair of operators on the same mode have a commutator of one. As equations
+\begin{align}
+    \left[ \hat{a}_i, \hat{a}_j^\dagger  \right] = &  \delta_{ij} \\
+    \left[ \hat{a}_i, \hat{a}_j  \right] = &  0 \\
+    \left[ \hat{a}^\dagger_i, \hat{a}^\dagger_j  \right] = &  0 
+\end{align}
+
+Writing eq. \ref{eq:8_bs_classic} in the formalism of quantum optics gives
+\begin{equation}
+    \hat{a}_2 = r \, \hat{a}_1 \quad \text{and} \quad  \hat{a}_3 = t \, \hat{a}_1  \label{eq:8_bs_QO1}
+\end{equation}
+The problem is that these definitions do not fulfill the commutators. We can check several combinations and all do only give the required outcome of zero when be neither set $r=0$ or $t=0$, i.e. take away the beam splitter
+\begin{align}
+    \left[ \hat{a}_2, \hat{a}_2^\dagger  \right] = &  |r|^2 \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =  |r|^2  \neq 0 \\
+    \left[ \hat{a}_3, \hat{a}_3^\dagger  \right] = &  |t|^2 \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =  |t|^2  \neq 0 \\
+    \left[ \hat{a}_2, \hat{a}_3^\dagger  \right] = &  rt^\star \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =   rt^\star  \neq 0 
+\end{align}
+So in quantum optics there seems to be something more to the beam splitter than in classical electrodynamics. The point is the fourth side of the beam splitting cube (which we label $i=0$ for convenience). Classically, we assumed that no light would enter here, so we set $\bE_0 = 0$ and ignored it in our calculations. But in quantum optics we have to take into account that $|\bE_0| = E_{vac}$. The vacuum fluctuations are shining into the empty port of the beam splitter.
+
+We expand eq.  \ref{eq:8_bs_QO1} to take the fourth port into account. In matrix form
+\begin{equation}
+    \begin{pmatrix}
+        \hat{a}_2 \\ \hat{a}_3 \\
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+       t' & r \\ r' & t
+    \end{pmatrix}
+    \begin{pmatrix}
+        \hat{a}_0 \\ \hat{a}_1 \\
+    \end{pmatrix}
+\end{equation}
+This definition satisfies all commutator relations when the reflection and transmission coefficients satisfy energy conservation ($|r|^2+ |t|^2 = 1$), reciprocity ($|r'| = |r|$, $|t'| = |t|$), and a phase condition as discussed with the Michelson interferometer. For a single dielectric layer, the transmitted and reflected beams are 90 degrees out of phase. A 50:50 beamsplitter is thus
+\begin{equation}
+\frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+       1 & i \\ i & 1
+    \end{pmatrix}
+\end{equation}
+
+
+\section{A single photon at a 50:50 beam splitter}
+
+As an example, let us examine what happens to a single photon in a 50:50 beam splitter. I label the eigenstates
+with $n$ photons in beam $i$ as $\ket{n}_i$. If nothing (a vacuum) shines into a beam splitter, nothing comes out, i.e. trivially
+\begin{equation}
+    \ket{0}_0 \,  \ket{0}_1  \xrightarrow{BS}  \ket{0}_2 \,  \ket{0}_3
+\end{equation}
+A single photon at port 1 is written by the creation operator acting on the vacuum state
+\begin{equation}
+    \ket{0}_0 \,  \ket{1}_1 = \hat{a}^\dagger_1 \ket{0}_0 \,  \ket{0}_1 
+\end{equation}
+and $\hat{a}^\dagger_1$ can be written with the port 2 and 3 operators of a 50:50 beam splitter
+\begin{equation}
+    \hat{a}^\dagger_1 = \frac{1}{\sqrt{2}} \left( i \hat{a}^\dagger_2 + \hat{a}^\dagger_3 \right)
+\end{equation}
+so that 
+\begin{equation}
+    \ket{0}_0 \,  \ket{1}_1  \xrightarrow{BS} \frac{1}{\sqrt{2}} \left( i   \ket{1}_2 \,  \ket{0}_3 +   \ket{0}_2 \,  \ket{1}_3 \right)
+\end{equation}
+A single photon entering port 1 together with a vacuum at port 0 leaves either port 2 or port 3, but not both! The final state is a \emph{entangled state}\sidenote{dt: verschränkter Zustand}, since it cannot be written as a product of states of the form $\ket{n}_2 \ket{m}_3$.
+
+
+
+
+\section{Hong-Ou-Mandel experiment: two photons on a beam splitter}
+
+What we can do with one photon, we can do with two! Let us shine a photon on each input port of the beam splitter, i.e. start with the state $\ket{1}_0 \, \ket{1}_1 $. We can create it from vacuum with two creation operators
+\begin{equation}
+    \ket{1}_0 \,  \ket{1}_1 = \hat{a}^\dagger_1 \hat{a}^\dagger_0 \ket{0}_0 \,  \ket{0}_1 
+\end{equation}
+and write additionally to $ \hat{a}^\dagger_1$ as above also  $\hat{a}^\dagger_0$ in terms of the port 2 and 3 operators 
+\begin{equation}
+    \hat{a}^\dagger_0 = \frac{1}{\sqrt{2}} \left(  \hat{a}^\dagger_2 + i \hat{a}^\dagger_3 \right)
+\end{equation}
+where only the position of the $i$ has swapped. Everything together is
+\begin{align}
+    \ket{1}_0 \,  \ket{1}_1  \xrightarrow{BS} & \frac{1}{2} 
+    \left( i \hat{a}^\dagger_2 +  \hat{a}^\dagger_3\right) 
+     \left( \hat{a}^\dagger_2 + i \hat{a}^\dagger_3\right) 
+      \ket{0}_2 \,  \ket{0}_3 \\
+      & = \frac{i}{2} 
+      \left(  \hat{a}^\dagger_2  \hat{a}^\dagger_2 +  \hat{a}^\dagger_3 \hat{a}^\dagger_3\right) 
+        \ket{0}_2 \,  \ket{0}_3 \\
+        & = \frac{i}{\sqrt{2}} 
+        \left(    \ket{2}_2 \,  \ket{0}_3 +  \ket{0}_2 \,  \ket{2}_3 \right) 
+\end{align}
+When multiplying out the two brackets, the cross terms $\hat{a}^\dagger_2  \hat{a}^\dagger_3$ cancel out and only the symmetric terms remain.  Two photons entering at different ports of the beam splitter will exit through the same port! Either both at port 2 or both at port 3. This is a quantum interference effect. The case where both photons are transmitted interferes destructively with the case where both photons are reflected. Since the photons are indistinguishable, we cannot separate the two cases and must add the probability amplitudes before taking the square modulus to get the power.
+
+\begin{marginfigure}
+    \inputtikz{\currfiledir HOM}
+    \caption{Two identical photons entering a beam splitter leave together (top), because the two processes below cannot be distinguished and interfere destructively.}
+\end{marginfigure}
+
+
+The word 'indistinguishable' is important here. The two photons must agree in every conceivable way. They must arrive at the beam splitter at the same time. They must have the same spectrum/color, the same polarization state, and the same mode/wavefront or beam profile. As soon as one photon is a little different from the other, we could distinguish the 'both reflected' case from the 'both transmitted' case.
+ 
+The Hong-Ou-Mandel experiment shows that photons are bosons. Bosons want to be in the same state. The two photons want to leave the beam splitter together. This is in stark contrast to electrons, which are fermions. Fermions want to be in different states. A beam splitter for electron waves would favor the $\ket{1}_2\ket{1}_3$ result over a $\ket{2}_2\ket{0}_3$ result.
+
+
+
+\section{Down-conversion source of entangled photons}
+
+Experiments in quantum optics require a single-photon source or a source of single entangled photon pairs. A single-photon source such as an atom, a molecule or a quantum dot can be studied with current technology even in an undergraduate lab. But if it should be the source for the following actual experiment, it is a bit too complicated. A technically simpler device is a source of entangled photon pairs (but not 'single' pairs). The process is called down-conversion.
+
+In nonlinear optics, there are processes that split a photon into two. The energy of the incoming photon is split into two parts, leaving as two photons. This is called down conversion. There is also the reverse process where the energy of two photons is combined into one. This is called sum frequency generation, since the optical frequency of the outgoing photon is the sum of the frequencies of the incoming photons.
+
+
+Both processes require that the polarization $P$ induced by a field $E$ is to some extent quadratically dependent on the field. In chapter \ref{chap:dielectrics} we wrote 
+\begin{equation}
+    P(t) =  \chi \epsilon_0 E(t) 
+\end{equation}
+Now we see this as first order of a Taylor expansion and write 
+\begin{equation}
+    P(t) =  \epsilon_0 \left( \chi^{(1)} E(t) +  \chi^{(2)} E^2(t)   +  \chi^{(3)} E^3(t)  + \dots \right)
+\end{equation}
+The expression with $\chi^{(2)}$ is important for us. If 
+\begin{equation}
+    E(t) = E_1 e^{i \omega_1 t} + E_2 e^{i \omega_2 t}
+\end{equation}
+then $P(t)$ will contain frequency components at $\omega_1$ and $\omega_2$ due to the $\chi^{(1)}$ term and at 0, $2\omega_1$, $2\omega_2$ and $\omega_1 \pm \omega_2$ due to the $\chi^{(2)}$ term. The latter is sum and difference frequency generation.
+
+In a down-conversion source, a blue laser beam hits a material with a rather high value of $\chi^{(2)}$: BBO  (Beta Barium Borate).The energy of the 400~nm photon is split into two photons of 800~nm wavelength. This conserves energy. Conservation of momentum would be easy if the index of refraction at both wavelengths were identical. However, this is not the case, as we saw in chapter \ref{chap:dielectrics}. This is where birefringence comes in. The ordinary and the extraordinary ray have slightly different refractive indices. In the chosen material, this difference helps to compensate for the difference due to dispersion. As a result, one of the 800~nm photons leaves as the ordinary beam and the other as the extraordinary beam. Both photons are polarized orthogonal to each other. By carefully aligning the source, one can generate polarization entangled photons, i.e. a state in which one does not know how each photon is polarized, except that one knows they are orthogonal to each other.
 
 %--------------------
 \printbibliography[segment=\therefsegment,heading=subbibliography]

@@ -1,0 +1,62 @@
+% \documentclass{standalone}
+% \usepackage{currfile,hyperxmp}
+
+% \input{../tikz_header.tex}
+
+% \begin{document}
+
+
+
+\begin{tikzpicture}
+%\useasboundingbox (-1.3,-1.2) rectangle (10.2,4.7);
+%\draw (-1,-1) rectangle +(12,5); 
+
+    \begin{axis}[ xlabel={delay $\tau$  (ns) }, ylabel= {autocorrelation $g^{(2)}(\tau)$}, 
+         width=100mm, height=50mm, 
+        %ymode=log, 
+     %   ymode=log,
+        xmin = -20,
+        xmax = 20,
+    %     xmax = 4.4,
+       ymin  = 0,
+       %  ymax = 8,
+         %xmax=5.5, ymin = 0, ymax=7.5,
+       %  axis x line=bottom,
+       %  axis y line=left,
+         % xmax= 2e5, unbounded coords=jump, ymin=0, ymax = 4
+        % label style={font=\tiny},
+        % tick label style={font=\tiny}
+       % ytick= \empty ,
+       % xtick= \empty, 
+     %  legend pos= north west,
+     %  legend style={draw=none, font=\footnotesize}
+    %clip = false,
+    ]
+
+    %\fill[fill=gray!20!white] (0,0) rectangle (3,7);
+
+
+    % para     
+    \addplot[const plot mark mid, thin, gray] table
+   [%col sep=comma,  
+   %x expr = -(\thisrowno{0}),  
+   x  index = 0,
+   y index = 1] 
+    {\currfiledir data/antibunching.csv};
+
+
+    \addplot[smooth, thick] table
+    [%col sep=comma,  
+    %x expr = -(\thisrowno{0}),  
+    x  index = 0,
+    y index = 2] 
+     {\currfiledir data/antibunching.csv};
+ 
+ 
+
+
+
+    \end{axis}
+\end{tikzpicture}
+
+%\end{document}
