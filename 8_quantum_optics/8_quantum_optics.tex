@@ -1,4 +1,4 @@
-\renewcommand{\lastmod}{January 25, 2024}
+\renewcommand{\lastmod}{January 26, 2024}
 \renewcommand{\chapterauthors}{Markus Lippitz}
 
 \chapter{Quantum Optics}
@@ -253,8 +253,8 @@ Writing eq. \ref{eq:8_bs_classic} in the formalism of quantum optics gives
 \end{equation}
 The problem is that these definitions do not satisfy the commutators. We can check several combinations and all of them give the required result of zero only if we set either $r=0$ or $t=0$, i.e. if we remove the beam splitter
 \begin{align}
-    \left[ \hat{a}_2, \hat{a}_2^\dagger  \right] = &  |r|^2 \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =  |r|^2  \neq 0 \\
-    \left[ \hat{a}_3, \hat{a}_3^\dagger  \right] = &  |t|^2 \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =  |t|^2  \neq 0 \\
+    \left[ \hat{a}_2, \hat{a}_2^\dagger  \right] = &  |r|^2 \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =  |r|^2  \neq 1 \\
+    \left[ \hat{a}_3, \hat{a}_3^\dagger  \right] = &  |t|^2 \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =  |t|^2  \neq 1 \\
     \left[ \hat{a}_2, \hat{a}_3^\dagger  \right] = &  rt^\star \left[ \hat{a}_1, \hat{a}_1^\dagger  \right] =   rt^\star  \neq 0  \quad .
 \end{align}
 So in quantum optics there seems to be something more to the beam splitter than in classical electrodynamics. The point is the fourth side of the beam splitting cube (which we label $i=0$ for convenience). Classically, we assumed that no light would enter here, so we set $\bE_0 = 0$ and ignored it in our calculations. But in quantum optics we have to take into account that $|\bE_0| = E_{vac}$. The vacuum fluctuations are shining into the empty port of the beam splitter.
@@ -307,6 +307,12 @@ A single photon entering port 1 together with a vacuum at port 0 leaves either p
 
 \section{Hong-Ou-Mandel experiment: two photons on a beam splitter}
 
+\begin{marginfigure}
+    \inputtikz{\currfiledir HOM}
+    \caption{Two identical photons entering a beam splitter leave together (top), because the two processes below cannot be distinguished and interfere destructively.}
+\end{marginfigure}
+
+
 What we can do with one photon, we can do with two! Let us shine a photon on each input port of the beam splitter, i.e. start with the state $\ket{1}_0 \, \ket{1}_1 $. We can create it from vacuum with two creation operators
 \begin{equation}
     \ket{1}_0 \,  \ket{1}_1 = \hat{a}^\dagger_1 \hat{a}^\dagger_0 \ket{0}_0 \,  \ket{0}_1 
@@ -329,10 +335,6 @@ where only the position of the $i$ has swapped. Everything together is
 \end{align}
 When multiplying out the two brackets, the cross terms $\hat{a}^\dagger_2  \hat{a}^\dagger_3$ cancel out and only the symmetric terms remain.  Two photons entering at different ports of the beam splitter will exit through the same port! Either both at port 2 or both at port 3. This is a quantum interference effect. The case where both photons are transmitted interferes destructively with the case where both photons are reflected. Since the photons are indistinguishable, we cannot separate the two cases and must add the probability amplitudes before taking the square modulus to get the power. This was demonstrated in 1987 by Hong, Ou, and Mandel\footcite{HOM87}.
 
-\begin{marginfigure}
-    \inputtikz{\currfiledir HOM}
-    \caption{Two identical photons entering a beam splitter leave together (top), because the two processes below cannot be distinguished and interfere destructively.}
-\end{marginfigure}
 
 
 The word 'indistinguishable' is important here. The two photons must agree in every conceivable way. They must arrive at the beam splitter at the same time. They must have the same spectrum/color, the same polarization state, and the same mode/wavefront or beam profile. As soon as one photon is a little different from the other, we could distinguish the 'both reflected' case from the 'both transmitted' case.
