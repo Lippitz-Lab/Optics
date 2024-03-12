@@ -1,0 +1,32 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Lecture notes 'Optics'
+message: >-
+  If you use this text, please cite it using the metadata
+  from this file.
+type: software
+authors:
+  - given-names: Markus
+    family-names: Lippitz
+    orcid: 'https://orcid.org/0000-0003-1218-6511'
+repository-code: 'https://github.com/Lippitz-Lab/Optics'
+url: 'https://www.ep3.uni-bayreuth.de/en/teaching/MO/index.html'
+abstract: >-
+  These are my lecture notes on optics, in our Physics BSc
+  program. I follow the circular structure of Saleh and
+  Teich: Fundamentals of Photonics. We start with geometric
+  rays and Gaussian beams, then discuss scalar waves and
+  Fourier optics. Materials come together with Maxwell's
+  equations and polarization optics. We compare different
+  types of interferometers and coherence as a prerequisite
+  for interference. The lecture concludes with a brief look
+  at quantum optics.
+
+
+  I want you to be able to really do optics, i.e. not only
+  solve textbook problems, but also build setups and do
+  experiments. To this end, the script contains practical
+  sections on alignment procedures and experiments.
+license: CC-BY-SA-4.0

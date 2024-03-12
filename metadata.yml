@@ -1,0 +1,47 @@
+'@context': https://schema.org/
+creativeWorkStatus: Published
+type: LearningResource
+name: Optics
+description: >-
+  These are my lecture notes on optics, in our Physics BSc program. I follow the
+  circular structure of Saleh and Teich: Fundamentals of Photonics. We start
+  with geometric rays and Gaussian beams, then discuss scalar waves and Fourier
+  optics. Materials come together with Maxwell's equations and polarization
+  optics. We compare different types of interferometers and coherence as a
+  prerequisite for interference. The lecture concludes with a brief look at
+  quantum optics.
+  
+  I want you to be able to really do optics, i.e. not only solve textbook
+  problems, but also build setups and do experiments. To this end, the script
+  contains practical sections on alignment procedures and experiments. 
+license: https://creativecommons.org/licenses/by-sa/4.0/deed.de
+id: https://github.com/Lippitz-Lab/Optics
+creator:
+  - givenName: Markus
+    familyName: Lippitz
+    id: https://orcid.org/0000-0003-1218-6511
+    type: Person
+    affiliation:
+      name: Universität Bayreuth
+      id: https://ror.org/0234wmv40
+      type: Organization
+keywords:
+  - Geometric optics
+  - Gaussian beams
+  - Fourier optics
+  - dielectric materials
+  - birefringence
+  - interference
+  - coherence
+  - quantum optics
+inLanguage:
+  - en
+about:
+  - https://w3id.org/kim/hochschulfaechersystematik/n0128
+image: https://www.ep3.uni-bayreuth.de/pool/bilder/optik-banner.png
+learningResourceType:
+  - https://w3id.org/kim/hcrt/script
+educationalLevel:
+  - https://w3id.org/kim/educationalLevel/level_A
+  - https://w3id.org/kim/educationalLevel/level_6
+datePublished: '2024-02-12'
